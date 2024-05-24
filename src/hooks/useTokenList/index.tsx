@@ -1,4 +1,5 @@
 import { Token } from '@uniswap/sdk-core'
+import tokenList from '@uniswap/default-token-list'
 import { TokenInfo, TokenList } from '@uniswap/token-lists'
 import { useWeb3React } from '@web3-react/core'
 import { useAsyncError } from 'components/Error/ErrorBoundary'
@@ -14,7 +15,7 @@ import { validateTokens } from './validateTokenList'
 
 export { useQueryTokens } from './useQueryTokens'
 
-export const UNISWAP_TOKEN_LIST = 'https://gateway.ipfs.io/ipns/tokens.uniswap.org'
+export const UNISWAP_TOKEN_LIST = tokenList.tokens
 export const EMPTY_TOKEN_LIST = []
 
 const MISSING_PROVIDER = Symbol()
