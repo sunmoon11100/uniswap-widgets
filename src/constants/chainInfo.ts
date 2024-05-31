@@ -1,3 +1,4 @@
+import coston2Logo from 'assets/images/coston2-logo.png'
 import ethereumLogoUrl from 'assets/images/ethereum-logo.png'
 import arbitrumLogoUrl from 'assets/svg/arbitrum_logo.svg'
 import baseLogo from 'assets/svg/base_logo.svg'
@@ -250,6 +251,16 @@ const CHAIN_INFO: ChainInfoMap = {
     nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
     color: '#0152ff',
     backgroundColor: '#0152ff',
+  },
+  [SupportedChainId.COSTON2]: {
+    networkType: NetworkType.L1,
+    docs: 'https://docs.uniswap.org/',
+    explorer: 'https://coston2.testnet.flarescan.com/',
+    infoLink: 'https://info.uniswap.org/#/',
+    label: 'Coston2',
+    logoUrl: coston2Logo,
+    nativeCurrency: { name: 'C2FLR', symbol: 'C2FLR', decimals: 18 },
+    color: '#FF9767',
   },
 }
 

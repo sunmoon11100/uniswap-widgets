@@ -300,7 +300,8 @@ declare enum SupportedChainId {
     CELO = 42220,
     CELO_ALFAJORES = 44787,
     BNB = 56,
-    BASE = 8453
+    BASE = 8453,
+    COSTON2 = 114
 }
 
 declare type DefaultAddress = string | {
@@ -577,9 +578,6 @@ declare const UNISWAP_TOKEN_LIST: ({
             "56": {
                 tokenAddress: string;
             };
-            "137": {
-                tokenAddress: string;
-            };
             "8453": {
                 tokenAddress: string;
             };
@@ -589,7 +587,7 @@ declare const UNISWAP_TOKEN_LIST: ({
             "43114": {
                 tokenAddress: string;
             };
-            "84531"?: undefined;
+            "137"?: undefined;
             "42220"?: undefined;
             "1"?: undefined;
         };
@@ -609,9 +607,6 @@ declare const UNISWAP_TOKEN_LIST: ({
             "56": {
                 tokenAddress: string;
             };
-            "137": {
-                tokenAddress: string;
-            };
             "42161": {
                 tokenAddress: string;
             };
@@ -619,7 +614,7 @@ declare const UNISWAP_TOKEN_LIST: ({
                 tokenAddress: string;
             };
             "8453"?: undefined;
-            "84531"?: undefined;
+            "137"?: undefined;
             "42220"?: undefined;
             "1"?: undefined;
         };
@@ -645,11 +640,10 @@ declare const UNISWAP_TOKEN_LIST: ({
                 tokenAddress: string;
             };
             "10"?: undefined;
-            "137"?: undefined;
             "8453"?: undefined;
             "42161"?: undefined;
             "43114"?: undefined;
-            "84531"?: undefined;
+            "137"?: undefined;
             "42220"?: undefined;
             "1"?: undefined;
         };
@@ -667,135 +661,277 @@ declare const UNISWAP_TOKEN_LIST: ({
                 tokenAddress: string;
             };
             "137": {
+                tokenAddress: string;
+            };
+            "42161": {
+                tokenAddress: string;
+            };
+            "43114": {
+                tokenAddress: string;
+            };
+            "10"?: undefined;
+            "8453"?: undefined;
+            "42220"?: undefined;
+            "1"?: undefined;
+        };
+    };
+} | {
+    chainId: number;
+    address: string;
+    name: string;
+    symbol: string;
+    decimals: number;
+    logoURI: string;
+    extensions: {
+        bridgeInfo: {
+            "42161": {
+                tokenAddress: string;
+            };
+            "10"?: undefined;
+            "56"?: undefined;
+            "8453"?: undefined;
+            "43114"?: undefined;
+            "137"?: undefined;
+            "42220"?: undefined;
+            "1"?: undefined;
+        };
+    };
+} | {
+    chainId: number;
+    address: string;
+    name: string;
+    symbol: string;
+    decimals: number;
+    logoURI: string;
+    extensions: {
+        bridgeInfo: {
+            "56": {
+                tokenAddress: string;
+            };
+            "42161": {
+                tokenAddress: string;
+            };
+            "10"?: undefined;
+            "8453"?: undefined;
+            "43114"?: undefined;
+            "137"?: undefined;
+            "42220"?: undefined;
+            "1"?: undefined;
+        };
+    };
+} | {
+    chainId: number;
+    address: string;
+    name: string;
+    symbol: string;
+    decimals: number;
+    logoURI: string;
+    extensions: {
+        bridgeInfo: {
+            "8453": {
+                tokenAddress: string;
+            };
+            "42161": {
+                tokenAddress: string;
+            };
+            "10"?: undefined;
+            "56"?: undefined;
+            "43114"?: undefined;
+            "137"?: undefined;
+            "42220"?: undefined;
+            "1"?: undefined;
+        };
+    };
+} | {
+    chainId: number;
+    address: string;
+    name: string;
+    symbol: string;
+    decimals: number;
+    logoURI: string;
+    extensions: {
+        bridgeInfo: {
+            "56": {
+                tokenAddress: string;
+            };
+            "42161": {
+                tokenAddress: string;
+            };
+            "43114": {
+                tokenAddress: string;
+            };
+            "10"?: undefined;
+            "8453"?: undefined;
+            "137"?: undefined;
+            "42220"?: undefined;
+            "1"?: undefined;
+        };
+    };
+} | {
+    chainId: number;
+    address: string;
+    name: string;
+    symbol: string;
+    decimals: number;
+    logoURI: string;
+    extensions: {
+        bridgeInfo: {
+            "10": {
+                tokenAddress: string;
+            };
+            "56": {
+                tokenAddress: string;
+            };
+            "8453": {
+                tokenAddress: string;
+            };
+            "42161"?: undefined;
+            "43114"?: undefined;
+            "137"?: undefined;
+            "42220"?: undefined;
+            "1"?: undefined;
+        };
+    };
+} | {
+    name: string;
+    address: string;
+    symbol: string;
+    decimals: number;
+    chainId: number;
+    logoURI: string;
+    extensions: {
+        bridgeInfo: {
+            "10": {
+                tokenAddress: string;
+            };
+            "8453": {
+                tokenAddress: string;
+            };
+            "42161": {
+                tokenAddress: string;
+            };
+            "56"?: undefined;
+            "43114"?: undefined;
+            "137"?: undefined;
+            "42220"?: undefined;
+            "1"?: undefined;
+        };
+    };
+} | {
+    chainId: number;
+    address: string;
+    name: string;
+    symbol: string;
+    decimals: number;
+    logoURI: string;
+    extensions: {
+        bridgeInfo: {
+            "42161": {
+                tokenAddress: string;
+            };
+            "43114": {
+                tokenAddress: string;
+            };
+            "10"?: undefined;
+            "56"?: undefined;
+            "8453"?: undefined;
+            "137"?: undefined;
+            "42220"?: undefined;
+            "1"?: undefined;
+        };
+    };
+} | {
+    chainId: number;
+    address: string;
+    name: string;
+    symbol: string;
+    decimals: number;
+    logoURI: string;
+    extensions: {
+        bridgeInfo: {
+            "10": {
+                tokenAddress: string;
+            };
+            "8453": {
+                tokenAddress: string;
+            };
+            "56"?: undefined;
+            "42161"?: undefined;
+            "43114"?: undefined;
+            "137"?: undefined;
+            "42220"?: undefined;
+            "1"?: undefined;
+        };
+    };
+} | {
+    chainId: number;
+    address: string;
+    name: string;
+    symbol: string;
+    decimals: number;
+    logoURI: string;
+    extensions: {
+        bridgeInfo: {
+            "10": {
+                tokenAddress: string;
+            };
+            "42161": {
+                tokenAddress: string;
+            };
+            "56"?: undefined;
+            "8453"?: undefined;
+            "43114"?: undefined;
+            "137"?: undefined;
+            "42220"?: undefined;
+            "1"?: undefined;
+        };
+    };
+} | {
+    name: string;
+    address: string;
+    symbol: string;
+    decimals: number;
+    chainId: number;
+    logoURI: string;
+    extensions: {
+        bridgeInfo: {
+            "56": {
+                tokenAddress: string;
+            };
+            "8453": {
+                tokenAddress: string;
+            };
+            "42161": {
+                tokenAddress: string;
+            };
+            "43114": {
+                tokenAddress: string;
+            };
+            "10"?: undefined;
+            "137"?: undefined;
+            "42220"?: undefined;
+            "1"?: undefined;
+        };
+    };
+} | {
+    chainId: number;
+    address: string;
+    name: string;
+    symbol: string;
+    decimals: number;
+    logoURI: string;
+    extensions: {
+        bridgeInfo: {
+            "56": {
+                tokenAddress: string;
+            };
+            "43114": {
                 tokenAddress: string;
             };
             "10"?: undefined;
             "8453"?: undefined;
             "42161"?: undefined;
-            "43114"?: undefined;
-            "84531"?: undefined;
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    chainId: number;
-    address: string;
-    name: string;
-    symbol: string;
-    decimals: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "137": {
-                tokenAddress: string;
-            };
-            "42161": {
-                tokenAddress: string;
-            };
-            "10"?: undefined;
-            "56"?: undefined;
-            "8453"?: undefined;
-            "43114"?: undefined;
-            "84531"?: undefined;
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    chainId: number;
-    address: string;
-    name: string;
-    symbol: string;
-    decimals: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "56": {
-                tokenAddress: string;
-            };
-            "137": {
-                tokenAddress: string;
-            };
-            "42161": {
-                tokenAddress: string;
-            };
-            "10"?: undefined;
-            "8453"?: undefined;
-            "43114"?: undefined;
-            "84531"?: undefined;
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    chainId: number;
-    address: string;
-    name: string;
-    symbol: string;
-    decimals: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "137": {
-                tokenAddress: string;
-            };
-            "10"?: undefined;
-            "56"?: undefined;
-            "8453"?: undefined;
-            "42161"?: undefined;
-            "43114"?: undefined;
-            "84531"?: undefined;
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    chainId: number;
-    address: string;
-    name: string;
-    symbol: string;
-    decimals: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "56": {
-                tokenAddress: string;
-            };
-            "137": {
-                tokenAddress: string;
-            };
-            "42161": {
-                tokenAddress: string;
-            };
-            "43114": {
-                tokenAddress: string;
-            };
-            "10"?: undefined;
-            "8453"?: undefined;
-            "84531"?: undefined;
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    chainId: number;
-    name: string;
-    address: string;
-    symbol: string;
-    decimals: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "42161": {
-                tokenAddress: string;
-            };
-            "10"?: undefined;
-            "56"?: undefined;
             "137"?: undefined;
-            "8453"?: undefined;
-            "43114"?: undefined;
-            "84531"?: undefined;
             "42220"?: undefined;
             "1"?: undefined;
         };
@@ -810,233 +946,6 @@ declare const UNISWAP_TOKEN_LIST: ({
     extensions: {
         bridgeInfo: {
             "56": {
-                tokenAddress: string;
-            };
-            "42161": {
-                tokenAddress: string;
-            };
-            "43114": {
-                tokenAddress: string;
-            };
-            "10"?: undefined;
-            "137"?: undefined;
-            "8453"?: undefined;
-            "84531"?: undefined;
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    name: string;
-    address: string;
-    symbol: string;
-    decimals: number;
-    chainId: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "10": {
-                tokenAddress: string;
-            };
-            "137": {
-                tokenAddress: string;
-            };
-            "8453": {
-                tokenAddress: string;
-            };
-            "42161": {
-                tokenAddress: string;
-            };
-            "56"?: undefined;
-            "43114"?: undefined;
-            "84531"?: undefined;
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    chainId: number;
-    address: string;
-    name: string;
-    symbol: string;
-    decimals: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "137": {
-                tokenAddress: string;
-            };
-            "42161": {
-                tokenAddress: string;
-            };
-            "43114": {
-                tokenAddress: string;
-            };
-            "10"?: undefined;
-            "56"?: undefined;
-            "8453"?: undefined;
-            "84531"?: undefined;
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    chainId: number;
-    address: string;
-    name: string;
-    symbol: string;
-    decimals: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "10": {
-                tokenAddress: string;
-            };
-            "137": {
-                tokenAddress: string;
-            };
-            "42161": {
-                tokenAddress: string;
-            };
-            "56"?: undefined;
-            "8453"?: undefined;
-            "43114"?: undefined;
-            "84531"?: undefined;
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    chainId: number;
-    address: string;
-    name: string;
-    symbol: string;
-    decimals: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "10": {
-                tokenAddress: string;
-            };
-            "8453": {
-                tokenAddress: string;
-            };
-            "42161": {
-                tokenAddress: string;
-            };
-            "84531": {
-                tokenAddress: string;
-            };
-            "56"?: undefined;
-            "137"?: undefined;
-            "43114"?: undefined;
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    name: string;
-    address: string;
-    symbol: string;
-    decimals: number;
-    chainId: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "56": {
-                tokenAddress: string;
-            };
-            "137": {
-                tokenAddress: string;
-            };
-            "8453": {
-                tokenAddress: string;
-            };
-            "42161": {
-                tokenAddress: string;
-            };
-            "43114": {
-                tokenAddress: string;
-            };
-            "84531": {
-                tokenAddress: string;
-            };
-            "10"?: undefined;
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    name: string;
-    address: string;
-    symbol: string;
-    decimals: number;
-    chainId: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "10": {
-                tokenAddress: string;
-            };
-            "56": {
-                tokenAddress: string;
-            };
-            "137": {
-                tokenAddress: string;
-            };
-            "8453": {
-                tokenAddress: string;
-            };
-            "42161": {
-                tokenAddress: string;
-            };
-            "43114": {
-                tokenAddress: string;
-            };
-            "84531": {
-                tokenAddress: string;
-            };
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    chainId: number;
-    address: string;
-    name: string;
-    symbol: string;
-    decimals: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "56": {
-                tokenAddress: string;
-            };
-            "43114": {
-                tokenAddress: string;
-            };
-            "10"?: undefined;
-            "137"?: undefined;
-            "8453"?: undefined;
-            "42161"?: undefined;
-            "84531"?: undefined;
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    chainId: number;
-    address: string;
-    name: string;
-    symbol: string;
-    decimals: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "56": {
-                tokenAddress: string;
-            };
-            "137": {
                 tokenAddress: string;
             };
             "8453": {
@@ -1047,31 +956,7 @@ declare const UNISWAP_TOKEN_LIST: ({
             };
             "10"?: undefined;
             "43114"?: undefined;
-            "84531"?: undefined;
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    chainId: number;
-    address: string;
-    name: string;
-    symbol: string;
-    decimals: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "56": {
-                tokenAddress: string;
-            };
-            "42161": {
-                tokenAddress: string;
-            };
-            "10"?: undefined;
             "137"?: undefined;
-            "8453"?: undefined;
-            "43114"?: undefined;
-            "84531"?: undefined;
             "42220"?: undefined;
             "1"?: undefined;
         };
@@ -1085,167 +970,6 @@ declare const UNISWAP_TOKEN_LIST: ({
     logoURI: string;
     extensions: {
         bridgeInfo: {
-            "10": {
-                tokenAddress: string;
-            };
-            "56": {
-                tokenAddress: string;
-            };
-            "137": {
-                tokenAddress: string;
-            };
-            "42161": {
-                tokenAddress: string;
-            };
-            "8453"?: undefined;
-            "43114"?: undefined;
-            "84531"?: undefined;
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    name: string;
-    address: string;
-    symbol: string;
-    decimals: number;
-    chainId: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "10": {
-                tokenAddress: string;
-            };
-            "137": {
-                tokenAddress: string;
-            };
-            "42161": {
-                tokenAddress: string;
-            };
-            "43114": {
-                tokenAddress: string;
-            };
-            "56"?: undefined;
-            "8453"?: undefined;
-            "84531"?: undefined;
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    chainId: number;
-    address: string;
-    name: string;
-    symbol: string;
-    decimals: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "10": {
-                tokenAddress: string;
-            };
-            "42161": {
-                tokenAddress: string;
-            };
-            "56"?: undefined;
-            "137"?: undefined;
-            "8453"?: undefined;
-            "43114"?: undefined;
-            "84531"?: undefined;
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    chainId: number;
-    address: string;
-    name: string;
-    symbol: string;
-    decimals: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "10": {
-                tokenAddress: string;
-            };
-            "56": {
-                tokenAddress: string;
-            };
-            "42161": {
-                tokenAddress: string;
-            };
-            "43114": {
-                tokenAddress: string;
-            };
-            "137"?: undefined;
-            "8453"?: undefined;
-            "84531"?: undefined;
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    chainId: number;
-    address: string;
-    name: string;
-    symbol: string;
-    decimals: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "10": {
-                tokenAddress: string;
-            };
-            "137": {
-                tokenAddress: string;
-            };
-            "56"?: undefined;
-            "8453"?: undefined;
-            "42161"?: undefined;
-            "43114"?: undefined;
-            "84531"?: undefined;
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    chainId: number;
-    address: string;
-    name: string;
-    symbol: string;
-    decimals: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "8453": {
-                tokenAddress: string;
-            };
-            "42161": {
-                tokenAddress: string;
-            };
-            "84531": {
-                tokenAddress: string;
-            };
-            "10"?: undefined;
-            "56"?: undefined;
-            "137"?: undefined;
-            "43114"?: undefined;
-            "42220"?: undefined;
-            "1"?: undefined;
-        };
-    };
-} | {
-    chainId: number;
-    address: string;
-    name: string;
-    symbol: string;
-    decimals: number;
-    logoURI: string;
-    extensions: {
-        bridgeInfo: {
-            "137": {
-                tokenAddress: string;
-            };
             "8453": {
                 tokenAddress: string;
             };
@@ -1253,7 +977,153 @@ declare const UNISWAP_TOKEN_LIST: ({
             "56"?: undefined;
             "42161"?: undefined;
             "43114"?: undefined;
-            "84531"?: undefined;
+            "137"?: undefined;
+            "42220"?: undefined;
+            "1"?: undefined;
+        };
+    };
+} | {
+    chainId: number;
+    address: string;
+    name: string;
+    symbol: string;
+    decimals: number;
+    logoURI: string;
+    extensions: {
+        bridgeInfo: {
+            "10": {
+                tokenAddress: string;
+            };
+            "56": {
+                tokenAddress: string;
+            };
+            "42161": {
+                tokenAddress: string;
+            };
+            "8453"?: undefined;
+            "43114"?: undefined;
+            "137"?: undefined;
+            "42220"?: undefined;
+            "1"?: undefined;
+        };
+    };
+} | {
+    chainId: number;
+    address: string;
+    name: string;
+    symbol: string;
+    decimals: number;
+    logoURI: string;
+    extensions: {
+        bridgeInfo: {
+            "56": {
+                tokenAddress: string;
+            };
+            "137": {
+                tokenAddress: string;
+            };
+            "42161": {
+                tokenAddress: string;
+            };
+            "10"?: undefined;
+            "8453"?: undefined;
+            "43114"?: undefined;
+            "42220"?: undefined;
+            "1"?: undefined;
+        };
+    };
+} | {
+    name: string;
+    address: string;
+    symbol: string;
+    decimals: number;
+    chainId: number;
+    logoURI: string;
+    extensions: {
+        bridgeInfo: {
+            "10": {
+                tokenAddress: string;
+            };
+            "42161": {
+                tokenAddress: string;
+            };
+            "43114": {
+                tokenAddress: string;
+            };
+            "56"?: undefined;
+            "8453"?: undefined;
+            "137"?: undefined;
+            "42220"?: undefined;
+            "1"?: undefined;
+        };
+    };
+} | {
+    chainId: number;
+    name: string;
+    symbol: string;
+    logoURI: string;
+    address: string;
+    decimals: number;
+    extensions: {
+        bridgeInfo: {
+            "56": {
+                tokenAddress: string;
+            };
+            "8453": {
+                tokenAddress: string;
+            };
+            "10"?: undefined;
+            "42161"?: undefined;
+            "43114"?: undefined;
+            "137"?: undefined;
+            "42220"?: undefined;
+            "1"?: undefined;
+        };
+    };
+} | {
+    name: string;
+    address: string;
+    symbol: string;
+    decimals: number;
+    chainId: number;
+    logoURI: string;
+    extensions: {
+        bridgeInfo: {
+            "10": {
+                tokenAddress: string;
+            };
+            "8453": {
+                tokenAddress: string;
+            };
+            "42161": {
+                tokenAddress: string;
+            };
+            "43114": {
+                tokenAddress: string;
+            };
+            "56"?: undefined;
+            "137"?: undefined;
+            "42220"?: undefined;
+            "1"?: undefined;
+        };
+    };
+} | {
+    chainId: number;
+    address: string;
+    name: string;
+    symbol: string;
+    decimals: number;
+    logoURI: string;
+    extensions: {
+        bridgeInfo: {
+            "10": {
+                tokenAddress: string;
+            };
+            "56"?: undefined;
+            "8453"?: undefined;
+            "42161"?: undefined;
+            "43114"?: undefined;
+            "137"?: undefined;
             "42220"?: undefined;
             "1"?: undefined;
         };
@@ -1273,20 +1143,48 @@ declare const UNISWAP_TOKEN_LIST: ({
             "56": {
                 tokenAddress: string;
             };
-            "137": {
-                tokenAddress: string;
-            };
             "8453": {
                 tokenAddress: string;
             };
             "42161": {
                 tokenAddress: string;
             };
-            "84531": {
+            "42220": {
                 tokenAddress: string;
             };
-            "43114"?: undefined;
-            "42220"?: undefined;
+            "43114": {
+                tokenAddress: string;
+            };
+            "137"?: undefined;
+            "1"?: undefined;
+        };
+    };
+} | {
+    name: string;
+    address: string;
+    symbol: string;
+    decimals: number;
+    chainId: number;
+    logoURI: string;
+    extensions: {
+        bridgeInfo: {
+            "10": {
+                tokenAddress: string;
+            };
+            "56": {
+                tokenAddress: string;
+            };
+            "42161": {
+                tokenAddress: string;
+            };
+            "42220": {
+                tokenAddress: string;
+            };
+            "43114": {
+                tokenAddress: string;
+            };
+            "8453"?: undefined;
+            "137"?: undefined;
             "1"?: undefined;
         };
     };
@@ -1320,38 +1218,28 @@ declare const UNISWAP_TOKEN_LIST: ({
             "43114": {
                 tokenAddress: string;
             };
-            "84531": {
-                tokenAddress: string;
-            };
             "1"?: undefined;
         };
     };
 } | {
-    name: string;
+    chainId: number;
     address: string;
+    name: string;
     symbol: string;
     decimals: number;
-    chainId: number;
     logoURI: string;
     extensions: {
         bridgeInfo: {
-            "10": {
-                tokenAddress: string;
-            };
             "137": {
-                tokenAddress: string;
-            };
-            "8453": {
                 tokenAddress: string;
             };
             "42161": {
                 tokenAddress: string;
             };
-            "43114": {
-                tokenAddress: string;
-            };
+            "10"?: undefined;
             "56"?: undefined;
-            "84531"?: undefined;
+            "8453"?: undefined;
+            "43114"?: undefined;
             "42220"?: undefined;
             "1"?: undefined;
         };
@@ -1370,11 +1258,10 @@ declare const UNISWAP_TOKEN_LIST: ({
             };
             "10"?: undefined;
             "56"?: undefined;
-            "137"?: undefined;
             "8453"?: undefined;
             "42161"?: undefined;
             "43114"?: undefined;
-            "84531"?: undefined;
+            "137"?: undefined;
             "42220"?: undefined;
         };
     };

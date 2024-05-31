@@ -3,7 +3,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('react');
-var index = require('./index-8d4e4c51.cjs');
+var index = require('./index-ff8ecc33.cjs');
 var sdkCore = require('@uniswap/sdk-core');
 require('buffer');
 require('@babel/runtime/helpers/slicedToArray');

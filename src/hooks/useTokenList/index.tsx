@@ -1,5 +1,5 @@
-import { Token } from '@uniswap/sdk-core'
 import tokenList from '@uniswap/default-token-list'
+import { Token } from '@uniswap/sdk-core'
 import { TokenInfo, TokenList } from '@uniswap/token-lists'
 import { useWeb3React } from '@web3-react/core'
 import { useAsyncError } from 'components/Error/ErrorBoundary'

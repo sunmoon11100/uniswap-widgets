@@ -3741,10 +3741,14 @@
   resolved "https://registry.npmjs.org/@uniswap/conedison/-/conedison-1.8.0.tgz"
   integrity sha512-EeC37bbrd4sJnqW3TxNhExdWUBvzyJDhbTXcbDzFdBh/bg5sOCu1NbYJEnrjwBHEfewc9nF2OjEzejJFyJUx9A==
 
-"@uniswap/default-token-list@^11.2.0", "@uniswap/default-token-list@^11.6.0":
+"@uniswap/default-token-list@^11.2.0":
   version "11.6.0"
   resolved "https://registry.npmjs.org/@uniswap/default-token-list/-/default-token-list-11.6.0.tgz"
   integrity sha512-4OS+sStju/pOp6w96RL275XDB3VrIiOBqPvqFHVAKP3mMtueYMRjpHEj+BhCi3l0bUmhllz6SyGt1OxD4IMeDQ==
+
+"@uniswap/default-token-list@github:sunmoon11100/uniswap-default-token-list":
+  version "11.19.0"
+  resolved "https://codeload.github.com/sunmoon11100/uniswap-default-token-list/tar.gz/313a1d153bbd5a761deba3a21f94a356f30aac7e"
 
 "@uniswap/lib@^4.0.1-alpha":
   version "4.0.1-alpha"
@@ -3775,7 +3779,7 @@
     "@uniswap/v2-sdk" "^3.2.0"
     "@uniswap/v3-sdk" "^3.10.0"
 
-"@uniswap/sdk-core@^4", "@uniswap/sdk-core@^4.0.0", "@uniswap/sdk-core@^4.0.2", "@uniswap/sdk-core@^4.0.7":
+"@uniswap/sdk-core@^4", "@uniswap/sdk-core@^4.0.0", "@uniswap/sdk-core@^4.0.7":
   version "4.0.7"
   resolved "https://registry.yarnpkg.com/@uniswap/sdk-core/-/sdk-core-4.0.7.tgz#90dfd070d7e44494234618af398da158363ae827"
   integrity sha512-jscx7KUIWzQatcL5PHY6xy0gEL9IGQcL5h/obxzX9foP2KoNk9cq66Ia8I2Kvpa7zBcPOeW1hU0hJNBq6CzcIQ==
@@ -5535,9 +5539,9 @@ camelize@^1.0.0:
   integrity sha1-FkpUg+Yw+kMh5a8HAg5TGDGyYJs=
 
 caniuse-lite@^1.0.30001332:
-  version "1.0.30001509"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001509.tgz"
-  integrity sha512-2uDDk+TRiTX5hMcUYT/7CSyzMZxjfGu0vAUjS2g0LSD8UoXOv0LtpH4LxGMemsiPq6LCVIUjNwVM0erkOkGCDA==
+  version "1.0.30001625"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001625.tgz"
+  integrity sha512-4KE9N2gcRH+HQhpeiRZXd+1niLB/XNLAhSy4z7fI8EzcbcPoAqjNInxVHTiTwWfTIV4w096XG8OtCOCQQKPv3w==
 
 cardinal@^2.1.1:
   version "2.1.1"

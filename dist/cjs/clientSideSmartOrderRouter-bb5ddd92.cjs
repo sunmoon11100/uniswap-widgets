@@ -1,81 +1,90 @@
-import _defineProperty from '@babel/runtime/helpers/defineProperty';
-import _asyncToGenerator from '@babel/runtime/helpers/asyncToGenerator';
-import _regeneratorRuntime from '@babel/runtime/regenerator';
-import { ChainId, Token, CurrencyAmount } from '@uniswap/sdk-core';
-import { StaticV2SubgraphProvider, UniswapMulticallProvider, OnChainQuoteProvider, AlphaRouter, routeAmountsToString } from '@uniswap/smart-order-router';
-import { Q as QuoteState, i as isExactInput, S as SwapRouterNativeAssets, n as nativeOnChain } from './index-89e51801.js';
-import JSBI from 'jsbi';
-import { Protocol } from '@uniswap/router-sdk';
-import 'react';
-import 'buffer';
-import '@babel/runtime/helpers/slicedToArray';
-import 'styled-components';
-import '@babel/runtime/helpers/taggedTemplateLiteral';
-import 'react-feather';
-import 'polished';
-import 'wcag-contrast';
-import '@babel/runtime/helpers/extends';
-import 'rebass';
-import '@web3-react/core';
-import '@babel/runtime/helpers/objectWithoutProperties';
-import '@uniswap/universal-router-sdk';
-import '@reduxjs/toolkit/query/react';
-import 'jotai/immer';
-import 'jotai/utils';
-import '@babel/runtime/helpers/classCallCheck';
-import '@babel/runtime/helpers/createClass';
-import '@babel/runtime/helpers/inherits';
-import '@babel/runtime/helpers/possibleConstructorReturn';
-import '@babel/runtime/helpers/getPrototypeOf';
-import 'tiny-invariant';
-import '@ethersproject/units';
-import '@reduxjs/toolkit';
-import 'jotai';
-import '@uniswap/v2-sdk';
-import '@uniswap/v3-sdk';
-import '@babel/runtime/helpers/typeof';
-import '@babel/runtime/helpers/get';
-import '@babel/runtime/helpers/assertThisInitialized';
-import '@babel/runtime/helpers/wrapNativeSuper';
-import 'qs';
-import '@ethersproject/abi';
-import '@uniswap/redux-multicall';
-import '@ethersproject/address';
-import '@ethersproject/constants';
-import '@ethersproject/contracts';
-import '@uniswap/permit2-sdk';
-import '@uniswap/conedison/provider/signing';
-import '@uniswap/conedison/format';
-import 'ethers/lib/utils';
-import '@ethersproject/bytes';
-import '@ethersproject/bignumber';
-import '@ethersproject/strings';
-import '@uniswap/default-token-list';
-import 'popper-max-size-modifier';
-import 'react-dom';
-import 'react-popper';
-import '@ethersproject/hash';
-import 'cids';
-import 'multicodec';
-import 'multihashes';
-import '@babel/runtime/helpers/toConsumableArray';
-import 'wicg-inert';
-import 'node-vibrant/lib/bundle.js';
-import 'setimmediate';
-import 'react-virtualized-auto-sizer';
-import 'react-window';
-import '@web3-react/walletconnect-v2';
-import 'qrcode';
-import '@uniswap/conedison/provider/index';
-import '@ethersproject/providers';
-import '@web3-react/eip1193';
-import '@web3-react/metamask';
-import '@web3-react/network';
-import '@web3-react/types';
-import 'make-plural/plurals';
-import 'react-redux';
-import 'redux';
-import 'resize-observer-polyfill';
+'use strict';
+
+var _defineProperty = require('@babel/runtime/helpers/defineProperty');
+var _asyncToGenerator = require('@babel/runtime/helpers/asyncToGenerator');
+var _regeneratorRuntime = require('@babel/runtime/regenerator');
+var sdkCore = require('@uniswap/sdk-core');
+var smartOrderRouter = require('@uniswap/smart-order-router');
+var index = require('./index-ff8ecc33.cjs');
+var JSBI = require('jsbi');
+var routerSdk = require('@uniswap/router-sdk');
+require('react');
+require('buffer');
+require('@babel/runtime/helpers/slicedToArray');
+require('styled-components');
+require('@babel/runtime/helpers/taggedTemplateLiteral');
+require('react-feather');
+require('polished');
+require('wcag-contrast');
+require('@babel/runtime/helpers/extends');
+require('rebass');
+require('@web3-react/core');
+require('@babel/runtime/helpers/objectWithoutProperties');
+require('@uniswap/universal-router-sdk');
+require('@reduxjs/toolkit/query/react');
+require('jotai/immer');
+require('jotai/utils');
+require('@babel/runtime/helpers/classCallCheck');
+require('@babel/runtime/helpers/createClass');
+require('@babel/runtime/helpers/inherits');
+require('@babel/runtime/helpers/possibleConstructorReturn');
+require('@babel/runtime/helpers/getPrototypeOf');
+require('tiny-invariant');
+require('@ethersproject/units');
+require('@reduxjs/toolkit');
+require('jotai');
+require('@uniswap/v2-sdk');
+require('@uniswap/v3-sdk');
+require('@babel/runtime/helpers/typeof');
+require('@babel/runtime/helpers/get');
+require('@babel/runtime/helpers/assertThisInitialized');
+require('@babel/runtime/helpers/wrapNativeSuper');
+require('qs');
+require('@ethersproject/abi');
+require('@uniswap/redux-multicall');
+require('@ethersproject/address');
+require('@ethersproject/constants');
+require('@ethersproject/contracts');
+require('@uniswap/permit2-sdk');
+require('@uniswap/conedison/provider/signing');
+require('@uniswap/conedison/format');
+require('ethers/lib/utils');
+require('@ethersproject/bytes');
+require('@ethersproject/bignumber');
+require('@ethersproject/strings');
+require('@uniswap/default-token-list');
+require('popper-max-size-modifier');
+require('react-dom');
+require('react-popper');
+require('@ethersproject/hash');
+require('cids');
+require('multicodec');
+require('multihashes');
+require('@babel/runtime/helpers/toConsumableArray');
+require('wicg-inert');
+require('node-vibrant/lib/bundle.js');
+require('setimmediate');
+require('react-virtualized-auto-sizer');
+require('react-window');
+require('@web3-react/walletconnect-v2');
+require('qrcode');
+require('@uniswap/conedison/provider/index');
+require('@ethersproject/providers');
+require('@web3-react/eip1193');
+require('@web3-react/metamask');
+require('@web3-react/network');
+require('@web3-react/types');
+require('make-plural/plurals');
+require('react-redux');
+require('redux');
+require('resize-observer-polyfill');
+
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var _defineProperty__default = /*#__PURE__*/_interopDefaultLegacy(_defineProperty);
+var _asyncToGenerator__default = /*#__PURE__*/_interopDefaultLegacy(_asyncToGenerator);
+var _regeneratorRuntime__default = /*#__PURE__*/_interopDefaultLegacy(_regeneratorRuntime);
+var JSBI__default = /*#__PURE__*/_interopDefaultLegacy(JSBI);
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
@@ -110,7 +119,7 @@ function transformSwapRouteToGetQuoteResult(_ref) {
           _quote = subRoute.quote,
           tokenPath = subRoute.tokenPath;
 
-      if (subRoute.protocol === Protocol.V3) {
+      if (subRoute.protocol === routerSdk.Protocol.V3) {
         var pools = subRoute.route.pools;
         var curRoute = [];
 
@@ -121,13 +130,13 @@ function transformSwapRouteToGetQuoteResult(_ref) {
           var edgeAmountIn = undefined;
 
           if (i === 0) {
-            edgeAmountIn = isExactInput(tradeType) ? _amount.quotient.toString() : _quote.quotient.toString();
+            edgeAmountIn = index.isExactInput(tradeType) ? _amount.quotient.toString() : _quote.quotient.toString();
           }
 
           var edgeAmountOut = undefined;
 
           if (i === pools.length - 1) {
-            edgeAmountOut = isExactInput(tradeType) ? _quote.quotient.toString() : _amount.quotient.toString();
+            edgeAmountOut = index.isExactInput(tradeType) ? _quote.quotient.toString() : _amount.quotient.toString();
           }
 
           curRoute.push({
@@ -154,7 +163,7 @@ function transformSwapRouteToGetQuoteResult(_ref) {
         }
 
         routeResponse.push(curRoute);
-      } else if (subRoute.protocol === Protocol.V2) {
+      } else if (subRoute.protocol === routerSdk.Protocol.V2) {
         var _pools = subRoute.route.pairs;
         var _curRoute = [];
 
@@ -165,13 +174,13 @@ function transformSwapRouteToGetQuoteResult(_ref) {
           var _edgeAmountIn = undefined;
 
           if (_i === 0) {
-            _edgeAmountIn = isExactInput(tradeType) ? _amount.quotient.toString() : _quote.quotient.toString();
+            _edgeAmountIn = index.isExactInput(tradeType) ? _amount.quotient.toString() : _quote.quotient.toString();
           }
 
           var _edgeAmountOut = undefined;
 
           if (_i === _pools.length - 1) {
-            _edgeAmountOut = isExactInput(tradeType) ? _quote.quotient.toString() : _amount.quotient.toString();
+            _edgeAmountOut = index.isExactInput(tradeType) ? _quote.quotient.toString() : _amount.quotient.toString();
           }
 
           var reserve0 = _nextPool.reserve0;
@@ -223,9 +232,9 @@ function transformSwapRouteToGetQuoteResult(_ref) {
     _iterator.f();
   }
 
-  var amount = isExactInput(tradeType) ? inputAmount : outputAmount;
+  var amount = index.isExactInput(tradeType) ? inputAmount : outputAmount;
   return {
-    state: QuoteState.SUCCESS,
+    state: index.QuoteState.SUCCESS,
     data: {
       methodParameters: methodParameters,
       blockNumber: blockNumber.toString(),
@@ -248,8 +257,8 @@ function transformSwapRouteToGetQuoteResult(_ref) {
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-var AUTO_ROUTER_SUPPORTED_CHAINS = Object.values(ChainId).filter(function (chainId) {
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty__default["default"](target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+var AUTO_ROUTER_SUPPORTED_CHAINS = Object.values(sdkCore.ChainId).filter(function (chainId) {
   return Number.isInteger(chainId);
 });
 
@@ -269,8 +278,8 @@ function getRouter(chainId, provider) {
 
   var v2SubgraphProvider;
 
-  if (chainId !== ChainId.MAINNET) {
-    v2SubgraphProvider = new StaticV2SubgraphProvider(chainId);
+  if (chainId !== sdkCore.ChainId.MAINNET) {
+    v2SubgraphProvider = new smartOrderRouter.StaticV2SubgraphProvider(chainId);
   } // V3 computes on-chain, so the quoter must have gas limits appropriate to the provider.
   // Most defaults are fine, but polygon needs a lower gas limit.
   // TODO(zzmp): Upstream to @uniswap/smart-order-router, possibly making this easier to modify
@@ -280,10 +289,10 @@ function getRouter(chainId, provider) {
   var onChainQuoteProvider;
   var multicall2Provider;
 
-  if ([ChainId.POLYGON, ChainId.POLYGON_MUMBAI].includes(chainId)) {
-    multicall2Provider = new UniswapMulticallProvider(chainId, provider, 375000); // See https://github.com/Uniswap/smart-order-router/blob/98c58bdee9981fd9ffac9e7d7a97b18302d5f77a/src/routers/alpha-router/alpha-router.ts#L464-L487
+  if ([sdkCore.ChainId.POLYGON, sdkCore.ChainId.POLYGON_MUMBAI].includes(chainId)) {
+    multicall2Provider = new smartOrderRouter.UniswapMulticallProvider(chainId, provider, 375000); // See https://github.com/Uniswap/smart-order-router/blob/98c58bdee9981fd9ffac9e7d7a97b18302d5f77a/src/routers/alpha-router/alpha-router.ts#L464-L487
 
-    onChainQuoteProvider = new OnChainQuoteProvider(chainId, provider, multicall2Provider, {
+    onChainQuoteProvider = new smartOrderRouter.OnChainQuoteProvider(chainId, provider, multicall2Provider, {
       retries: 2,
       minTimeout: 100,
       maxTimeout: 1000
@@ -300,7 +309,7 @@ function getRouter(chainId, provider) {
     });
   }
 
-  var router = new AlphaRouter({
+  var router = new smartOrderRouter.AlphaRouter({
     chainId: chainId,
     provider: provider,
     v2SubgraphProvider: v2SubgraphProvider,
@@ -317,20 +326,20 @@ function getQuoteResult(_x, _x2, _x3) {
 }
 
 function _getQuoteResult() {
-  _getQuoteResult = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(_ref, router, routerConfig) {
+  _getQuoteResult = _asyncToGenerator__default["default"]( /*#__PURE__*/_regeneratorRuntime__default["default"].mark(function _callee(_ref, router, routerConfig) {
     var tradeType, tokenIn, tokenOut, amountRaw, tokenInIsNative, tokenOutIsNative, currencyIn, currencyOut, baseCurrency, quoteCurrency, amount, route;
-    return _regeneratorRuntime.wrap(function _callee$(_context) {
+    return _regeneratorRuntime__default["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             tradeType = _ref.tradeType, tokenIn = _ref.tokenIn, tokenOut = _ref.tokenOut, amountRaw = _ref.amount;
-            tokenInIsNative = Object.values(SwapRouterNativeAssets).includes(tokenIn.address);
-            tokenOutIsNative = Object.values(SwapRouterNativeAssets).includes(tokenOut.address);
-            currencyIn = tokenInIsNative ? nativeOnChain(tokenIn.chainId) : new Token(tokenIn.chainId, tokenIn.address, tokenIn.decimals, tokenIn.symbol);
-            currencyOut = tokenOutIsNative ? nativeOnChain(tokenOut.chainId) : new Token(tokenOut.chainId, tokenOut.address, tokenOut.decimals, tokenOut.symbol);
-            baseCurrency = isExactInput(tradeType) ? currencyIn : currencyOut;
-            quoteCurrency = isExactInput(tradeType) ? currencyOut : currencyIn;
-            amount = CurrencyAmount.fromRawAmount(baseCurrency, JSBI.BigInt(amountRaw !== null && amountRaw !== void 0 ? amountRaw : '1')); // a null amountRaw should initialize the route
+            tokenInIsNative = Object.values(index.SwapRouterNativeAssets).includes(tokenIn.address);
+            tokenOutIsNative = Object.values(index.SwapRouterNativeAssets).includes(tokenOut.address);
+            currencyIn = tokenInIsNative ? index.nativeOnChain(tokenIn.chainId) : new sdkCore.Token(tokenIn.chainId, tokenIn.address, tokenIn.decimals, tokenIn.symbol);
+            currencyOut = tokenOutIsNative ? index.nativeOnChain(tokenOut.chainId) : new sdkCore.Token(tokenOut.chainId, tokenOut.address, tokenOut.decimals, tokenOut.symbol);
+            baseCurrency = index.isExactInput(tradeType) ? currencyIn : currencyOut;
+            quoteCurrency = index.isExactInput(tradeType) ? currencyOut : currencyIn;
+            amount = sdkCore.CurrencyAmount.fromRawAmount(baseCurrency, JSBI__default["default"].BigInt(amountRaw !== null && amountRaw !== void 0 ? amountRaw : '1')); // a null amountRaw should initialize the route
 
             _context.next = 10;
             return router.route(amount, quoteCurrency, tradeType,
@@ -346,7 +355,7 @@ function _getQuoteResult() {
             }
 
             return _context.abrupt("return", {
-              state: QuoteState.INITIALIZED
+              state: index.QuoteState.INITIALIZED
             });
 
           case 13:
@@ -356,12 +365,12 @@ function _getQuoteResult() {
             }
 
             return _context.abrupt("return", {
-              state: QuoteState.NOT_FOUND
+              state: index.QuoteState.NOT_FOUND
             });
 
           case 15:
             return _context.abrupt("return", transformSwapRouteToGetQuoteResult(_objectSpread(_objectSpread({}, route), {}, {
-              routeString: routeAmountsToString(route.route)
+              routeString: smartOrderRouter.routeAmountsToString(route.route)
             })));
 
           case 16:
@@ -379,9 +388,9 @@ function getClientSideQuoteResult(_x4, _x5) {
 }
 
 function _getClientSideQuoteResult() {
-  _getClientSideQuoteResult = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee2(_ref2, routerConfig) {
+  _getClientSideQuoteResult = _asyncToGenerator__default["default"]( /*#__PURE__*/_regeneratorRuntime__default["default"].mark(function _callee2(_ref2, routerConfig) {
     var tokenInAddress, tokenInChainId, tokenInDecimals, tokenInSymbol, tokenOutAddress, tokenOutChainId, tokenOutDecimals, tokenOutSymbol, amount, tradeType, provider, router;
-    return _regeneratorRuntime.wrap(function _callee2$(_context2) {
+    return _regeneratorRuntime__default["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
@@ -423,4 +432,4 @@ function _getClientSideQuoteResult() {
   return _getClientSideQuoteResult.apply(this, arguments);
 }
 
-export { getClientSideQuoteResult };
+exports.getClientSideQuoteResult = getClientSideQuoteResult;
