@@ -3,7 +3,7 @@ import './external'
 
 import { mix, rgba, transparentize } from 'polished'
 import { createContext, PropsWithChildren, useContext, useMemo, useState } from 'react'
-import { DefaultTheme, ThemeProvider as StyledProvider } from 'styled-components/macro'
+import { DefaultTheme, ThemeProvider as StyledProvider, css } from 'styled-components/macro'
 
 import { Layer } from './layer'
 import type { Colors, Theme, ThemeBorderRadius } from './theme'
@@ -160,3 +160,12 @@ function toDefaultTheme(theme: Required<Theme>): DefaultTheme {
     }
   }
 }
+
+const gapValues = {
+  xs: '4px',
+  sm: '8px',
+  md: '12px',
+  lg: '24px',
+  xl: '32px',
+}
+export type Gap = keyof typeof gapValues

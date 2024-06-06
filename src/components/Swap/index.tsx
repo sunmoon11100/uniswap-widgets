@@ -41,7 +41,6 @@ export default function Swap(props: SwapProps) {
   useSyncSwapRouterUrl(props.routerUrl)
 
   const [wrapper, setWrapper] = useState<HTMLDivElement | null>(null)
-
   const [displayTxHash, setDisplayTxHash] = useAtom(displayTxHashAtom)
   const pendingTxs = usePendingTransactions()
   const displayTx = useMemo(() => displayTxHash && pendingTxs[displayTxHash], [displayTxHash, pendingTxs])
@@ -49,8 +48,7 @@ export default function Swap(props: SwapProps) {
   return (
     <>
       <SwapInfoProvider>
-        <Header title={<Trans>Swap</Trans>}>
-          <Wallet disabled={props.hideConnectionUI} />
+        <Header title={<Wallet disabled={props.hideConnectionUI} />}>
           <Settings />
         </Header>
         <div ref={setWrapper}>

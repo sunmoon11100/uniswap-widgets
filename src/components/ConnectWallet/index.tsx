@@ -11,5 +11,9 @@ export default function Wallet({ disabled }: WalletProps) {
   if (!isActive || !Boolean(account)) {
     return null
   }
-  return <ConnectedWalletChip disabled={disabled} account={account} />
+  return (
+    <div className="">
+      <ConnectedWalletChip disabled={disabled} account={account} />
+    </div>
+  )
 }

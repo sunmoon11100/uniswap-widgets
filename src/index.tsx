@@ -1,7 +1,9 @@
 import 'polyfills'
-
 import Swap, { SwapProps } from 'components/Swap'
 import Widget, { WidgetProps } from 'components/Widget'
+import Pool from 'components/Pool'
+import { Tabs, Tab } from 'components/Tab'
+import { useState } from 'react'
 
 export { getAssetsRepoURI, getNativeLogoURI, Logo, LogoUpdater, useLogo, useLogos } from './components/Logo'
 export type { Provider as EthersProvider } from '@ethersproject/abstract-provider'
@@ -79,9 +81,32 @@ export { invertTradeType, toTradeType } from 'utils/tradeType'
 export type SwapWidgetProps = SwapProps & WidgetProps
 
 export function SwapWidget(props: SwapWidgetProps) {
+  const [activeTab, setActiveTab] = useState(0)
+  const handleTabClick = (index: number) => {
+    setActiveTab(index)
+  }
   return (
     <Widget {...props}>
-      <Swap {...props} />
+      <Tabs>
+        <Tab active={activeTab === 0} onClick={() => handleTabClick(0)}>
+          Swap
+        </Tab>
+        <Tab active={activeTab === 1} onClick={() => handleTabClick(1)}>
+          Pool
+        </Tab>
+      </Tabs>
+      <div>
+        {activeTab === 0 && (
+          <div>
+            <Swap {...props} />
+          </div>
+        )}
+        {activeTab === 1 && (
+          <div>
+            <Pool />
+          </div>
+        )}
+      </div>
     </Widget>
   )
 }
