@@ -76,7 +76,7 @@ export const darkTheme: Colors = {
   module: '#061930',
   interactive: '#011324',
   secondInteractive: '#4E99DE',
-  outline: 'hsl(224, 33%, 16%)',
+  outline: '#8527D4',
   dialog: black,
   scrim: 'hsla(224, 33%, 16%, 0.5)',
 

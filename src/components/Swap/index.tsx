@@ -1,6 +1,3 @@
-import { Trans } from '@lingui/macro'
-import BrandedFooter from 'components/BrandedFooter'
-import Wallet from 'components/ConnectWallet'
 import { SwapInfoProvider } from 'hooks/swap/useSwapInfo'
 import useSyncController, { SwapController } from 'hooks/swap/useSyncController'
 import useSyncConvenienceFee, { FeeOptions } from 'hooks/swap/useSyncConvenienceFee'
@@ -8,22 +5,19 @@ import useSyncSwapEventHandlers, { SwapEventHandlers } from 'hooks/swap/useSyncS
 import useSyncSwapRouterUrl from 'hooks/swap/useSyncSwapRouterUrl'
 import useSyncTokenDefaults, { TokenDefaults } from 'hooks/swap/useSyncTokenDefaults'
 import { usePendingTransactions } from 'hooks/transactions'
-import { useBrandedFooter } from 'hooks/useSyncFlags'
 import { useAtom } from 'jotai'
 import { useMemo, useState } from 'react'
 import { displayTxHashAtom } from 'state/swap'
 
+import ModuleContainer from 'components/container/module'
 import Dialog from '../Dialog'
-import Header from '../Header'
 import { PopoverBoundaryProvider } from '../Popover'
 import Input from './Input'
 import Output from './Output'
 import ReverseButton from './ReverseButton'
-import Settings from './Settings'
 import { StatusDialog } from './Status'
 import Toolbar, { CaptionRow } from './Toolbar'
 import useValidate from './useValidate'
-import ModuleContainer from 'components/container/module'
 
 // SwapProps also currently includes props needed for wallet connection (eg hideConnectionUI),
 // since the wallet connection component exists within the Swap component.
@@ -50,10 +44,6 @@ export default function Swap(props: SwapProps) {
   return (
     <>
       <SwapInfoProvider>
-        <Header title={<Trans>Swap</Trans>}>
-          <Wallet disabled={props.hideConnectionUI} />
-          <Settings />
-        </Header>
         <ModuleContainer ref={setWrapper} style={{ padding: 16, paddingTop: 0 }}>
           <PopoverBoundaryProvider value={wrapper}>
             <Input />

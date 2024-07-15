@@ -7,13 +7,12 @@ import { Field } from 'state/swap'
 import styled from 'styled-components/macro'
 import { ThemedText } from 'theme'
 
+import { InteractiveContainerRounded } from 'components/container/interactive/InteractiveContainer'
+import { Logo } from 'components/Logo'
 import Column from '../Column'
 import { DecimalInput } from '../Input'
 import Row from '../Row'
 import TokenSelect from '../TokenSelect'
-import InteractiveContainer from 'components/container/interactive'
-import { InteractiveContainerRounded } from 'components/container/interactive/InteractiveContainer'
-import { Logo } from 'components/Logo'
 
 const TokenInputRow = styled(Row)`
   grid-template-columns: 1fr;
