@@ -70,7 +70,7 @@ function Fixture() {
   const [width] = useValue('width', { defaultValue: 360 })
 
   const [theme, setTheme] = useValue('theme', { defaultValue: defaultTheme })
-  const [darkMode] = useValue('darkMode', { defaultValue: false })
+  const [darkMode] = useValue('darkMode', { defaultValue: true })
   useEffect(() => setTheme((theme) => ({ ...theme, ...(darkMode ? darkTheme : lightTheme) })), [darkMode, setTheme])
 
   const defaultNetwork = useOption('defaultChainId', {
@@ -126,7 +126,7 @@ function Fixture() {
   if (!window.frameElement) return widget
 
   return (
-    <Row flex align="start" justify="start" gap={0.5}>
+    <Row flex align="start" justify="start" gap={0.5} style={{ background: 'black' }}>
       {widget}
       <EventFeed events={events} onClear={() => setEvents([])} />
     </Row>

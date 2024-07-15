@@ -20,8 +20,8 @@ import ToolbarOrderRouting from './ToolbarOrderRouting'
 import ToolbarTradeSummary, { SummaryRowProps } from './ToolbarTradeSummary'
 
 const StyledExpando = styled(Expando)`
-  border: 1px solid ${({ theme }) => theme.outline};
-  border-radius: ${({ theme }) => theme.borderRadius.medium}rem;
+  // border: 1px solid ${({ theme }) => theme.outline};
+  // border-radius: ${({ theme }) => theme.borderRadius.medium}rem;
   overflow: hidden;
 `
 
@@ -35,7 +35,7 @@ const ToolbarRow = styled(Row)<{ isExpandable?: true }>`
   padding: 0 1rem;
 `
 
-function CaptionRow() {
+export function CaptionRow() {
   const {
     [Field.INPUT]: { currency: inputCurrency },
     [Field.OUTPUT]: { currency: outputCurrency, usdc: outputUSDC },
@@ -216,7 +216,6 @@ function ToolbarActionButton() {
 function Toolbar() {
   return (
     <>
-      <CaptionRow />
       <ToolbarActionButton />
     </>
   )

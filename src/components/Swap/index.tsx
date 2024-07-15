@@ -21,8 +21,9 @@ import Output from './Output'
 import ReverseButton from './ReverseButton'
 import Settings from './Settings'
 import { StatusDialog } from './Status'
-import Toolbar from './Toolbar'
+import Toolbar, { CaptionRow } from './Toolbar'
 import useValidate from './useValidate'
+import ModuleContainer from 'components/container/module'
 
 // SwapProps also currently includes props needed for wallet connection (eg hideConnectionUI),
 // since the wallet connection component exists within the Swap component.
@@ -53,15 +54,17 @@ export default function Swap(props: SwapProps) {
           <Wallet disabled={props.hideConnectionUI} />
           <Settings />
         </Header>
-        <div ref={setWrapper}>
+        <ModuleContainer ref={setWrapper} style={{ padding: 16, paddingTop: 0 }}>
           <PopoverBoundaryProvider value={wrapper}>
             <Input />
             <ReverseButton />
             <Output />
             <Toolbar />
-            {useBrandedFooter() && <BrandedFooter />}
+            {/* {useBrandedFooter() && <BrandedFooter />} */}
           </PopoverBoundaryProvider>
-        </div>
+        </ModuleContainer>
+
+        <CaptionRow />
       </SwapInfoProvider>
       {displayTx && (
         <Dialog color="dialog">

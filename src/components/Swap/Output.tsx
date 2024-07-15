@@ -44,7 +44,7 @@ export default function Output() {
         field={Field.OUTPUT}
         fiatValueChange={fiatValueChange}
         hasColor={hasColor}
-        subheader={t`You receive`}
+        subheader={t`Buy`}
       />
     </DynamicThemeProvider>
   )

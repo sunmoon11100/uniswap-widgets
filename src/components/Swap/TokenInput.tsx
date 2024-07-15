@@ -11,6 +11,9 @@ import Column from '../Column'
 import { DecimalInput } from '../Input'
 import Row from '../Row'
 import TokenSelect from '../TokenSelect'
+import InteractiveContainer from 'components/container/interactive'
+import { InteractiveContainerRounded } from 'components/container/interactive/InteractiveContainer'
+import { Logo } from 'components/Logo'
 
 const TokenInputRow = styled(Row)`
   grid-template-columns: 1fr;
@@ -23,7 +26,7 @@ const ValueInput = styled(DecimalInput)`
 `
 
 const TokenInputColumn = styled(Column)`
-  margin: 0.25rem 1rem 0;
+  // margin: 0.25rem 1rem 0;
 `
 
 export interface TokenInputHandle {
@@ -66,18 +69,21 @@ export const TokenInput = forwardRef<TokenInputHandle, PropsWithChildren<TokenIn
 
   return (
     <TokenInputColumn gap={0.25} {...rest}>
-      <TokenInputRow gap={0.5}>
-        <ThemedText.H1>
-          <ValueInput
-            value={amount}
-            onChange={onChangeInput}
-            disabled={disabled || !currency}
-            isLoading={Boolean(loading)}
-            ref={input}
-          />
-        </ThemedText.H1>
-        <TokenSelect field={field} value={currency} approved={approved} disabled={disabled} onSelect={onSelect} />
-      </TokenInputRow>
+      <InteractiveContainerRounded style={{ padding: '4px 12px' }}>
+        <TokenInputRow gap={0.5}>
+          {currency ? <Logo currency={currency} symbol={currency.symbol} /> : null}
+          <ThemedText.H1>
+            <ValueInput
+              value={amount}
+              onChange={onChangeInput}
+              disabled={disabled || !currency}
+              isLoading={Boolean(loading)}
+              ref={input}
+            />
+          </ThemedText.H1>
+          <TokenSelect field={field} value={currency} approved={approved} disabled={disabled} onSelect={onSelect} />
+        </TokenInputRow>
+      </InteractiveContainerRounded>
       {children}
     </TokenInputColumn>
   )

@@ -1,6 +1,5 @@
 import { Trans } from '@lingui/macro'
 import { Currency } from '@uniswap/sdk-core'
-import { Logo } from 'components/Logo'
 import { ChevronDown } from 'icons'
 import styled from 'styled-components/macro'
 import { ThemedText } from 'theme'
@@ -12,7 +11,7 @@ import TokenImg from '../TokenImg'
 const StyledTokenButton = styled(Button)<{ approved?: boolean }>`
   border-radius: ${({ theme }) => theme.borderRadius.medium}rem;
   min-height: 2rem;
-  padding: 0.25rem 0.5rem 0.25rem 0.25rem;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
 
   :enabled {
     transition: none;
@@ -53,7 +52,6 @@ export default function TokenButton({ value, approved, disabled, onClick }: Toke
       <TokenButtonRow empty={!value} flex gap={0.4} flow="nowrap">
         {value ? (
           <>
-            <Logo currency={value} symbol={value.symbol} />
             <ThemedText.ButtonLarge color={'currentColor'}>
               <span>{value.symbol}</span>
             </ThemedText.ButtonLarge>

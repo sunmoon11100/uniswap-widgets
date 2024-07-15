@@ -7,7 +7,7 @@ import Row from './Row'
 
 const HeaderRow = styled(Row)`
   height: 1.5rem;
-  margin: 0.5rem 0.75rem 1rem;
+  margin: 0.75rem 1rem;
   ${largeIconCss}
 `
 

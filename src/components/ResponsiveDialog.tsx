@@ -63,7 +63,7 @@ export function ResponsiveDialog({
       <>
         {anchor}
         {open && (
-          <Dialog color="container" onClose={() => setOpen(false)}>
+          <Dialog color="module" onClose={() => setOpen(false)}>
             {children}
           </Dialog>
         )}

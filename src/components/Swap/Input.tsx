@@ -31,7 +31,6 @@ const Balance = styled(ThemedText.Body2)`
 `
 
 const InputColumn = styled(Column)<{ disableHover?: boolean; isWide: boolean }>`
-  background-color: ${({ theme }) => theme.module};
   border-radius: ${({ theme }) => theme.borderRadius.medium}rem;
   margin-bottom: 0.25rem;
   padding: ${({ isWide }) => (isWide ? '1rem 0' : '1rem 0 1.5rem')};
@@ -55,11 +54,11 @@ const InputColumn = styled(Column)<{ disableHover?: boolean; isWide: boolean }>`
   ${({ theme, disableHover }) =>
     !disableHover &&
     ` &:hover:before {
-        border-color: ${theme.interactive};
+        // border-color: ${theme.interactive};
       }
 
       &:focus-within:before {
-        border-color: ${theme.networkDefaultShadow};
+        // border-color: ${theme.networkDefaultShadow};
       }`}
 `
 
@@ -146,7 +145,7 @@ export function FieldWrapper({
       onClick={onClick}
       className={className}
     >
-      <Row pad={1 /* rem */}>
+      <Row>
         <ThemedText.Subhead2 color={'secondary'}>{subheader}</ThemedText.Subhead2>
       </Row>
       <TokenInput
@@ -210,7 +209,7 @@ export default function Input() {
       field={Field.INPUT}
       maxAmount={maxAmount}
       approved={approvalState === SwapApprovalState.APPROVED}
-      subheader={t`You pay`}
+      subheader={t`Sell`}
     />
   )
 }

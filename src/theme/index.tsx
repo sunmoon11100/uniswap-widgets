@@ -18,11 +18,11 @@ const white = 'hsl(0, 0%, 100%)'
 const black = 'hsl(0, 0%, 0%)'
 
 const brandLight = 'hsl(328, 97%, 53%)'
-const brandDark = 'hsl(221, 96%, 64%)'
+const brandDark = '#FC72FF'
 export const brand = brandLight
 
 const stateColors = {
-  active: 'hsl(221, 96%, 64%)',
+  active: '#8527D4',
   activeSoft: 'hsla(221, 96%, 64%, 0.24)',
   success: 'hsl(145, 63.4%, 41.8%)',
   warningSoft: 'hsla(44, 86%, 51%, 0.24)',
@@ -37,6 +37,7 @@ export const lightTheme: Colors = {
   container: 'hsl(0, 0%, 100%)',
   module: 'hsl(231, 54%, 97%)',
   interactive: 'hsl(227, 70%, 95%)',
+  secondInteractive: '#4E99DE',
   outline: 'hsla(225, 18%, 44%, 0.24)',
   dialog: white,
   scrim: 'hsla(224, 37%, 8%, 0.6)',
@@ -59,13 +60,22 @@ export const lightTheme: Colors = {
   currentColor: 'currentColor',
 }
 
+// "#FC72FF",
+// "#8527D44D",
+// "#8527D419",
+// "#8527D4",
+// "#4E99DE",
+// "#061930",
+// "#011324",
+
 export const darkTheme: Colors = {
   // surface
   accent: brandDark,
   accentSoft: rgba(brandDark, 0.24),
-  container: 'hsla(224, 37%, 8%, 1)',
-  module: 'hsl(222, 37%, 12%)',
-  interactive: 'hsla(223, 28%, 22%, 1)',
+  container: '#8527D4',
+  module: '#061930',
+  interactive: '#011324',
+  secondInteractive: '#4E99DE',
   outline: 'hsl(224, 33%, 16%)',
   dialog: black,
   scrim: 'hsla(224, 33%, 16%, 0.5)',
