@@ -1,5 +1,4 @@
 import { Trans } from '@lingui/macro'
-import Button from 'components/Button'
 import Column from 'components/Column'
 import Row from 'components/Row'
 import { StyledTokenButton } from 'components/TokenSelect/TokenButton'
