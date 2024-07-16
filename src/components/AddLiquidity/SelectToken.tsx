@@ -5,18 +5,16 @@ import { useState } from 'react'
 import { TradeState } from 'state/routing/types'
 import { Field } from 'state/swap'
 
-import { Currency } from '@uniswap/sdk-core'
+import { Currency, Token } from '@uniswap/sdk-core'
 import TokenInput from 'components/Swap/TokenInput'
 
-export default function SelectToken() {
+export default function SelectToken({ value, onChange }: { value?: Currency; onChange: (v: Currency) => void }) {
   const {
     trade: { state: tradeState },
   } = useSwapInfo()
 
-  const [currency, updateCurrency] = useState<Currency>()
-
   // extract eagerly in case of reversal
-  usePrefetchCurrencyColor(currency)
+  usePrefetchCurrencyColor(value)
 
   const isRouteLoading = tradeState === TradeState.LOADING
   const isDependentField = !useIsSwapFieldIndependent(Field.INPUT)
@@ -25,11 +23,11 @@ export default function SelectToken() {
   return (
     <TokenInput
       field={Field.INPUT}
-      currency={currency}
+      currency={value}
       loading={isLoading}
       // approved={approvalState === SwapApprovalState.APPROVED}
       // disabled={isDisabled}
-      onChangeCurrency={updateCurrency}
+      onChangeCurrency={onChange}
       hideInput={true}
     />
   )

@@ -80,25 +80,38 @@ export const TokenInput = forwardRef<TokenInputHandle, PropsWithChildren<TokenIn
   }, [])
   useImperativeHandle(ref, () => ({ focus }), [focus])
 
+  const inputRow = (
+    <TokenInputRow gap={0.5}>
+      {currency && !hideInput ? <Logo currency={currency} symbol={currency.symbol} /> : null}
+      {hideInput ? null : (
+        <ThemedText.H1>
+          <ValueInput
+            value={amount ?? '0'}
+            onChange={onChangeInput ?? (() => null)}
+            disabled={disabled || !currency}
+            isLoading={Boolean(loading)}
+            ref={input}
+          />
+        </ThemedText.H1>
+      )}
+      <TokenSelect
+        field={field}
+        value={currency}
+        approved={approved}
+        disabled={disabled}
+        onSelect={onSelect}
+        showLogo={hideInput}
+      />
+    </TokenInputRow>
+  )
+
   return (
     <TokenInputColumn gap={0.25} {...rest}>
-      <InteractiveContainerRounded style={{ padding: '4px 12px' }}>
-        <TokenInputRow gap={0.5}>
-          {currency ? <Logo currency={currency} symbol={currency.symbol} /> : null}
-          {hideInput ? null : (
-            <ThemedText.H1>
-              <ValueInput
-                value={amount ?? '0'}
-                onChange={onChangeInput ?? (() => null)}
-                disabled={disabled || !currency}
-                isLoading={Boolean(loading)}
-                ref={input}
-              />
-            </ThemedText.H1>
-          )}
-          <TokenSelect field={field} value={currency} approved={approved} disabled={disabled} onSelect={onSelect} />
-        </TokenInputRow>
-      </InteractiveContainerRounded>
+      {hideInput ? (
+        inputRow
+      ) : (
+        <InteractiveContainerRounded style={{ padding: '4px 12px' }}>{inputRow}</InteractiveContainerRounded>
+      )}
       {children}
     </TokenInputColumn>
   )

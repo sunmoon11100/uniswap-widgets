@@ -148,9 +148,17 @@ interface TokenSelectProps {
   approved?: boolean
   disabled?: boolean
   onSelect: (value: Currency) => void
+  showLogo?: boolean
 }
 
-export default memo(function TokenSelect({ field, value, approved, disabled, onSelect }: TokenSelectProps) {
+export default memo(function TokenSelect({
+  field,
+  value,
+  approved,
+  disabled,
+  onSelect,
+  showLogo = false,
+}: TokenSelectProps) {
   usePrefetchBalances()
 
   const [open, setOpen] = useState(false)
@@ -168,7 +176,7 @@ export default memo(function TokenSelect({ field, value, approved, disabled, onS
 
   return (
     <>
-      <TokenButton value={value} approved={approved} disabled={disabled} onClick={onOpen} />
+      <TokenButton value={value} approved={approved} disabled={disabled} onClick={onOpen} showLogo={showLogo} />
       <ResponsiveDialog open={open} setOpen={setOpen}>
         <TokenSelectDialogContent value={value} onSelect={selectAndClose} onClose={() => setOpen(false)} />
       </ResponsiveDialog>

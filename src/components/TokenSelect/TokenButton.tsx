@@ -7,6 +7,7 @@ import { ThemedText } from 'theme'
 import Button from '../Button'
 import Row from '../Row'
 import TokenImg from '../TokenImg'
+import { Logo } from 'components/Logo'
 
 export const StyledTokenButton = styled(Button)<{ approved?: boolean }>`
   border-radius: ${({ theme }) => theme.borderRadius.medium}rem;
@@ -26,7 +27,7 @@ const TokenButtonRow = styled(Row)<{ empty: boolean }>`
   max-width: 12rem;
   overflow: hidden;
   padding-left: ${({ empty }) => empty && 0.5}rem;
-  width: max-content;
+  width: 100%;
 
   img {
     min-width: 1.2rem;
@@ -38,9 +39,10 @@ interface TokenButtonProps {
   approved?: boolean
   disabled?: boolean
   onClick: () => void
+  showLogo?: boolean
 }
 
-export default function TokenButton({ value, approved, disabled, onClick }: TokenButtonProps) {
+export default function TokenButton({ value, approved, disabled, onClick, showLogo = false }: TokenButtonProps) {
   return (
     <StyledTokenButton
       onClick={onClick}
@@ -49,13 +51,14 @@ export default function TokenButton({ value, approved, disabled, onClick }: Toke
       disabled={disabled}
       data-testid="token-select"
     >
-      <TokenButtonRow empty={!value} flex gap={0.4} flow="nowrap">
+      <TokenButtonRow empty={!value} flex gap={0.4} flow="nowrap" justify="space-between">
         {value ? (
-          <>
+          <Row flex gap={0.4}>
+            {showLogo ? <Logo currency={value} symbol={value.symbol} /> : null}
             <ThemedText.ButtonLarge color={'currentColor'}>
               <span>{value.symbol}</span>
             </ThemedText.ButtonLarge>
-          </>
+          </Row>
         ) : (
           <ThemedText.ButtonLarge
             color={'onAccent'}
