@@ -35,17 +35,30 @@ export interface TokenInputHandle {
 
 interface TokenInputProps {
   field: Field
-  amount: string
+  amount?: string
   currency?: Currency
   approved?: boolean
   loading?: boolean
   disabled?: boolean
-  onChangeInput: (input: string) => void
+  onChangeInput?: (input: string) => void
   onChangeCurrency: (currency: Currency) => void
+  hideInput?: boolean
 }
 
 export const TokenInput = forwardRef<TokenInputHandle, PropsWithChildren<TokenInputProps>>(function TokenInput(
-  { field, amount, currency, approved, loading, disabled, onChangeInput, onChangeCurrency, children, ...rest },
+  {
+    field,
+    amount,
+    currency,
+    approved,
+    loading,
+    disabled,
+    onChangeInput,
+    onChangeCurrency,
+    hideInput,
+    children,
+    ...rest
+  },
   ref
 ) {
   const input = useRef<HTMLInputElement>(null)
@@ -72,15 +85,17 @@ export const TokenInput = forwardRef<TokenInputHandle, PropsWithChildren<TokenIn
       <InteractiveContainerRounded style={{ padding: '4px 12px' }}>
         <TokenInputRow gap={0.5}>
           {currency ? <Logo currency={currency} symbol={currency.symbol} /> : null}
-          <ThemedText.H1>
-            <ValueInput
-              value={amount}
-              onChange={onChangeInput}
-              disabled={disabled || !currency}
-              isLoading={Boolean(loading)}
-              ref={input}
-            />
-          </ThemedText.H1>
+          {hideInput ? null : (
+            <ThemedText.H1>
+              <ValueInput
+                value={amount ?? '0'}
+                onChange={onChangeInput ?? (() => null)}
+                disabled={disabled || !currency}
+                isLoading={Boolean(loading)}
+                ref={input}
+              />
+            </ThemedText.H1>
+          )}
           <TokenSelect field={field} value={currency} approved={approved} disabled={disabled} onSelect={onSelect} />
         </TokenInputRow>
       </InteractiveContainerRounded>

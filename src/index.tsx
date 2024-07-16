@@ -106,8 +106,8 @@ export function SwapWidget(props: SwapWidgetProps) {
   }
 
   const renderWidgets = [
-    { label: 'Swap', content: <Swap {...props} /> },
     { label: 'Pool', content: <Pool /> },
+    { label: 'Swap', content: <Swap {...props} /> },
   ]
 
   return (
