@@ -8,6 +8,7 @@ import Row from 'components/Row'
 import styled from 'styled-components'
 import Wallet from 'components/ConnectWallet'
 import Settings from 'components/Swap/Settings'
+import Pool from 'components/Pool'
 
 export { getAssetsRepoURI, getNativeLogoURI, Logo, LogoUpdater, useLogo, useLogos } from './components/Logo'
 export type { Provider as EthersProvider } from '@ethersproject/abstract-provider'
@@ -105,8 +106,8 @@ export function SwapWidget(props: SwapWidgetProps) {
   }
 
   const renderWidgets = [
+    { label: 'Pool', content: <Pool /> },
     { label: 'Swap', content: <Swap {...props} /> },
-    { label: 'Pool', content: <div></div> },
   ]
 
   return (

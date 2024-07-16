@@ -13,7 +13,7 @@ import { iconHoverCss } from 'css/hover'
 import { FunctionComponent, SVGProps } from 'react'
 // This file wraps react-feather, so its import is intentional.
 /* eslint-disable no-restricted-imports */
-import { Icon as FeatherIcon } from 'react-feather'
+import { Icon as FeatherIcon, Inbox as InboxFeather } from 'react-feather'
 import {
   AlertTriangle as AlertTriangleIcon,
   ArrowDown as ArrowDownIcon,
@@ -99,6 +99,7 @@ export const ChevronUp = icon(ChevronUpIcon)
 export const Clock = icon(ClockIcon)
 export const HelpCircle = icon(HelpCircleIcon)
 export const Identicon = icon(IdenticonIcon)
+export const Inbox = icon(InboxFeather)
 export const Info = icon(InfoIcon)
 export const Link = icon(LinkIcon)
 export const AutoRouter = icon(AutoRouterIcon)
