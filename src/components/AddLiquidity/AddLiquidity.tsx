@@ -1,19 +1,22 @@
 import { Trans } from '@lingui/macro'
 import { BigintIsh, Currency } from '@uniswap/sdk-core'
-import { FeeAmount, Pool, TickDataProvider } from '@uniswap/v3-sdk'
+import { FeeAmount, TickDataProvider } from '@uniswap/v3-sdk'
 import Column from 'components/Column'
-import Row from 'components/Row'
 import { StyledTokenButton } from 'components/TokenSelect/TokenButton'
+import ScrollContainer from 'components/container/scroll-container'
 import { ETH_BNB_CHAIN } from 'constants/tokens'
 import JSBI from 'jsbi'
-import { useState } from 'react'
-import SelectToken from './SelectToken'
+import { useRef, useState } from 'react'
 import { ThemedText } from 'theme'
+import FeeSelect from './FeeSelect'
+import SelectToken from './SelectToken'
 
 export default function AddLiquidity() {
+  const contentRef = useRef<HTMLDivElement>(null)
+
   const [tokenA, setTokenA] = useState<Currency>(ETH_BNB_CHAIN)
   const [tokenB, setTokenB] = useState<Currency>()
-  const [fee, setFee] = useState<FeeAmount>()
+  const [fee, setFee] = useState<FeeAmount>(FeeAmount.LOW)
   const [sqrtRatio, setSqrtRatio] = useState<BigintIsh>()
   const [liquidity, setLiquidity] = useState<BigintIsh>(JSBI.BigInt('1000000000000000000'))
   const [tickCurrent, setTickCurrent] = useState<number>()
@@ -24,25 +27,23 @@ export default function AddLiquidity() {
   }
 
   return (
-    <div>
+    <ScrollContainer>
       <Column gap={1}>
         <ThemedText.Body1>
           <Trans>Select pair</Trans>
         </ThemedText.Body1>
 
-        <Row gap={0.5} flex>
-          <div style={{ flexGrow: 1 }}>
-            <SelectToken value={tokenA} onChange={setTokenA} />
-          </div>
-          <div style={{ flexGrow: 1 }}>
-            <SelectToken value={tokenB} onChange={setTokenB} />
-          </div>
-        </Row>
+        <Column gap={0.5} flex align="stretch">
+          <SelectToken value={tokenA} onChange={setTokenA} />
+          <SelectToken value={tokenB} onChange={setTokenB} />
+        </Column>
+
+        <FeeSelect value={fee} onChange={setFee} />
 
         <StyledTokenButton onClick={handleSave} color={'accent'}>
           <Trans>+ New Position</Trans>
         </StyledTokenButton>
       </Column>
-    </div>
+    </ScrollContainer>
   )
 }

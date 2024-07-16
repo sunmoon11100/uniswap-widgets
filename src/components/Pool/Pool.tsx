@@ -11,7 +11,7 @@ import { useState } from 'react'
 import { ThemedText } from 'theme'
 
 export default function Pool() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
 
   const handleClick = () => {
     setIsOpen(true)

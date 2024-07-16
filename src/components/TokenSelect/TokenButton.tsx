@@ -24,7 +24,7 @@ export const StyledTokenButton = styled(Button)<{ approved?: boolean }>`
 `
 
 const TokenButtonRow = styled(Row)<{ empty: boolean }>`
-  max-width: 12rem;
+  // max-width: 12rem;
   overflow: hidden;
   padding-left: ${({ empty }) => empty && 0.5}rem;
   width: 100%;
