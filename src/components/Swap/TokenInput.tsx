@@ -34,14 +34,15 @@ export interface TokenInputHandle {
 }
 
 interface TokenInputProps {
-  field: Field
+  field?: Field
   amount?: string
   currency?: Currency
   approved?: boolean
   loading?: boolean
   disabled?: boolean
+  disabledSelectToken?: boolean
   onChangeInput?: (input: string) => void
-  onChangeCurrency: (currency: Currency) => void
+  onChangeCurrency?: (currency: Currency) => void
   hideInput?: boolean
 }
 
@@ -53,6 +54,7 @@ export const TokenInput = forwardRef<TokenInputHandle, PropsWithChildren<TokenIn
     approved,
     loading,
     disabled,
+    disabledSelectToken,
     onChangeInput,
     onChangeCurrency,
     hideInput,
@@ -64,7 +66,9 @@ export const TokenInput = forwardRef<TokenInputHandle, PropsWithChildren<TokenIn
   const input = useRef<HTMLInputElement>(null)
   const onSelect = useCallback(
     (currency: Currency) => {
-      onChangeCurrency(currency)
+      if (onChangeCurrency) {
+        onChangeCurrency(currency)
+      }
       setImmediate(() => input.current?.focus())
     },
     [onChangeCurrency]
@@ -98,7 +102,7 @@ export const TokenInput = forwardRef<TokenInputHandle, PropsWithChildren<TokenIn
         field={field}
         value={currency}
         approved={approved}
-        disabled={disabled}
+        disabled={disabled || disabledSelectToken}
         onSelect={onSelect}
         showLogo={hideInput}
       />

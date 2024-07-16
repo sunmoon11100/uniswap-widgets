@@ -11,6 +11,7 @@ import { ThemedText } from 'theme'
 import FeeSelect from './FeeSelect'
 import SelectToken from './SelectToken'
 import PriceRange from './PriceRange'
+import DepositInput from './DepositInput'
 
 export default function AddLiquidity() {
   const contentRef = useRef<HTMLDivElement>(null)
@@ -42,6 +43,8 @@ export default function AddLiquidity() {
         <FeeSelect value={fee} onChange={setFee} />
 
         <PriceRange />
+
+        <DepositInput tokenA={tokenA} tokenB={tokenB} />
 
         <StyledTokenButton onClick={handleSave} color={'accent'}>
           <Trans>+ New Position</Trans>

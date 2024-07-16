@@ -143,7 +143,7 @@ export function TokenSelectDialogContent({ value, onSelect, onClose }: TokenSele
 }
 
 interface TokenSelectProps {
-  field: Field
+  field?: Field
   value?: Currency
   approved?: boolean
   disabled?: boolean
@@ -164,7 +164,7 @@ export default memo(function TokenSelect({
   const [open, setOpen] = useState(false)
   const onTokenSelectorClick = useConditionalHandler(useAtomValue(swapEventHandlersAtom).onTokenSelectorClick)
   const onOpen = useCallback(async () => {
-    setOpen(await onTokenSelectorClick(field))
+    setOpen(await onTokenSelectorClick(field ?? Field.INPUT))
   }, [field, onTokenSelectorClick])
   const selectAndClose = useCallback(
     (value: Currency) => {
