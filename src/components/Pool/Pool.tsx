@@ -1,8 +1,10 @@
 import { Trans } from '@lingui/macro'
+import { useWeb3React } from '@web3-react/core'
 import AddLiquidity from 'components/AddLiquidity'
 import Column from 'components/Column'
 import Dialog, { Header, Modal } from 'components/Dialog'
 import Row from 'components/Row'
+import ConnectWalletButton from 'components/Swap/SwapActionButton/ConnectWalletButton'
 import { StyledTokenButton } from 'components/TokenSelect/TokenButton'
 import MainContainer from 'components/container/main'
 import ModuleContainer from 'components/container/module'
@@ -11,6 +13,8 @@ import { useState } from 'react'
 import { ThemedText } from 'theme'
 
 export default function Pool() {
+  const { account, isActive } = useWeb3React()
+
   const [isOpen, setIsOpen] = useState(true)
 
   const handleClick = () => {
@@ -44,9 +48,7 @@ export default function Pool() {
             <ThemedText.Body1 textAlign="center">
               <Trans>Your active V3 liquidity positions will appear here.</Trans>
             </ThemedText.Body1>
-            <StyledTokenButton onClick={handleClick} color={'accent'}>
-              <Trans>Connect a wallet</Trans>
-            </StyledTokenButton>
+            {!account || !isActive ? <ConnectWalletButton /> : null}
           </Column>
         </MainContainer>
       </Column>

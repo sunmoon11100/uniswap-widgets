@@ -24,6 +24,8 @@ export default function AddLiquidity() {
   const [tickCurrent, setTickCurrent] = useState<number>()
   const [ticks, setTicks] = useState<TickDataProvider>()
 
+  const isTokensSelected = tokenA.chainId && tokenB?.chainId
+
   const handleSave = () => {
     // const pool = new Pool(tokenA, tokenB, fee, sqrtRatio, liquidity, tickCurrent, ticks)
   }
@@ -40,15 +42,19 @@ export default function AddLiquidity() {
           <SelectToken value={tokenB} onChange={setTokenB} />
         </Column>
 
-        <FeeSelect value={fee} onChange={setFee} />
+        {isTokensSelected ? (
+          <>
+            <FeeSelect value={fee} onChange={setFee} />
 
-        <PriceRange />
+            <PriceRange />
 
-        <DepositInput tokenA={tokenA} tokenB={tokenB} />
+            <DepositInput tokenA={tokenA} tokenB={tokenB} />
 
-        <StyledTokenButton onClick={handleSave} color={'accent'}>
-          <Trans>+ New Position</Trans>
-        </StyledTokenButton>
+            <StyledTokenButton onClick={handleSave} color={'accent'}>
+              <Trans>+ New Position</Trans>
+            </StyledTokenButton>
+          </>
+        ) : null}
       </Column>
     </ScrollContainer>
   )
