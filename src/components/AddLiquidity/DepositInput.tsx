@@ -36,6 +36,7 @@ function DepositInput({ tokenA, tokenB }: { tokenA?: Currency; tokenB?: Currency
         approved={approvalState === SwapApprovalState.APPROVED}
         // subheader={t`Sell`}
         disabledSelectToken
+        noPadding
       />
       <FieldWrapper
         field={Field.OUTPUT}
@@ -43,6 +44,7 @@ function DepositInput({ tokenA, tokenB }: { tokenA?: Currency; tokenB?: Currency
         approved={approvalState === SwapApprovalState.APPROVED}
         // subheader={t`Sell`}
         disabledSelectToken
+        noPadding
       />
     </Column>
   )

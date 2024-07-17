@@ -30,10 +30,10 @@ const Balance = styled(ThemedText.Body2)`
   transition: color ${AnimationSpeed.Medium} ease-in-out;
 `
 
-const InputColumn = styled(Column)<{ disableHover?: boolean; isWide: boolean }>`
+const InputColumn = styled(Column)<{ disableHover?: boolean; isWide: boolean; noPadding?: boolean }>`
   border-radius: ${({ theme }) => theme.borderRadius.medium}rem;
   margin-bottom: 0.25rem;
-  padding: ${({ isWide }) => (isWide ? '1rem 0' : '1rem 0 1.5rem')};
+  padding: ${({ isWide, noPadding }) => (noPadding ? '0px' : isWide ? '1rem 0' : '1rem 0 1.5rem')};
   position: relative;
 
   &:before {
@@ -87,6 +87,7 @@ interface FieldWrapperProps {
   fiatValueChange?: PriceImpact
   subheader?: string
   disabledSelectToken?: boolean
+  noPadding?: boolean
 }
 
 export function FieldWrapper({
@@ -97,6 +98,7 @@ export function FieldWrapper({
   className,
   subheader,
   disabledSelectToken,
+  noPadding = false,
 }: FieldWrapperProps & { className?: string }) {
   const {
     [field]: { balance, amount: currencyAmount, usdc },
@@ -146,10 +148,13 @@ export function FieldWrapper({
       ref={wrapper}
       onClick={onClick}
       className={className}
+      noPadding={noPadding}
     >
-      <Row>
-        <ThemedText.Subhead2 color={'secondary'}>{subheader}</ThemedText.Subhead2>
-      </Row>
+      {subheader ? (
+        <Row>
+          <ThemedText.Subhead2 color={'secondary'}>{subheader}</ThemedText.Subhead2>
+        </Row>
+      ) : null}
       <TokenInput
         ref={setInput}
         field={field}

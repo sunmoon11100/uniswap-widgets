@@ -16,7 +16,7 @@ import { ThemedText } from 'theme'
 export default function Pool() {
   const { account, isActive } = useWeb3React()
 
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
 
   const handleClick = () => {
     setIsOpen(true)
