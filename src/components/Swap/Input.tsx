@@ -85,7 +85,8 @@ interface FieldWrapperProps {
   maxAmount?: string
   approved?: boolean
   fiatValueChange?: PriceImpact
-  subheader: string
+  subheader?: string
+  disabledSelectToken?: boolean
 }
 
 export function FieldWrapper({
@@ -95,6 +96,7 @@ export function FieldWrapper({
   fiatValueChange,
   className,
   subheader,
+  disabledSelectToken,
 }: FieldWrapperProps & { className?: string }) {
   const {
     [field]: { balance, amount: currencyAmount, usdc },
@@ -158,6 +160,7 @@ export function FieldWrapper({
         disabled={isDisabled}
         onChangeInput={updateAmount}
         onChangeCurrency={updateCurrency}
+        disabledSelectToken={disabledSelectToken}
       >
         <ThemedText.Body2 color="secondary" userSelect>
           <Row>

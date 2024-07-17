@@ -1,30 +1,31 @@
 import { Trans } from '@lingui/macro'
-import { BigintIsh, Currency } from '@uniswap/sdk-core'
+import { BigintIsh } from '@uniswap/sdk-core'
 import { FeeAmount, TickDataProvider } from '@uniswap/v3-sdk'
 import Column from 'components/Column'
 import { StyledTokenButton } from 'components/TokenSelect/TokenButton'
 import ScrollContainer from 'components/container/scroll-container'
-import { ETH_BNB_CHAIN } from 'constants/tokens'
+import { useSwapCurrency } from 'hooks/swap'
 import JSBI from 'jsbi'
 import { useRef, useState } from 'react'
+import { Field } from 'state/swap'
 import { ThemedText } from 'theme'
-import FeeSelect from './FeeSelect'
-import SelectToken from './SelectToken'
-import PriceRange from './PriceRange'
 import DepositInput from './DepositInput'
+import FeeSelect from './FeeSelect'
+import PriceRange from './PriceRange'
+import SelectToken from './SelectToken'
 
 export default function AddLiquidity() {
   const contentRef = useRef<HTMLDivElement>(null)
 
-  const [tokenA, setTokenA] = useState<Currency>(ETH_BNB_CHAIN)
-  const [tokenB, setTokenB] = useState<Currency>()
+  const [tokenA, setTokenA] = useSwapCurrency(Field.INPUT)
+  const [tokenB, setTokenB] = useSwapCurrency(Field.OUTPUT)
   const [fee, setFee] = useState<FeeAmount>(FeeAmount.LOW)
   const [sqrtRatio, setSqrtRatio] = useState<BigintIsh>()
   const [liquidity, setLiquidity] = useState<BigintIsh>(JSBI.BigInt('1000000000000000000'))
   const [tickCurrent, setTickCurrent] = useState<number>()
   const [ticks, setTicks] = useState<TickDataProvider>()
 
-  const isTokensSelected = tokenA.chainId && tokenB?.chainId
+  const isTokensSelected = tokenA?.chainId && tokenB?.chainId
 
   const handleSave = () => {
     // const pool = new Pool(tokenA, tokenB, fee, sqrtRatio, liquidity, tickCurrent, ticks)
@@ -48,7 +49,7 @@ export default function AddLiquidity() {
 
             <PriceRange />
 
-            <DepositInput tokenA={tokenA} tokenB={tokenB} />
+            <DepositInput />
 
             <StyledTokenButton onClick={handleSave} color={'accent'}>
               <Trans>+ New Position</Trans>

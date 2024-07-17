@@ -1,10 +1,9 @@
-import Column from 'components/Column'
-import React from 'react'
-import PriceInput from './PriceInput'
-import { ThemedText } from 'theme'
-import Row from 'components/Row'
 import { Trans } from '@lingui/macro'
 import Button from 'components/Button'
+import Column from 'components/Column'
+import Row from 'components/Row'
+import { ThemedText } from 'theme'
+import PriceInput from './PriceInput'
 
 function PriceRange() {
   return (

@@ -8,6 +8,7 @@ import ConnectWalletButton from 'components/Swap/SwapActionButton/ConnectWalletB
 import { StyledTokenButton } from 'components/TokenSelect/TokenButton'
 import MainContainer from 'components/container/main'
 import ModuleContainer from 'components/container/module'
+import { SwapInfoProvider } from 'hooks/swap/useSwapInfo'
 import { Inbox, LargeIcon } from 'icons'
 import { useState } from 'react'
 import { ThemedText } from 'theme'
@@ -30,7 +31,9 @@ export default function Pool() {
       {isOpen ? (
         <Dialog color="module" onClose={handleClose}>
           <Header title={<Trans>Add Liquidity</Trans>} />
-          <AddLiquidity />
+          <SwapInfoProvider>
+            <AddLiquidity />
+          </SwapInfoProvider>
         </Dialog>
       ) : null}
 
