@@ -141,7 +141,7 @@ export default function AddLiquidity({
               <ConnectWalletButton />
             ) : (
               <StyledTokenButton onClick={handleSave} color={'accent'}>
-                <Trans>Mint a position</Trans>
+                <Trans>Mint</Trans>
               </StyledTokenButton>
             )}
           </>
