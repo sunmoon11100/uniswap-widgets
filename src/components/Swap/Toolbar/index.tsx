@@ -20,8 +20,8 @@ import ToolbarOrderRouting from './ToolbarOrderRouting'
 import ToolbarTradeSummary, { SummaryRowProps } from './ToolbarTradeSummary'
 
 const StyledExpando = styled(Expando)`
-  // border: 1px solid ${({ theme }) => theme.outline};
-  // border-radius: ${({ theme }) => theme.borderRadius.medium}rem;
+  border: 1px solid ${({ theme }) => theme.outline};
+  border-radius: ${({ theme }) => theme.borderRadius.medium}rem;
   overflow: hidden;
 `
 

@@ -18,14 +18,10 @@ export const optionCss = (selected: boolean) => css`
     border: 1px solid ${({ theme }) => (selected ? theme.active : theme.outline)};
   }
 
-
   :enabled:focus-within {
     border-color: ${({ theme }) => theme.active};
   }
 `
-  // :enabled:hover {
-  //   border-color: ${({ theme }) => theme.onHover(selected ? theme.active : theme.outline)};
-  // }
 
 export function value(Value: AnyStyledComponent) {
   return styled(Value)<{ selected?: boolean; cursor?: string }>`

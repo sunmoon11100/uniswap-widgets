@@ -143,28 +143,20 @@ export function TokenSelectDialogContent({ value, onSelect, onClose }: TokenSele
 }
 
 interface TokenSelectProps {
-  field?: Field
+  field: Field
   value?: Currency
   approved?: boolean
   disabled?: boolean
   onSelect: (value: Currency) => void
-  showLogo?: boolean
 }
 
-export default memo(function TokenSelect({
-  field,
-  value,
-  approved,
-  disabled,
-  onSelect,
-  showLogo = false,
-}: TokenSelectProps) {
+export default memo(function TokenSelect({ field, value, approved, disabled, onSelect }: TokenSelectProps) {
   usePrefetchBalances()
 
   const [open, setOpen] = useState(false)
   const onTokenSelectorClick = useConditionalHandler(useAtomValue(swapEventHandlersAtom).onTokenSelectorClick)
   const onOpen = useCallback(async () => {
-    setOpen(await onTokenSelectorClick(field ?? Field.INPUT))
+    setOpen(await onTokenSelectorClick(field))
   }, [field, onTokenSelectorClick])
   const selectAndClose = useCallback(
     (value: Currency) => {
@@ -176,7 +168,7 @@ export default memo(function TokenSelect({
 
   return (
     <>
-      <TokenButton value={value} approved={approved} disabled={disabled} onClick={onOpen} showLogo={showLogo} />
+      <TokenButton value={value} approved={approved} disabled={disabled} onClick={onOpen} />
       <ResponsiveDialog open={open} setOpen={setOpen}>
         <TokenSelectDialogContent value={value} onSelect={selectAndClose} onClose={() => setOpen(false)} />
       </ResponsiveDialog>

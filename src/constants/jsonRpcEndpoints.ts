@@ -95,4 +95,9 @@ export const JSON_RPC_FALLBACK_ENDPOINTS: Record<SupportedChainId, string[]> = {
     'https://1rpc.io/base',
     'https://base.meowrpc.com',
   ],
+  [SupportedChainId.COSTON2]: [
+    // "Safe" URLs
+    // "Fallback" URLs
+    'https://coston2-api.flare.network/ext/bc/C/rpc',
+  ],
 }

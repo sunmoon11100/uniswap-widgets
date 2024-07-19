@@ -1,3 +1,4 @@
+import BrandedFooter from 'components/BrandedFooter'
 import { SwapInfoProvider } from 'hooks/swap/useSwapInfo'
 import useSyncController, { SwapController } from 'hooks/swap/useSyncController'
 import useSyncConvenienceFee, { FeeOptions } from 'hooks/swap/useSyncConvenienceFee'
@@ -5,18 +6,18 @@ import useSyncSwapEventHandlers, { SwapEventHandlers } from 'hooks/swap/useSyncS
 import useSyncSwapRouterUrl from 'hooks/swap/useSyncSwapRouterUrl'
 import useSyncTokenDefaults, { TokenDefaults } from 'hooks/swap/useSyncTokenDefaults'
 import { usePendingTransactions } from 'hooks/transactions'
+import { useBrandedFooter } from 'hooks/useSyncFlags'
 import { useAtom } from 'jotai'
 import { useMemo, useState } from 'react'
 import { displayTxHashAtom } from 'state/swap'
 
-import ModuleContainer from 'components/container/module'
 import Dialog from '../Dialog'
 import { PopoverBoundaryProvider } from '../Popover'
 import Input from './Input'
 import Output from './Output'
 import ReverseButton from './ReverseButton'
 import { StatusDialog } from './Status'
-import Toolbar, { CaptionRow } from './Toolbar'
+import Toolbar from './Toolbar'
 import useValidate from './useValidate'
 
 // SwapProps also currently includes props needed for wallet connection (eg hideConnectionUI),
@@ -44,17 +45,15 @@ export default function Swap(props: SwapProps) {
   return (
     <>
       <SwapInfoProvider>
-        <ModuleContainer ref={setWrapper} style={{ padding: 16, paddingTop: 0 }}>
+        <div ref={setWrapper}>
           <PopoverBoundaryProvider value={wrapper}>
             <Input />
             <ReverseButton />
             <Output />
             <Toolbar />
-            {/* {useBrandedFooter() && <BrandedFooter />} */}
+            {useBrandedFooter() && <BrandedFooter />}
           </PopoverBoundaryProvider>
-        </ModuleContainer>
-
-        <CaptionRow />
+        </div>
       </SwapInfoProvider>
       {displayTx && (
         <Dialog color="dialog">

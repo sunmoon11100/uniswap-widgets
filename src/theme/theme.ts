@@ -5,7 +5,6 @@ export interface Colors {
   container: string
   module: string
   interactive: string
-  secondInteractive: string
   outline: string
   dialog: string
   scrim: string

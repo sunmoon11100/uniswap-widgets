@@ -1,6 +1,5 @@
 import { globalFontStyles } from 'css/font'
 import { WidgetWidthProvider } from 'hooks/useWidgetWidth'
-import { rgba } from 'polished'
 import { PropsWithChildren, useEffect, useMemo, useRef, useState } from 'react'
 import ResizeObserver from 'resize-observer-polyfill'
 import styled from 'styled-components/macro'
@@ -11,8 +10,8 @@ const ROOT_CONTAINER_PADDING = 8
 
 const StyledWidgetWrapper = styled.div<{ width: number | string }>`
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  background-color: ${({ theme }) => rgba(theme.container, 0.1)};
-  border: ${({ theme }) => `1px solid ${theme.container}`};
+  background-color: ${({ theme }) => theme.container};
+  border: ${({ theme }) => `1px solid ${theme.outline}`};
   border-radius: ${({ theme }) => theme.borderRadius.large}rem;
   box-shadow: ${({ theme }) => `0px 40px 120px 0px ${theme.networkDefaultShadow}`};
   box-sizing: border-box;
@@ -22,12 +21,10 @@ const StyledWidgetWrapper = styled.div<{ width: number | string }>`
   max-width: 600px;
   min-height: 300px;
   min-width: 300px;
-  // padding: ${ROOT_CONTAINER_PADDING}px;
+  padding: ${ROOT_CONTAINER_PADDING}px;
   position: relative;
   user-select: none;
   width: ${({ width }) => toLength(width)};
-
-  overflow: hidden;
 
   * {
     box-sizing: border-box;
@@ -44,11 +41,11 @@ interface WidgetWrapperProps {
 export default function WidgetWrapper(props: PropsWithChildren<WidgetWrapperProps>) {
   const initialWidth: string | number = useMemo(() => {
     if (props.width) {
-      if (parseFloat(`${props.width}`) < 300) {
+      if (props.width < 300) {
         console.warn(`Widget width must be at least 300px (you set it to ${props.width}). Falling back to 300px.`)
         return 300
       }
-      if (parseFloat(`${props.width}`) > 600) {
+      if (props.width > 600) {
         console.warn(`Widget width must be at most 600px (you set it to ${props.width}). Falling back to 600px.`)
         return 600
       }

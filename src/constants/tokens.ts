@@ -137,6 +137,13 @@ export const USDC_BASE = new Token(
   'USDC',
   'USD Coin'
 )
+export const USDC_COSTON2 = new Token(
+  SupportedChainId.COSTON2,
+  '0xe38b9b20b5ff326afa16284ca028cb5627b60722',
+  6,
+  'USDC',
+  'USD Coin'
+)
 export const USDC: { [chainId in SupportedChainId]: Token } = {
   [SupportedChainId.MAINNET]: USDC_MAINNET,
   [SupportedChainId.ARBITRUM_ONE]: USDC_ARBITRUM,
@@ -153,6 +160,7 @@ export const USDC: { [chainId in SupportedChainId]: Token } = {
   [SupportedChainId.ROPSTEN]: USDC_ROPSTEN,
   [SupportedChainId.BNB]: USDC_BNB_CHAIN,
   [SupportedChainId.BASE]: USDC_BASE,
+  [SupportedChainId.COSTON2]: USDC_COSTON2,
 }
 export const DAI_POLYGON = new Token(
   SupportedChainId.POLYGON,
@@ -513,6 +521,13 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } =
     'WETH',
     'Wrapped Ether'
   ),
+  [SupportedChainId.COSTON2]: new Token(
+    SupportedChainId.COSTON2,
+    '0x940Cbbe060c916AC206f60054236bF7a469af702',
+    18,
+    'WETH',
+    'Wrapped Ether'
+  ),
 }
 
 export function isCelo(chainId: number): chainId is SupportedChainId.CELO | SupportedChainId.CELO_ALFAJORES {
@@ -598,5 +613,6 @@ export const TOKEN_SHORTHANDS: { [shorthand: string]: { [chainId in SupportedCha
     [SupportedChainId.CELO]: PORTAL_USDC_CELO.address,
     [SupportedChainId.CELO_ALFAJORES]: USDC_CELO_ALFAJORES.address,
     [SupportedChainId.BASE]: USDC_BASE.address,
+    [SupportedChainId.COSTON2]: USDC_COSTON2.address,
   },
 }
