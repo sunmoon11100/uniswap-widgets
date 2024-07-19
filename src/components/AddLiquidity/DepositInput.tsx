@@ -3,6 +3,7 @@ import { Currency } from '@uniswap/sdk-core'
 import Column from 'components/Column'
 import { FieldWrapper } from 'components/Swap/Input'
 import TokenInput from 'components/Swap/TokenInput'
+import { CaptionRow } from 'components/Swap/Toolbar'
 import { useSwapInfo } from 'hooks/swap'
 import { SwapApprovalState } from 'hooks/swap/useSwapApproval'
 import React, { useMemo } from 'react'
@@ -46,6 +47,8 @@ function DepositInput({ tokenA, tokenB }: { tokenA?: Currency; tokenB?: Currency
         disabledSelectToken
         noPadding
       />
+
+      <CaptionRow />
     </Column>
   )
 }

@@ -2,12 +2,13 @@ import { Trans } from '@lingui/macro'
 import { useWeb3React } from '@web3-react/core'
 import AddLiquidity from 'components/AddLiquidity'
 import Column from 'components/Column'
-import Dialog, { Header, Modal } from 'components/Dialog'
+import Dialog, { Header } from 'components/Dialog'
 import Row from 'components/Row'
 import ConnectWalletButton from 'components/Swap/SwapActionButton/ConnectWalletButton'
 import { StyledTokenButton } from 'components/TokenSelect/TokenButton'
 import MainContainer from 'components/container/main'
 import ModuleContainer from 'components/container/module'
+import { ethers } from 'ethers'
 import { SwapInfoProvider } from 'hooks/swap/useSwapInfo'
 import { Inbox, LargeIcon } from 'icons'
 import { useState } from 'react'
@@ -16,7 +17,7 @@ import { ThemedText } from 'theme'
 export default function Pool() {
   const { account, isActive } = useWeb3React()
 
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
 
   const handleClick = () => {
     setIsOpen(true)
@@ -26,13 +27,17 @@ export default function Pool() {
     setIsOpen(false)
   }
 
+  const handleSaved = (v: ethers.providers.TransactionResponse) => {
+    handleClose()
+  }
+
   return (
     <ModuleContainer style={{ padding: 16 }}>
       {isOpen ? (
         <Dialog color="module" onClose={handleClose}>
           <Header title={<Trans>Add Liquidity</Trans>} />
           <SwapInfoProvider>
-            <AddLiquidity />
+            <AddLiquidity onMint={handleSaved} />
           </SwapInfoProvider>
         </Dialog>
       ) : null}
