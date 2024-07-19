@@ -1,38 +1,39 @@
 import { Trans } from '@lingui/macro'
 import { BigintIsh, WETH9 } from '@uniswap/sdk-core'
+import { Percent } from '@uniswap/sdk-core'
 import IUniswapV3PoolABI from '@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json'
 import {
+  computePoolAddress,
   FACTORY_ADDRESS,
   FeeAmount,
+  nearestUsableTick,
   Pool,
   Position,
   TickDataProvider,
-  computePoolAddress,
-  nearestUsableTick,
 } from '@uniswap/v3-sdk'
+import { MintOptions, NonfungiblePositionManager } from '@uniswap/v3-sdk'
 import { useWeb3React } from '@web3-react/core'
 import Column from 'components/Column'
-import { StyledTokenButton } from 'components/TokenSelect/TokenButton'
 import ScrollContainer from 'components/container/scroll-container'
-import { ethers } from 'ethers'
-import { useSwapAmount, useSwapCurrency, useSwapInfo } from 'hooks/swap'
+import ConnectWalletButton from 'components/Swap/SwapActionButton/ConnectWalletButton'
+import StyledTokenButton from 'components/TokenSelect/TokenButton'
+import { NONFUNGIBLE_POSITION_MANAGER_CONTRACT_ADDRESS } from 'constants/addresses'
+import { MAX_FEE_PER_GAS, MAX_PRIORITY_FEE_PER_GAS } from 'constants/gas'
+import { Contract, providers } from 'ethers'
+import { useSwapAmount, useSwapCurrency } from 'hooks/swap'
 import JSBI from 'jsbi'
 import { useRef, useState } from 'react'
 import { Field } from 'state/swap'
 import { ThemedText } from 'theme'
+
 import DepositInput from './DepositInput'
 import FeeSelect from './FeeSelect'
 import PriceRange from './PriceRange'
 import SelectToken from './SelectToken'
-import { MintOptions, NonfungiblePositionManager } from '@uniswap/v3-sdk'
-import { Percent } from '@uniswap/sdk-core'
-import ConnectWalletButton from 'components/Swap/SwapActionButton/ConnectWalletButton'
-import { MAX_FEE_PER_GAS, MAX_PRIORITY_FEE_PER_GAS } from 'constants/gas'
-import { NONFUNGIBLE_POSITION_MANAGER_CONTRACT_ADDRESS } from 'constants/addresses'
 
 export default function AddLiquidity({
   onMint = () => null,
-}: { onMint?: (v: ethers.providers.TransactionResponse) => void } = {}) {
+}: { onMint?: (v: providers.TransactionResponse) => void } = {}) {
   const contentRef = useRef<HTMLDivElement>(null)
 
   const { chainId, account, isActive, provider } = useWeb3React()
@@ -51,7 +52,7 @@ export default function AddLiquidity({
 
   const handleSave = async () => {
     if (isTokensSelected) {
-      const provider = new ethers.providers.JsonRpcProvider()
+      const provider = new providers.JsonRpcProvider()
 
       const token0 = tokenA.isNative ? WETH9[1] : tokenA
       const token1 = tokenB.isNative ? WETH9[1] : tokenB
@@ -64,10 +65,10 @@ export default function AddLiquidity({
         factoryAddress: FACTORY_ADDRESS,
         tokenA: token0,
         tokenB: token1,
-        fee: fee,
+        fee,
       })
 
-      const poolContract = new ethers.Contract(currentPoolAddress, IUniswapV3PoolABI.abi, provider)
+      const poolContract = new Contract(currentPoolAddress, IUniswapV3PoolABI.abi, provider)
 
       const [liquidity, slot0] = await Promise.all([poolContract.liquidity(), poolContract.slot0()])
 
@@ -103,7 +104,7 @@ export default function AddLiquidity({
       const transaction = {
         data: calldata,
         to: NONFUNGIBLE_POSITION_MANAGER_CONTRACT_ADDRESS,
-        value: value,
+        value,
         from: account,
         maxFeePerGas: MAX_FEE_PER_GAS,
         maxPriorityFeePerGas: MAX_PRIORITY_FEE_PER_GAS,
@@ -137,13 +138,7 @@ export default function AddLiquidity({
 
             <DepositInput />
 
-            {!account || !isActive ? (
-              <ConnectWalletButton />
-            ) : (
-              <StyledTokenButton onClick={handleSave} color={'accent'}>
-                <Trans>Mint a position</Trans>
-              </StyledTokenButton>
-            )}
+            {!account || !isActive ? <ConnectWalletButton /> : <StyledTokenButton onClick={handleSave} />}
           </>
         ) : null}
       </Column>

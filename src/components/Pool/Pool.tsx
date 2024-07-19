@@ -2,13 +2,13 @@ import { Trans } from '@lingui/macro'
 import { useWeb3React } from '@web3-react/core'
 import AddLiquidity from 'components/AddLiquidity'
 import Column from 'components/Column'
+import MainContainer from 'components/container/main'
+import ModuleContainer from 'components/container/module'
 import Dialog, { Header } from 'components/Dialog'
 import Row from 'components/Row'
 import ConnectWalletButton from 'components/Swap/SwapActionButton/ConnectWalletButton'
-import { StyledTokenButton } from 'components/TokenSelect/TokenButton'
-import MainContainer from 'components/container/main'
-import ModuleContainer from 'components/container/module'
-import { ethers } from 'ethers'
+import StyledTokenButton from 'components/TokenSelect/TokenButton'
+import { providers } from 'ethers'
 import { SwapInfoProvider } from 'hooks/swap/useSwapInfo'
 import { Inbox, LargeIcon } from 'icons'
 import { useState } from 'react'
@@ -27,7 +27,7 @@ export default function Pool() {
     setIsOpen(false)
   }
 
-  const handleSaved = (v: ethers.providers.TransactionResponse) => {
+  const handleSaved = (v: providers.TransactionResponse) => {
     handleClose()
   }
 
@@ -44,9 +44,7 @@ export default function Pool() {
 
       <Column gap={1.5}>
         <Row justify="flex-end">
-          <StyledTokenButton onClick={handleClick} color={'accent'}>
-            <Trans>+ New Position</Trans>
-          </StyledTokenButton>
+          <StyledTokenButton onClick={handleClick} />
         </Row>
         <MainContainer style={{ padding: '32px 16px' }}>
           <Column align="center" justify="space-between" gap={1.5}>
