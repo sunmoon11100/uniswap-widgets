@@ -61,19 +61,19 @@ export const lightTheme: Colors = {
 
 export const darkTheme: Colors = {
   // surface
-  accent: brandDark,
-  accentSoft: rgba(brandDark, 0.24),
-  container: 'hsla(224, 37%, 8%, 1)',
+  accent: 'hsla(273, 69%, 49%, 0.7)',
+  accentSoft: 'RGB(33,52,94)',
+  container: 'RGB(22,16,39)',
   module: 'hsl(222, 37%, 12%)',
   interactive: 'hsla(223, 28%, 22%, 1)',
-  outline: 'hsl(224, 33%, 16%)',
+  outline: 'hsla(273, 69%, 49%, 0.3)',
   dialog: black,
   scrim: 'hsla(224, 33%, 16%, 0.5)',
 
   // text
   onAccent: white,
   primary: white,
-  secondary: 'hsl(227, 21%, 67%)',
+  secondary: white,
   hint: 'hsla(225, 18%, 44%)',
   onInteractive: white,
 
