@@ -1,3 +1,5 @@
+import { ChainId, SUPPORTED_CHAINS, SupportedChainsType } from '@uniswap/sdk-core'
+
 /**
  * List of all the networks supported by the Uniswap Interface
  */
@@ -112,3 +114,23 @@ export type SupportedL2ChainId = typeof L2_CHAIN_IDS[number]
 export function isPolygonChain(chainId: number): chainId is SupportedChainId.POLYGON | SupportedChainId.POLYGON_MUMBAI {
   return chainId === SupportedChainId.POLYGON || chainId === SupportedChainId.POLYGON_MUMBAI
 }
+
+// TODO: include BASE_GOERLI when routing is implemented
+export type SupportedInterfaceChain = Exclude<SupportedChainsType, ChainId.BASE_GOERLI>
+
+export const CHAIN_IDS_TO_NAMES = {
+  [ChainId.MAINNET]: 'mainnet',
+  [ChainId.GOERLI]: 'goerli',
+  [ChainId.SEPOLIA]: 'sepolia',
+  [ChainId.POLYGON]: 'polygon',
+  [ChainId.POLYGON_MUMBAI]: 'polygon_mumbai',
+  [ChainId.CELO]: 'celo',
+  [ChainId.CELO_ALFAJORES]: 'celo_alfajores',
+  [ChainId.ARBITRUM_ONE]: 'arbitrum',
+  [ChainId.ARBITRUM_GOERLI]: 'arbitrum_goerli',
+  [ChainId.OPTIMISM]: 'optimism',
+  [ChainId.OPTIMISM_GOERLI]: 'optimism_goerli',
+  [ChainId.BNB]: 'bnb',
+  [ChainId.AVALANCHE]: 'avalanche',
+  [ChainId.BASE]: 'base',
+} as const

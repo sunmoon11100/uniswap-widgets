@@ -7,6 +7,7 @@ const BlockNumberContext = createContext<
   | {
       value?: number
       fastForward(block: number): void
+      mainnetBlock?: number
     }
   | typeof MISSING_PROVIDER
 >(MISSING_PROVIDER)
@@ -26,6 +27,11 @@ export default function useBlockNumber(): number | undefined {
 
 export function useFastForwardBlockNumber(): (block: number) => void {
   return useBlockNumberContext().fastForward
+}
+
+
+export function useMainnetBlockNumber(): number | undefined {
+  return useBlockNumberContext().mainnetBlock
 }
 
 export function Provider({ children }: PropsWithChildren) {

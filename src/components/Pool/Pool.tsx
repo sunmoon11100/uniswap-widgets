@@ -10,6 +10,7 @@ import MainContainer from 'components/container/main'
 import ModuleContainer from 'components/container/module'
 import { ethers } from 'ethers'
 import { SwapInfoProvider } from 'hooks/swap/useSwapInfo'
+import { useV3Positions } from 'hooks/useV3Positions'
 import { Inbox, LargeIcon } from 'icons'
 import { useState } from 'react'
 import { ThemedText } from 'theme'
@@ -19,7 +20,11 @@ export default function Pool() {
 
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleClick = () => {
+  const { positions, loading: positionsLoading } = useV3Positions(account)
+
+  console.log(positions)
+
+  const handleAdd = () => {
     setIsOpen(true)
   }
 
@@ -44,18 +49,22 @@ export default function Pool() {
 
       <Column gap={1.5}>
         <Row justify="flex-end">
-          <StyledTokenButton onClick={handleClick} color={'accent'}>
+          <StyledTokenButton onClick={handleAdd} color={'accent'}>
             <Trans>+ New Position</Trans>
           </StyledTokenButton>
         </Row>
         <MainContainer style={{ padding: '32px 16px' }}>
           <Column align="center" justify="space-between" gap={1.5}>
-            <Row justify="center">
-              <LargeIcon icon={Inbox} size={2} />
-            </Row>
-            <ThemedText.Body1 textAlign="center">
-              <Trans>Your active V3 liquidity positions will appear here.</Trans>
-            </ThemedText.Body1>
+            {
+              <>
+                <Row justify="center">
+                  <LargeIcon icon={Inbox} size={2} />
+                </Row>
+                <ThemedText.Body1 textAlign="center">
+                  <Trans>Your active V3 liquidity positions will appear here.</Trans>
+                </ThemedText.Body1>
+              </>
+            }
             {!account || !isActive ? <ConnectWalletButton /> : null}
           </Column>
         </MainContainer>
