@@ -30,10 +30,11 @@ const Balance = styled(ThemedText.Body2)`
   transition: color ${AnimationSpeed.Medium} ease-in-out;
 `
 
-const InputColumn = styled(Column)<{ disableHover?: boolean; isWide: boolean; noPadding?: boolean }>`
+const InputColumn = styled(Column)<{ disableHover?: boolean; isWide: boolean }>`
+  background-color: ${({ theme }) => theme.module};
   border-radius: ${({ theme }) => theme.borderRadius.medium}rem;
   margin-bottom: 0.25rem;
-  padding: ${({ isWide, noPadding }) => (noPadding ? '0px' : isWide ? '1rem 0' : '1rem 0 1.5rem')};
+  padding: ${({ isWide }) => (isWide ? '1rem 0' : '1rem 0 1.5rem')};
   position: relative;
 
   &:before {
@@ -54,11 +55,11 @@ const InputColumn = styled(Column)<{ disableHover?: boolean; isWide: boolean; no
   ${({ theme, disableHover }) =>
     !disableHover &&
     ` &:hover:before {
-        // border-color: ${theme.interactive};
+        border-color: ${theme.interactive};
       }
 
       &:focus-within:before {
-        // border-color: ${theme.networkDefaultShadow};
+        border-color: ${theme.networkDefaultShadow};
       }`}
 `
 
@@ -85,9 +86,7 @@ interface FieldWrapperProps {
   maxAmount?: string
   approved?: boolean
   fiatValueChange?: PriceImpact
-  subheader?: string
-  disabledSelectToken?: boolean
-  noPadding?: boolean
+  subheader: string
 }
 
 export function FieldWrapper({
@@ -97,8 +96,6 @@ export function FieldWrapper({
   fiatValueChange,
   className,
   subheader,
-  disabledSelectToken,
-  noPadding = false,
 }: FieldWrapperProps & { className?: string }) {
   const {
     [field]: { balance, amount: currencyAmount, usdc },
@@ -148,13 +145,10 @@ export function FieldWrapper({
       ref={wrapper}
       onClick={onClick}
       className={className}
-      noPadding={noPadding}
     >
-      {subheader ? (
-        <Row>
-          <ThemedText.Subhead2 color={'secondary'}>{subheader}</ThemedText.Subhead2>
-        </Row>
-      ) : null}
+      <Row pad={1 /* rem */}>
+        <ThemedText.Subhead2 color={'secondary'}>{subheader}</ThemedText.Subhead2>
+      </Row>
       <TokenInput
         ref={setInput}
         field={field}
@@ -165,7 +159,6 @@ export function FieldWrapper({
         disabled={isDisabled}
         onChangeInput={updateAmount}
         onChangeCurrency={updateCurrency}
-        disabledSelectToken={disabledSelectToken}
       >
         <ThemedText.Body2 color="secondary" userSelect>
           <Row>
@@ -217,7 +210,7 @@ export default function Input() {
       field={Field.INPUT}
       maxAmount={maxAmount}
       approved={approvalState === SwapApprovalState.APPROVED}
-      subheader={t`Sell`}
+      subheader={t`You pay`}
     />
   )
 }

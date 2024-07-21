@@ -2,7 +2,6 @@ import { Trans } from '@lingui/macro'
 import { Currency } from '@uniswap/sdk-core'
 import Column from 'components/Column'
 import { FieldWrapper } from 'components/Swap/Input'
-import TokenInput from 'components/Swap/TokenInput'
 import { CaptionRow } from 'components/Swap/Toolbar'
 import { useSwapInfo } from 'hooks/swap'
 import { SwapApprovalState } from 'hooks/swap/useSwapApproval'
@@ -35,17 +34,13 @@ function DepositInput({ tokenA, tokenB }: { tokenA?: Currency; tokenB?: Currency
         field={Field.INPUT}
         maxAmount={maxAmount}
         approved={approvalState === SwapApprovalState.APPROVED}
-        // subheader={t`Sell`}
-        disabledSelectToken
-        noPadding
+        subheader={''}
       />
       <FieldWrapper
         field={Field.OUTPUT}
         maxAmount={maxAmount}
         approved={approvalState === SwapApprovalState.APPROVED}
-        // subheader={t`Sell`}
-        disabledSelectToken
-        noPadding
+        subheader={''}
       />
 
       <CaptionRow />

@@ -1,5 +1,6 @@
 import { Trans } from '@lingui/macro'
 import { Currency } from '@uniswap/sdk-core'
+import { Logo } from 'components/Logo'
 import { ChevronDown } from 'icons'
 import styled from 'styled-components/macro'
 import { ThemedText } from 'theme'
@@ -7,12 +8,11 @@ import { ThemedText } from 'theme'
 import Button from '../Button'
 import Row from '../Row'
 import TokenImg from '../TokenImg'
-import { Logo } from 'components/Logo'
 
-export const StyledTokenButton = styled(Button)<{ approved?: boolean }>`
+const StyledTokenButton = styled(Button)<{ approved?: boolean }>`
   border-radius: ${({ theme }) => theme.borderRadius.medium}rem;
   min-height: 2rem;
-  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  padding: 0.25rem 0.5rem 0.25rem 0.25rem;
 
   :enabled {
     transition: none;
@@ -24,10 +24,10 @@ export const StyledTokenButton = styled(Button)<{ approved?: boolean }>`
 `
 
 const TokenButtonRow = styled(Row)<{ empty: boolean }>`
-  // max-width: 12rem;
+  max-width: 12rem;
   overflow: hidden;
   padding-left: ${({ empty }) => empty && 0.5}rem;
-  width: 100%;
+  width: max-content;
 
   img {
     min-width: 1.2rem;
@@ -39,10 +39,9 @@ interface TokenButtonProps {
   approved?: boolean
   disabled?: boolean
   onClick: () => void
-  showLogo?: boolean
 }
 
-export default function TokenButton({ value, approved, disabled, onClick, showLogo = false }: TokenButtonProps) {
+export default function TokenButton({ value, approved, disabled, onClick }: TokenButtonProps) {
   return (
     <StyledTokenButton
       onClick={onClick}
@@ -51,14 +50,14 @@ export default function TokenButton({ value, approved, disabled, onClick, showLo
       disabled={disabled}
       data-testid="token-select"
     >
-      <TokenButtonRow empty={!value} flex gap={0.4} flow="nowrap" justify="space-between">
+      <TokenButtonRow empty={!value} flex gap={0.4} flow="nowrap">
         {value ? (
-          <Row flex gap={0.4}>
-            {showLogo ? <Logo currency={value} symbol={value.symbol} /> : null}
+          <>
+            <Logo currency={value} symbol={value.symbol} />
             <ThemedText.ButtonLarge color={'currentColor'}>
               <span>{value.symbol}</span>
             </ThemedText.ButtonLarge>
-          </Row>
+          </>
         ) : (
           <ThemedText.ButtonLarge
             color={'onAccent'}

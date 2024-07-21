@@ -1,12 +1,9 @@
+import { Currency } from '@uniswap/sdk-core'
+import TokenInput from 'components/Swap/TokenInput'
 import { useIsSwapFieldIndependent, useSwapInfo } from 'hooks/swap'
-import { SwapApprovalState } from 'hooks/swap/useSwapApproval'
 import { usePrefetchCurrencyColor } from 'hooks/useCurrencyColor'
-import { useState } from 'react'
 import { TradeState } from 'state/routing/types'
 import { Field } from 'state/swap'
-
-import { Currency, Token } from '@uniswap/sdk-core'
-import TokenInput from 'components/Swap/TokenInput'
 
 export default function SelectToken({ value, onChange }: { value?: Currency; onChange: (v: Currency) => void }) {
   const {
@@ -25,10 +22,11 @@ export default function SelectToken({ value, onChange }: { value?: Currency; onC
       field={Field.INPUT}
       currency={value}
       loading={isLoading}
-      // approved={approvalState === SwapApprovalState.APPROVED}
-      // disabled={isDisabled}
+      amount={'0'}
       onChangeCurrency={onChange}
-      hideInput={true}
+      onChangeInput={() => {
+        return
+      }}
     />
   )
 }

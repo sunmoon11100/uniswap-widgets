@@ -1,22 +1,21 @@
 import 'polyfills'
+
 import { Trans } from '@lingui/macro'
+import Wallet from 'components/ConnectWallet'
+import HeaderRow from 'components/Header'
+import Pool from 'components/Pool'
+import Row from 'components/Row'
 import Swap, { SwapProps } from 'components/Swap'
+import Settings from 'components/Swap/Settings'
 import Widget, { WidgetProps } from 'components/Widget'
 import { useState } from 'react'
-import { HeaderRow } from 'components/Header'
-import Row from 'components/Row'
-import styled from 'styled-components'
-import Wallet from 'components/ConnectWallet'
-import Settings from 'components/Swap/Settings'
-import Pool from 'components/Pool'
+import styled from 'styled-components/macro'
 
 export { getAssetsRepoURI, getNativeLogoURI, Logo, LogoUpdater, useLogo, useLogos } from './components/Logo'
-export type { Provider as EthersProvider } from '@ethersproject/abstract-provider'
 export type { JsonRpcProvider } from '@ethersproject/providers'
 export type { Currency } from '@uniswap/sdk-core'
 export { TradeType } from '@uniswap/sdk-core'
 export type { TokenInfo } from '@uniswap/token-lists'
-export type { Provider as Eip1193Provider } from '@web3-react/types'
 export type { DialogOptions, DialogWidgetProps } from 'components/Dialog'
 export { DialogAnimationType } from 'components/Dialog'
 export type { SwapWidgetSkeletonProps } from 'components/Swap/Skeleton'
@@ -84,13 +83,13 @@ export { darkTheme, defaultTheme, lightTheme } from 'theme'
 export { invertTradeType, toTradeType } from 'utils/tradeType'
 
 const TabButton = styled.div<{ isActive?: boolean }>`
-  padding 8px;
   border-bottom: solid 2px ${({ theme, isActive }) => (isActive ? theme.outline : 'transparent')};
   border-top-left-radius: ${({ theme }) => theme.borderRadius.xsmall}rem;
   border-top-right-radius: ${({ theme }) => theme.borderRadius.xsmall}rem;
-  overflow: hidden;
   cursor: pointer;
-  
+  overflow: hidden;
+  padding: 8px;
+
   :hover {
     background-color: ${({ theme }) => theme.interactive};
   }
@@ -112,7 +111,7 @@ export function SwapWidget(props: SwapWidgetProps) {
 
   return (
     <Widget {...props}>
-      <HeaderRow iconSize={1.2} flex align="center" data-testid="header-container">
+      <HeaderRow>
         <Row gap={0.5} data-testid="header-title">
           {renderWidgets.map((item, itemIndex) => {
             return (

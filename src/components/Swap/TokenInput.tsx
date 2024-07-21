@@ -7,8 +7,6 @@ import { Field } from 'state/swap'
 import styled from 'styled-components/macro'
 import { ThemedText } from 'theme'
 
-import { InteractiveContainerRounded } from 'components/container/interactive/InteractiveContainer'
-import { Logo } from 'components/Logo'
 import Column from '../Column'
 import { DecimalInput } from '../Input'
 import Row from '../Row'
@@ -20,13 +18,12 @@ const TokenInputRow = styled(Row)`
 
 const ValueInput = styled(DecimalInput)`
   color: ${({ theme }) => theme.primary};
-  font-size: 1.8rem;
 
   ${loadingTransitionCss}
 `
 
 const TokenInputColumn = styled(Column)`
-  // margin: 0.25rem 1rem 0;
+  margin: 0.25rem 1rem 0;
 `
 
 export interface TokenInputHandle {
@@ -34,41 +31,24 @@ export interface TokenInputHandle {
 }
 
 interface TokenInputProps {
-  field?: Field
-  amount?: string
+  field: Field
+  amount: string
   currency?: Currency
   approved?: boolean
   loading?: boolean
   disabled?: boolean
-  disabledSelectToken?: boolean
-  onChangeInput?: (input: string) => void
-  onChangeCurrency?: (currency: Currency) => void
-  hideInput?: boolean
+  onChangeInput: (input: string) => void
+  onChangeCurrency: (currency: Currency) => void
 }
 
 export const TokenInput = forwardRef<TokenInputHandle, PropsWithChildren<TokenInputProps>>(function TokenInput(
-  {
-    field,
-    amount,
-    currency,
-    approved,
-    loading,
-    disabled,
-    disabledSelectToken,
-    onChangeInput,
-    onChangeCurrency,
-    hideInput,
-    children,
-    ...rest
-  },
+  { field, amount, currency, approved, loading, disabled, onChangeInput, onChangeCurrency, children, ...rest },
   ref
 ) {
   const input = useRef<HTMLInputElement>(null)
   const onSelect = useCallback(
     (currency: Currency) => {
-      if (onChangeCurrency) {
-        onChangeCurrency(currency)
-      }
+      onChangeCurrency(currency)
       setImmediate(() => input.current?.focus())
     },
     [onChangeCurrency]
@@ -84,38 +64,20 @@ export const TokenInput = forwardRef<TokenInputHandle, PropsWithChildren<TokenIn
   }, [])
   useImperativeHandle(ref, () => ({ focus }), [focus])
 
-  const inputRow = (
-    <TokenInputRow gap={0.5}>
-      {currency && !hideInput ? <Logo currency={currency} symbol={currency.symbol} /> : null}
-      {hideInput ? null : (
+  return (
+    <TokenInputColumn gap={0.25} {...rest}>
+      <TokenInputRow gap={0.5}>
         <ThemedText.H1>
           <ValueInput
-            value={amount ?? '0'}
-            onChange={onChangeInput ?? (() => null)}
+            value={amount}
+            onChange={onChangeInput}
             disabled={disabled || !currency}
             isLoading={Boolean(loading)}
             ref={input}
           />
         </ThemedText.H1>
-      )}
-      <TokenSelect
-        field={field}
-        value={currency}
-        approved={approved}
-        disabled={disabled || disabledSelectToken}
-        onSelect={onSelect}
-        showLogo={hideInput}
-      />
-    </TokenInputRow>
-  )
-
-  return (
-    <TokenInputColumn gap={0.25} {...rest}>
-      {hideInput ? (
-        inputRow
-      ) : (
-        <InteractiveContainerRounded style={{ padding: '4px 12px' }}>{inputRow}</InteractiveContainerRounded>
-      )}
+        <TokenSelect field={field} value={currency} approved={approved} disabled={disabled} onSelect={onSelect} />
+      </TokenInputRow>
       {children}
     </TokenInputColumn>
   )
