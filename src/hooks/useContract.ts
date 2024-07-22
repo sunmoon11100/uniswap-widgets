@@ -1,5 +1,8 @@
 import { Contract } from '@ethersproject/contracts'
+import { InterfaceEventName } from '@uniswap/analytics-events'
+import { NONFUNGIBLE_POSITION_MANAGER_ADDRESSES } from '@uniswap/sdk-core'
 import UniswapInterfaceMulticallJson from '@uniswap/v3-periphery/artifacts/contracts/lens/UniswapInterfaceMulticall.sol/UniswapInterfaceMulticall.json'
+import NonfungiblePositionManagerJson from '@uniswap/v3-periphery/artifacts/contracts/NonfungiblePositionManager.sol/NonfungiblePositionManager.json'
 import { useWeb3React } from '@web3-react/core'
 import ARGENT_WALLET_DETECTOR_ABI from 'abis/argent-wallet-detector.json'
 import EIP_2612 from 'abis/eip_2612.json'
@@ -9,13 +12,15 @@ import ERC20_ABI from 'abis/erc20.json'
 import ERC20_BYTES32_ABI from 'abis/erc20_bytes32.json'
 import { ArgentWalletDetector, EnsPublicResolver, EnsRegistrar, Erc20, Weth } from 'abis/types'
 import WETH_ABI from 'abis/weth.json'
+import { sendAnalyticsEvent } from 'analytics'
 import { ARGENT_WALLET_DETECTOR_ADDRESS, ENS_REGISTRAR_ADDRESSES, MULTICALL_ADDRESS } from 'constants/addresses'
 import { WRAPPED_NATIVE_CURRENCY } from 'constants/tokens'
-import { useMemo } from 'react'
-import { UniswapInterfaceMulticall } from 'types/v3'
+import { useEffect, useMemo } from 'react'
+import { NonfungiblePositionManager, UniswapInterfaceMulticall } from 'types/v3'
 import { getContract } from 'utils'
 
 const { abi: MulticallABI } = UniswapInterfaceMulticallJson
+const { abi: NFTPositionManagerABI } = NonfungiblePositionManagerJson
 
 // returns null on errors
 export function useContract<T extends Contract = Contract>(
@@ -75,4 +80,22 @@ export function useEIP2612Contract(tokenAddress?: string): Contract | null {
 
 export function useInterfaceMulticall() {
   return useContract<UniswapInterfaceMulticall>(MULTICALL_ADDRESS, MulticallABI, false) as UniswapInterfaceMulticall
+}
+
+export function useV3NFTPositionManagerContract(withSignerIfPossible?: boolean): NonfungiblePositionManager | null {
+  const { account } = useWeb3React()
+  const contract = useContract<NonfungiblePositionManager>(
+    NONFUNGIBLE_POSITION_MANAGER_ADDRESSES,
+    NFTPositionManagerABI,
+    withSignerIfPossible
+  )
+  useEffect(() => {
+    if (contract && account) {
+      sendAnalyticsEvent(InterfaceEventName.WALLET_PROVIDER_USED, {
+        source: 'useV3NFTPositionManagerContract',
+        contract,
+      })
+    }
+  }, [account, contract])
+  return contract
 }

@@ -14,7 +14,17 @@
       "version": "detect"
     }
   },
-  "ignorePatterns": ["dist/", "dts/", "node_modules/", "src/__generated__/", "src/types/v3/", "src/abis/types/", "src/locales/", "yarn.lock"],
+  "ignorePatterns": [
+    "dist/",
+    "dts/",
+    "node_modules/",
+    "src/__generated__/",
+    "src/types/v3/",
+    "src/abis/types/",
+    "src/analytics/",
+    "src/locales/",
+    "yarn.lock"
+  ],
   "extends": [
     "react-app",
     "plugin:react/recommended",
@@ -52,6 +62,10 @@
           {
             "name": "styled-components",
             "message": "Please import from styled-components/macro."
+          },
+          {
+            "name": "@uniswap/analytics",
+            "message": "Do not import from '@uniswap/analytics' directly. Use 'analytics' instead."
           }
         ],
         "patterns": [

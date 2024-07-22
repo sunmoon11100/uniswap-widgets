@@ -1,3 +1,5 @@
+import { Contract } from '@ethersproject/contracts'
+import { JsonRpcProvider, TransactionResponse } from '@ethersproject/providers'
 import { Trans } from '@lingui/macro'
 import { BigintIsh, WETH9 } from '@uniswap/sdk-core'
 import { Percent } from '@uniswap/sdk-core'
@@ -19,7 +21,6 @@ import ConnectWalletButton from 'components/Swap/SwapActionButton/ConnectWalletB
 import StyledTokenButton from 'components/TokenSelect/TokenButton'
 import { NONFUNGIBLE_POSITION_MANAGER_CONTRACT_ADDRESS } from 'constants/addresses'
 import { MAX_FEE_PER_GAS, MAX_PRIORITY_FEE_PER_GAS } from 'constants/gas'
-import { Contract, providers } from 'ethers'
 import { useSwapAmount, useSwapCurrency } from 'hooks/swap'
 import JSBI from 'jsbi'
 import { useRef, useState } from 'react'
@@ -31,9 +32,7 @@ import FeeSelect from './FeeSelect'
 import PriceRange from './PriceRange'
 import SelectToken from './SelectToken'
 
-export default function AddLiquidity({
-  onMint = () => null,
-}: { onMint?: (v: providers.TransactionResponse) => void } = {}) {
+export default function AddLiquidity({ onMint = () => null }: { onMint?: (v: TransactionResponse) => void } = {}) {
   const contentRef = useRef<HTMLDivElement>(null)
 
   const { chainId, account, isActive, provider } = useWeb3React()
@@ -52,7 +51,7 @@ export default function AddLiquidity({
 
   const handleSave = async () => {
     if (isTokensSelected) {
-      const provider = new providers.JsonRpcProvider()
+      const provider = new JsonRpcProvider()
 
       const token0 = tokenA.isNative ? WETH9[1] : tokenA
       const token1 = tokenB.isNative ? WETH9[1] : tokenB
