@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 
+import mintV3 from './mint/v3/reducer'
 import multicall from './multicall'
 import { routing } from './routing/slice'
 
 const reducer = combineReducers({
   [multicall.reducerPath]: multicall.reducer,
   [routing.reducerPath]: routing.reducer,
+  mintV3,
 })
 export const store = configureStore({
   reducer,
@@ -24,3 +26,5 @@ export const store = configureStore({
       },
     }).concat(routing.middleware),
 })
+
+export type AppState = ReturnType<typeof reducer>
