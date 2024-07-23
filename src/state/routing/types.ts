@@ -117,3 +117,7 @@ export type TradeResult =
     }
 
 export class InterfaceTrade extends Trade<Currency, Currency, TradeType> {}
+
+// This is excluded from `RouterPreference` enum because it's only used
+// internally for token -> USDC trades to get a USD value.
+export const INTERNAL_ROUTER_PREFERENCE_PRICE = 'price' as const
