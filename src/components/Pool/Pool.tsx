@@ -10,6 +10,7 @@ import PositionList from 'components/PositionList'
 import Row from 'components/Row'
 import ConnectWalletButton from 'components/Swap/SwapActionButton/ConnectWalletButton'
 import StyledTokenButton from 'components/TokenSelect/TokenButton'
+import { TooltipText } from 'components/Tooltip'
 import { SwapInfoProvider } from 'hooks/swap/useSwapInfo'
 import { useV3Positions } from 'hooks/useV3Positions'
 import { Inbox } from 'icons'
@@ -110,7 +111,7 @@ export default function Pool() {
     setIsOpen(false)
   }
 
-  const handleSaved = (v: void) => {
+  const handleSaved = () => {
     handleClose()
   }
 

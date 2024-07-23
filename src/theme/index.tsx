@@ -3,10 +3,11 @@ import './external'
 
 import { mix, rgba, transparentize } from 'polished'
 import { createContext, PropsWithChildren, useContext, useMemo, useState } from 'react'
-import { DefaultTheme, ThemeProvider as StyledProvider } from 'styled-components/macro'
+import { DefaultTheme, ThemeProvider as StyledProvider, css } from 'styled-components/macro'
 
 import { Layer } from './layer'
 import type { Colors, Theme, ThemeBorderRadius } from './theme'
+import styled from 'styled-components'
 
 export * from './animations'
 export * from './dynamic'
@@ -167,3 +168,34 @@ export const MEDIA_WIDTHS = {
   deprecated_upToMedium: 960,
   deprecated_upToLarge: 1280,
 }
+
+export const mediaWidth: { [width in keyof typeof MEDIA_WIDTHS]: typeof css } = Object.keys(MEDIA_WIDTHS).reduce(
+  (acc, size) => {
+    acc[size] = (a: any, b: any, c: any) => css`
+      @media (max-width: ${(MEDIA_WIDTHS as any)[size]}px) {
+        ${css(a, b, c)}
+      }
+    `
+    return acc
+  },
+  {} as any
+)
+
+export const HideSmall = styled.span`
+  ${({ theme }) => mediaWidth.deprecated_upToSmall`
+    display: none;
+  `};
+`
+
+export const HideExtraSmall = styled.span`
+  ${({ theme }) => mediaWidth.deprecated_upToExtraSmall`
+    display: none;
+  `};
+`
+
+export const SmallOnly = styled.span`
+  display: none;
+  ${({ theme }) => mediaWidth.deprecated_upToSmall`
+    display: block;
+  `};
+`

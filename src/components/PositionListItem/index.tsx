@@ -1,29 +1,25 @@
 import { BigNumber } from '@ethersproject/bignumber'
-import { Trans } from '@lingui/macro'
 import { Percent, Price, Token } from '@uniswap/sdk-core'
 import { Position } from '@uniswap/v3-sdk'
-import RangeBadge from 'components/Badge/RangeBadge'
-import DoubleCurrencyLogo from 'components/DoubleLogo'
-import HoverInlineText from 'components/HoverInlineText'
-import Loader from 'components/Icons/LoadingSpinner'
-import { RowBetween } from 'components/Row'
 import { useToken } from 'hooks/useCurrency'
 import useIsTickAtLimit from 'hooks/useIsTickAtLimit'
 import { usePool } from 'hooks/usePools'
 import { useMemo } from 'react'
-import { Link } from 'react-router-dom'
-import { Bound } from 'state/mint/v3/actions'
-import styled from 'styled-components/macro'
-import { MEDIA_WIDTHS } from 'theme'
-import { HideSmall, SmallOnly, ThemedText } from 'theme/components'
-import { formatTickPrice } from 'utils/formatNumbers'
 import { unwrappedToken } from 'utils/unwrappedToken'
 
+import { Trans } from '@lingui/macro'
+import RangeBadge from 'components/Badge/RangeBadge'
+import HoverInlineText from 'components/HoverInlineText'
+import { Loading } from 'components/Swap/Toolbar/Caption'
+import styled from 'styled-components'
+import { HideSmall, MEDIA_WIDTHS, SmallOnly, ThemedText, mediaWidth } from 'theme'
+import { Bound, formatTickPrice } from 'utils/formatNumbers'
 import { DAI, USDC_MAINNET, USDT, WBTC, WRAPPED_NATIVE_CURRENCY } from '../../constants/tokens'
+import DoubleLogo from 'components/Logo/DoubleCurrencyLogo'
+import { useLogo } from 'components/Logo'
 
-const LinkRow = styled(Link)`
+const LinkRow = styled.div`
   align-items: center;
-  color: ${({ theme }) => theme.neutral1};
   cursor: pointer;
   display: flex;
   display: flex;
@@ -38,14 +34,14 @@ const LinkRow = styled(Link)`
     text-align: center;
   }
   :hover {
-    background-color: ${({ theme }) => theme.deprecated_hoverDefault};
+    background-color: ${({ theme }) => theme.module};
   }
 
   @media screen and (min-width: ${MEDIA_WIDTHS.deprecated_upToSmall}px) {
     /* flex-direction: row; */
   }
 
-  ${({ theme }) => theme.deprecated_mediaWidth.deprecated_upToSmall`
+  ${({ theme }) => mediaWidth.deprecated_upToSmall`
     flex-direction: column;
     row-gap: 8px;
   `};
@@ -63,33 +59,33 @@ const RangeLineItem = styled(DataLineItem)`
   width: 100%;
 `
 
+// color: ${({ theme }) => theme.neutral1};
 const DoubleArrow = styled.span`
-  color: ${({ theme }) => theme.neutral1};
   font-size: 12px;
   margin: 0 2px;
 `
 
-const RangeText = styled(ThemedText.BodySmall)`
+const RangeText = styled(ThemedText.Body2)`
   border-radius: 8px;
   font-size: 14px !important;
   padding: 0.25rem 0.25rem;
   word-break: break-word;
 `
 
-const FeeTierText = styled(ThemedText.UtilityBadge)`
-  color: ${({ theme }) => theme.neutral3};
+const FeeTierText = styled(ThemedText.Caption)`
+  color: ${({ theme }) => theme.accent};
   font-size: 16px !important;
   margin-left: 8px !important;
 `
-const ExtentsText = styled(ThemedText.BodySmall)`
-  color: ${({ theme }) => theme.neutral2};
+const ExtentsText = styled(ThemedText.Body2)`
+  color: ${({ theme }) => theme.accent};
   display: inline-block;
   line-height: 16px;
   margin-right: 4px !important;
-  ${({ theme }) => theme.deprecated_mediaWidth.deprecated_upToSmall`
-    display: none;
-  `};
 `
+// ${({ theme }) => theme.deprecated_mediaWidth.deprecated_upToSmall`
+//   display: none;
+// `};
 
 const PrimaryPositionIdData = styled.div`
   align-items: center;
@@ -200,25 +196,29 @@ export default function PositionListItem({
   // check if price is within range
   const outOfRange: boolean = pool ? pool.tickCurrent < tickLower || pool.tickCurrent >= tickUpper : false
 
-  const positionSummaryLink = '/pools/' + tokenId
-
   const removed = liquidity?.eq(0)
 
+  const { src: logoSrc1, invalidateSrc: invalidateLogoSrc1 } = useLogo(currencyBase)
+  const { src: logoSrc2, invalidateSrc: invalidateLogoSrc2 } = useLogo(currencyQuote)
+
   return (
-    <LinkRow to={positionSummaryLink}>
-      <RowBetween>
+    <LinkRow>
+      <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
         <PrimaryPositionIdData>
-          <DoubleCurrencyLogo currency0={currencyBase} currency1={currencyQuote} size={18} margin />
-          <ThemedText.SubHeader>
+          {/* should show the logo */}
+          {/* <DoubleCurrencyLogo currency0={currencyBase} currency1={currencyQuote} size={18} margin /> */}
+
+          <DoubleLogo logo1={logoSrc1} onError1={invalidateLogoSrc1} logo2={logoSrc2} onError2={invalidateLogoSrc2} />
+          <ThemedText.Subhead2>
             &nbsp;{currencyQuote?.symbol}&nbsp;/&nbsp;{currencyBase?.symbol}
-          </ThemedText.SubHeader>
+          </ThemedText.Subhead2>
 
           <FeeTierText>
             <Trans>{new Percent(feeAmount, 1_000_000).toSignificant()}%</Trans>
           </FeeTierText>
         </PrimaryPositionIdData>
         <RangeBadge removed={removed} inRange={!outOfRange} />
-      </RowBetween>
+      </div>
 
       {priceLower && priceUpper ? (
         <RangeLineItem>
@@ -255,13 +255,14 @@ export default function PositionListItem({
                   direction: Bound.UPPER,
                 })}{' '}
               </span>
+              <span>{currencyQuote?.symbol}</span> <span></span>
               <HoverInlineText text={currencyQuote?.symbol} /> per{' '}
               <HoverInlineText maxCharacters={10} text={currencyBase?.symbol} />
             </Trans>
           </RangeText>
         </RangeLineItem>
       ) : (
-        <Loader />
+        <Loading />
       )}
     </LinkRow>
   )

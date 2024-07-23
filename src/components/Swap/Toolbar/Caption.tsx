@@ -15,7 +15,7 @@ import { WIDGET_BREAKPOINTS } from 'theme/breakpoints'
 import Price from '../Price'
 import { GasEstimateTooltip, TradeTooltip } from './GasEstimateTooltip'
 
-const Loading = styled.span`
+export const Loading = styled.span`
   color: ${({ theme }) => theme.secondary};
   ${loadingCss};
 `
