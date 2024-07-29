@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 
+import burnV3 from './burn/v3/reducer'
 import mintV3 from './mint/v3/reducer'
 import multicall from './multicall'
 import { routing } from './routing/slice'
@@ -8,6 +9,7 @@ import { routing } from './routing/slice'
 const reducer = combineReducers({
   [multicall.reducerPath]: multicall.reducer,
   [routing.reducerPath]: routing.reducer,
+  burnV3,
   mintV3,
 })
 export const store = configureStore({
