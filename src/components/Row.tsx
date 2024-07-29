@@ -1,18 +1,20 @@
 import { Children, ReactNode } from 'react'
 import styled from 'styled-components/macro'
-import { Color, Theme } from 'theme'
+import { Color, Gap, Theme } from 'theme'
 
 export interface RowProps {
   color?: Color
   align?: string
   justify?: string
+  justifyContent?: string
   flow?: string
   pad?: number
-  gap?: number
+  gap?: number | Gap | string
   flex?: true
   grow?: true | 'first' | 'last'
   children?: ReactNode
   theme: Theme
+  paddingBottom?: string
 }
 
 const Row = styled.div<RowProps>`
@@ -21,7 +23,7 @@ const Row = styled.div<RowProps>`
   display: ${({ flex }) => (flex ? 'flex' : 'grid')};
   flex-flow: ${({ flow }) => flow ?? 'wrap'};
   flex-grow: ${({ grow }) => grow && 1};
-  gap: ${({ gap }) => gap && `${gap}rem`};
+  gap: ${({ gap }) => (typeof gap === 'number' ? `${gap}rem` : gap)};
   grid-auto-flow: column;
   grid-template-columns: ${({ grow, children }) => {
     if (grow === 'first') return '1fr'
@@ -29,8 +31,33 @@ const Row = styled.div<RowProps>`
     if (grow) return `repeat(${Children.count(children)}, 1fr)`
     return undefined
   }};
-  justify-content: ${({ justify }) => justify ?? 'space-between'};
+  justify-content: ${({ justify, justifyContent }) => justify ?? justifyContent ?? 'space-between'};
   padding: ${({ pad }) => pad && `0 ${pad}rem`};
+  ${({ paddingBottom }) => (paddingBottom ? `padding-bottom: ${paddingBottom};` : '')};
+`
+
+export const RowBetween = styled(Row)`
+  justify-content: space-between;
+`
+
+export const RowFlat = styled.div`
+  display: flex;
+  align-items: flex-end;
+`
+
+export const AutoRow = styled(Row)<{ gap?: string; justify?: string }>`
+  flex-wrap: wrap;
+  margin: ${({ gap }) => gap && `-${gap}`};
+  justify-content: ${({ justify }) => justify && justify};
+
+  & > * {
+    margin: ${({ gap }) => gap} !important;
+  }
+`
+
+export const RowFixed = styled(Row)<{ gap?: string; justify?: string }>`
+  width: fit-content;
+  margin: ${({ gap }) => gap && `-${gap}`};
 `
 
 export default Row

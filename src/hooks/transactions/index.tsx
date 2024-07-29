@@ -29,6 +29,7 @@ export function useAddTransactionInfo() {
     (info: TransactionInfo) => {
       invariant(chainId)
       const txChainId = chainId
+      // @ts-ignore
       const { hash } = info.response
 
       updateTxs((chainTxs) => {
@@ -58,6 +59,7 @@ export function usePendingApproval(token?: Token, spender?: string): string | un
       tx.info.tokenAddress === token.address &&
       tx.info.spenderAddress === spender &&
       isTransactionRecent(tx)
+    // @ts-ignore
   )?.info.response.hash
 }
 

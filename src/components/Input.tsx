@@ -43,7 +43,7 @@ const Input = styled.input`
 
 export default Input
 
-interface InputProps extends Omit<HTMLProps<HTMLInputElement>, 'onChange' | 'as' | 'value'> {
+export interface InputProps extends Omit<HTMLProps<HTMLInputElement>, 'onChange' | 'as' | 'value'> {
   value: string
   onChange: (input: string) => void
   placeholder?: string

@@ -1,6 +1,7 @@
 import blankTokenUrl from 'assets/svg/blank_token.svg'
 import styled from 'styled-components'
-
+import { useLogo } from './hooks'
+import { Currency } from '@uniswap/sdk-core'
 
 const DoubleLogoContainer = styled.div`
   display: flex;
@@ -28,6 +29,33 @@ const CircleLogoImage = styled.img`
   height: 32px;
   border-radius: 50%;
 `
+
+interface CurrencyLogoProps {
+  currency: Currency
+  onError?: () => void
+}
+
+export function CurrencyLogo({ currency, onError }: CurrencyLogoProps) {
+  const { src: logoSrc, invalidateSrc: invalidateLogoSrc } = useLogo(currency)
+  return <CircleLogoImage src={logoSrc ?? blankTokenUrl} onError={onError} />
+}
+
+interface DoubleCurrencyLogoProps {
+  currency0: Currency
+  currency1: Currency
+  onError0?: () => void
+  onError1?: () => void
+}
+
+export function DoubleCurrencyLogo({ currency0, onError0, currency1, onError1 }: DoubleCurrencyLogoProps) {
+  const { src: logoSrc0, invalidateSrc: invalidateLogoSrc0 } = useLogo(currency0)
+  const { src: logoSrc1, invalidateSrc: invalidateLogoSrc1 } = useLogo(currency1)
+  return (
+    <DoubleLogoContainer>
+      <DoubleLogo logo1={logoSrc0} onError1={invalidateLogoSrc0} logo2={logoSrc1} onError2={invalidateLogoSrc1} />
+    </DoubleLogoContainer>
+  )
+}
 
 interface DoubleLogoProps {
   logo1?: string

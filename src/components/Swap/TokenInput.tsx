@@ -12,17 +12,17 @@ import { DecimalInput } from '../Input'
 import Row from '../Row'
 import TokenSelect from '../TokenSelect'
 
-const TokenInputRow = styled(Row)`
+export const TokenInputRow = styled(Row)`
   grid-template-columns: 1fr;
 `
 
-const ValueInput = styled(DecimalInput)`
+export const ValueInput = styled(DecimalInput)`
   color: ${({ theme }) => theme.primary};
 
   ${loadingTransitionCss}
 `
 
-const TokenInputColumn = styled(Column)`
+export const TokenInputColumn = styled(Column)`
   margin: 0.25rem 1rem 0;
 `
 

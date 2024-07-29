@@ -26,7 +26,7 @@ const USDC = styled(Row)`
   gap: 0.25rem;
 `
 
-const Balance = styled(ThemedText.Body2)`
+export const Balance = styled(ThemedText.Body2)`
   transition: color ${AnimationSpeed.Medium} ease-in-out;
 `
 

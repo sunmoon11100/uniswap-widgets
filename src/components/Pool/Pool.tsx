@@ -3,14 +3,13 @@ import { BrowserEvent, InterfaceElementName, InterfaceEventName } from '@uniswap
 import { useWeb3React } from '@web3-react/core'
 import { TraceEvent } from 'analytics'
 import AddLiquidity from 'components/AddLiquidity'
+import Button from 'components/Button'
 import Column from 'components/Column'
 import ModuleContainer from 'components/container/module'
 import Dialog, { Header } from 'components/Dialog'
 import PositionList from 'components/PositionList'
 import Row from 'components/Row'
 import ConnectWalletButton from 'components/Swap/SwapActionButton/ConnectWalletButton'
-import StyledTokenButton from 'components/TokenSelect/TokenButton'
-import { TooltipText } from 'components/Tooltip'
 import { SwapInfoProvider } from 'hooks/swap/useSwapInfo'
 import { useV3Positions } from 'hooks/useV3Positions'
 import { Inbox } from 'icons'
@@ -77,6 +76,12 @@ function WrongNetworkCard() {
   )
 }
 
+const StyledTokenButton = styled(Button)`
+  border-radius: ${({ theme }) => theme.borderRadius.medium}rem;
+  min-height: 2rem;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+`
+
 export default function Pool() {
   const { account, chainId, isActive } = useWeb3React()
 
@@ -103,7 +108,7 @@ export default function Pool() {
 
   const showConnectAWallet = Boolean(!account)
 
-  const handleClick = () => {
+  const handleAdd = () => {
     setIsOpen(true)
   }
 
@@ -120,15 +125,15 @@ export default function Pool() {
       {isOpen ? (
         <Dialog color="module" onClose={handleClose}>
           <Header title={<Trans>Add Liquidity</Trans>} />
-          <SwapInfoProvider>
-            <AddLiquidity onMint={handleSaved} />
-          </SwapInfoProvider>
+          <AddLiquidity onClose={handleClose} />
         </Dialog>
       ) : null}
 
       <Column gap={1.5}>
         <Row justify="flex-end">
-          <StyledTokenButton onClick={handleClick} />
+          <StyledTokenButton onClick={handleAdd}>
+            <Trans>Add Liquidity</Trans>
+          </StyledTokenButton>
         </Row>
         <MainContentWrapper>
           {positionsLoading ? (
@@ -146,7 +151,7 @@ export default function Pool() {
               <ThemedText.Body1 color="primary" textAlign="center">
                 <InboxIcon strokeWidth={1} style={{ marginTop: '2em' }} />
                 <div>
-                  <Trans>Your active V3 liquidity positions will appear here.</Trans>
+                  <Trans>Your active liquidity positions will appear here.</Trans>
                 </div>
               </ThemedText.Body1>
               {showConnectAWallet && (

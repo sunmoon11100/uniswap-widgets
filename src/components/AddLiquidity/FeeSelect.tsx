@@ -35,7 +35,7 @@ function FeeSelectCard({
 }) {
   return (
     <InteractiveContainerRounded
-      borderColor={isActive ? 'accent' : 'outline'}
+      borderColor={isActive ? 'accent' : 'hint'}
       onClick={onClick}
       border
       padding={'1rem'}

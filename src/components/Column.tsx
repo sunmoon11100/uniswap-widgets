@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components/macro'
-import { Color } from 'theme'
+import { Color, Gap } from 'theme'
 
 export interface ColumnProps {
   align?: string
@@ -26,6 +26,18 @@ const Column = styled.div<ColumnProps>`
   padding: ${({ padded, padding }) => padding ?? (padded ? '0.75rem' : 'unset')};
 
   ${({ css }) => css}
+`
+
+export const AutoColumn = styled.div<{
+  gap?: Gap | string
+  justify?: 'stretch' | 'center' | 'start' | 'end' | 'flex-start' | 'flex-end' | 'space-between'
+  grow?: true
+}>`
+  display: grid;
+  grid-auto-rows: auto;
+  grid-row-gap: ${({ gap, theme }) => gap};
+  justify-items: ${({ justify }) => justify && justify};
+  flex-grow: ${({ grow }) => grow && 1};
 `
 
 export default Column

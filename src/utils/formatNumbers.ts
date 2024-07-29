@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Price, Token } from '@uniswap/sdk-core'
+import { Currency, CurrencyAmount, Percent, Price, Token } from '@uniswap/sdk-core'
 import { DEFAULT_LOCALE, SupportedLocale } from 'constants/locales'
 
 import {
@@ -6,6 +6,8 @@ import {
   LOCAL_CURRENCY_SYMBOL_DISPLAY_TYPE,
   SupportedLocalCurrency,
 } from '../constants/localCurrencies'
+import usePrevious from 'hooks/usePrevious'
+import { useCallback, useMemo } from 'react'
 
 // Convert [CurrencyAmount] to number with necessary precision for price formatting.
 export function currencyAmountToPreciseFloat(currencyAmount: CurrencyAmount<Currency> | undefined) {
@@ -551,4 +553,299 @@ export function formatTickPrice({
   }
 
   return formatPrice({ price, type: numberType ?? NumberType.TokenNonTx, locale, localCurrency, conversionRate })
+}
+
+export function useFormatterLocales(): {
+  formatterLocale: SupportedLocale
+  formatterLocalCurrency: SupportedLocalCurrency
+} {
+  // const currencyConversionEnabled = useCurrencyConversionFlagEnabled()
+  // const activeLocale = useActiveLocale()
+  // const activeLocalCurrency = useActiveLocalCurrency()
+
+  // if (currencyConversionEnabled) {
+  //   return {
+  //     formatterLocale: activeLocale,
+  //     formatterLocalCurrency: activeLocalCurrency,
+  //   }
+  // }
+
+  return {
+    formatterLocale: DEFAULT_LOCALE,
+    formatterLocalCurrency: DEFAULT_LOCAL_CURRENCY,
+  }
+}
+
+function handleFallbackCurrency(
+  selectedCurrency: SupportedLocalCurrency,
+  previousSelectedCurrency: SupportedLocalCurrency | undefined,
+  previousConversionRate: number | undefined,
+  shouldFallbackToUSD: boolean,
+  shouldFallbackToPrevious: boolean
+) {
+  if (shouldFallbackToUSD) return DEFAULT_LOCAL_CURRENCY
+  if (shouldFallbackToPrevious) return previousConversionRate ? previousSelectedCurrency : DEFAULT_LOCAL_CURRENCY
+  return selectedCurrency
+}
+
+interface FormatCurrencyAmountOptions {
+  amount: Nullish<CurrencyAmount<Currency>>
+  type?: FormatterType
+  placeholder?: string
+  locale?: SupportedLocale
+  localCurrency?: SupportedLocalCurrency
+  conversionRate?: number
+}
+
+function formatCurrencyAmount({
+  amount,
+  type = NumberType.TokenNonTx,
+  placeholder,
+  locale = DEFAULT_LOCALE,
+  localCurrency = DEFAULT_LOCAL_CURRENCY,
+  conversionRate,
+}: FormatCurrencyAmountOptions): string {
+  return formatNumber({
+    input: amount ? parseFloat(amount.toSignificant()) : undefined,
+    type,
+    placeholder,
+    locale,
+    localCurrency,
+    conversionRate,
+  })
+}
+
+function formatPriceImpact(priceImpact: Percent | undefined, locale: SupportedLocale = DEFAULT_LOCALE): string {
+  if (!priceImpact) return '-'
+
+  return `${Number(priceImpact.multiply(-1).toFixed(3)).toLocaleString(locale, {
+    minimumFractionDigits: 3,
+    maximumFractionDigits: 3,
+    useGrouping: false,
+  })}%`
+}
+
+const MAX_AMOUNT_STR_LENGTH = 9
+
+function formatReviewSwapCurrencyAmount(
+  amount: CurrencyAmount<Currency>,
+  locale: SupportedLocale = DEFAULT_LOCALE
+): string {
+  let formattedAmount = formatCurrencyAmount({ amount, type: NumberType.TokenTx, locale })
+  if (formattedAmount.length > MAX_AMOUNT_STR_LENGTH) {
+    formattedAmount = formatCurrencyAmount({ amount, type: NumberType.SwapTradeAmount, locale })
+  }
+  return formattedAmount
+}
+
+function formatSlippage(slippage: Percent | undefined, locale: SupportedLocale = DEFAULT_LOCALE) {
+  if (!slippage) return '-'
+
+  return `${Number(slippage.toFixed(3)).toLocaleString(locale, {
+    maximumFractionDigits: 3,
+    useGrouping: false,
+  })}%`
+}
+
+interface FormatNumberOrStringOptions {
+  input: Nullish<number | string>
+  type: FormatterType
+  locale?: SupportedLocale
+  localCurrency?: SupportedLocalCurrency
+  conversionRate?: number
+}
+
+interface FormatNumberOrStringOptions {
+  input: Nullish<number | string>
+  type: FormatterType
+  locale?: SupportedLocale
+  localCurrency?: SupportedLocalCurrency
+  conversionRate?: number
+}
+
+function formatNumberOrString({
+  input,
+  type,
+  locale,
+  localCurrency,
+  conversionRate,
+}: FormatNumberOrStringOptions): string {
+  if (input === null || input === undefined) return '-'
+  if (typeof input === 'string')
+    return formatNumber({ input: parseFloat(input), type, locale, localCurrency, conversionRate })
+  return formatNumber({ input, type, locale, localCurrency, conversionRate })
+}
+
+interface FormatFiatPriceOptions {
+  price: Nullish<number | string>
+  type?: FormatterType
+  locale?: SupportedLocale
+  localCurrency?: SupportedLocalCurrency
+  conversionRate?: number
+}
+
+function formatFiatPrice({
+  price,
+  type = NumberType.FiatTokenPrice,
+  locale,
+  localCurrency,
+  conversionRate,
+}: FormatFiatPriceOptions): string {
+  return formatNumberOrString({ input: price, type, locale, localCurrency, conversionRate })
+}
+
+function formatPercent(percent: Nullish<number>, locale: SupportedLocale = DEFAULT_LOCALE) {
+  if (percent === null || percent === undefined || percent === Infinity || isNaN(percent)) {
+    return '-'
+  }
+
+  return `${Number(Math.abs(percent).toFixed(2)).toLocaleString(locale, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+    useGrouping: false,
+  })}%`
+}
+
+// Constructs an object that injects the correct locale and local currency into each of the above formatter functions.
+export function useFormatter() {
+  const { formatterLocale, formatterLocalCurrency } = useFormatterLocales()
+
+  // const formatterLocalCurrencyIsUSD = formatterLocalCurrency === GqlCurrency.Usd
+  const formatterLocalCurrencyIsUSD = true
+  // const { data: localCurrencyConversionRate, isLoading: localCurrencyConversionRateIsLoading } =
+  //   useLocalCurrencyConversionRate(formatterLocalCurrency, formatterLocalCurrencyIsUSD)
+  const { data: localCurrencyConversionRate, isLoading: localCurrencyConversionRateIsLoading } = {
+    data: undefined,
+    isLoading: false,
+  }
+
+  const previousSelectedCurrency = usePrevious(formatterLocalCurrency)
+  const previousConversionRate = usePrevious(localCurrencyConversionRate)
+
+  const shouldFallbackToPrevious = !localCurrencyConversionRate && localCurrencyConversionRateIsLoading
+  const shouldFallbackToUSD = !localCurrencyConversionRate && !localCurrencyConversionRateIsLoading
+  const currencyToFormatWith = handleFallbackCurrency(
+    formatterLocalCurrency,
+    previousSelectedCurrency,
+    previousConversionRate,
+    shouldFallbackToUSD,
+    shouldFallbackToPrevious
+  )
+  const localCurrencyConversionRateToFormatWith = shouldFallbackToPrevious
+    ? previousConversionRate
+    : localCurrencyConversionRate
+
+  type LocalesType = 'locale' | 'localCurrency' | 'conversionRate'
+  const formatNumberWithLocales = useCallback(
+    (options: Omit<FormatNumberOptions, LocalesType>) =>
+      formatNumber({
+        ...options,
+        locale: formatterLocale,
+        localCurrency: currencyToFormatWith,
+        conversionRate: localCurrencyConversionRateToFormatWith,
+      }),
+    [currencyToFormatWith, formatterLocale, localCurrencyConversionRateToFormatWith]
+  )
+
+  const formatCurrencyAmountWithLocales = useCallback(
+    (options: Omit<FormatCurrencyAmountOptions, LocalesType>) =>
+      formatCurrencyAmount({
+        ...options,
+        locale: formatterLocale,
+        localCurrency: currencyToFormatWith,
+        conversionRate: localCurrencyConversionRateToFormatWith,
+      }),
+    [currencyToFormatWith, formatterLocale, localCurrencyConversionRateToFormatWith]
+  )
+
+  const formatPriceWithLocales = useCallback(
+    (options: Omit<FormatPriceOptions, LocalesType>) =>
+      formatPrice({
+        ...options,
+        locale: formatterLocale,
+        localCurrency: currencyToFormatWith,
+        conversionRate: localCurrencyConversionRateToFormatWith,
+      }),
+    [currencyToFormatWith, formatterLocale, localCurrencyConversionRateToFormatWith]
+  )
+
+  const formatPriceImpactWithLocales = useCallback(
+    (priceImpact: Percent | undefined) => formatPriceImpact(priceImpact, formatterLocale),
+    [formatterLocale]
+  )
+
+  const formatReviewSwapCurrencyAmountWithLocales = useCallback(
+    (amount: CurrencyAmount<Currency>) => formatReviewSwapCurrencyAmount(amount, formatterLocale),
+    [formatterLocale]
+  )
+
+  const formatSlippageWithLocales = useCallback(
+    (slippage: Percent | undefined) => formatSlippage(slippage, formatterLocale),
+    [formatterLocale]
+  )
+
+  const formatTickPriceWithLocales = useCallback(
+    (options: Omit<FormatTickPriceOptions, LocalesType>) =>
+      formatTickPrice({
+        ...options,
+        locale: formatterLocale,
+        localCurrency: currencyToFormatWith,
+        conversionRate: localCurrencyConversionRateToFormatWith,
+      }),
+    [currencyToFormatWith, formatterLocale, localCurrencyConversionRateToFormatWith]
+  )
+
+  const formatNumberOrStringWithLocales = useCallback(
+    (options: Omit<FormatNumberOrStringOptions, LocalesType>) =>
+      formatNumberOrString({
+        ...options,
+        locale: formatterLocale,
+        localCurrency: currencyToFormatWith,
+        conversionRate: localCurrencyConversionRateToFormatWith,
+      }),
+    [currencyToFormatWith, formatterLocale, localCurrencyConversionRateToFormatWith]
+  )
+
+  const formatFiatPriceWithLocales = useCallback(
+    (options: Omit<FormatFiatPriceOptions, LocalesType>) =>
+      formatFiatPrice({
+        ...options,
+        locale: formatterLocale,
+        localCurrency: currencyToFormatWith,
+        conversionRate: localCurrencyConversionRateToFormatWith,
+      }),
+    [currencyToFormatWith, formatterLocale, localCurrencyConversionRateToFormatWith]
+  )
+
+  const formatPercentWithLocales = useCallback(
+    (percent: Nullish<number>) => formatPercent(percent, formatterLocale),
+    [formatterLocale]
+  )
+
+  return useMemo(
+    () => ({
+      formatCurrencyAmount: formatCurrencyAmountWithLocales,
+      formatFiatPrice: formatFiatPriceWithLocales,
+      formatNumber: formatNumberWithLocales,
+      formatNumberOrString: formatNumberOrStringWithLocales,
+      formatPercent: formatPercentWithLocales,
+      formatPrice: formatPriceWithLocales,
+      formatPriceImpact: formatPriceImpactWithLocales,
+      formatReviewSwapCurrencyAmount: formatReviewSwapCurrencyAmountWithLocales,
+      formatSlippage: formatSlippageWithLocales,
+      formatTickPrice: formatTickPriceWithLocales,
+    }),
+    [
+      formatCurrencyAmountWithLocales,
+      formatFiatPriceWithLocales,
+      formatNumberOrStringWithLocales,
+      formatNumberWithLocales,
+      formatPercentWithLocales,
+      formatPriceImpactWithLocales,
+      formatPriceWithLocales,
+      formatReviewSwapCurrencyAmountWithLocales,
+      formatSlippageWithLocales,
+      formatTickPriceWithLocales,
+    ]
+  )
 }
