@@ -310,6 +310,8 @@ function AddLiquidity({
                 ...trace,
                 ...transactionInfo,
               })
+
+              onClose()
             })
         })
         .catch((error) => {
@@ -522,10 +524,11 @@ function AddLiquidity({
           )}
         <Button
           color={
-            !isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B] ? 'error' : 'interactive'
+            !isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B] ? 'error' : 'accent'
           }
           onClick={() => {
-            setShowConfirm(true)
+            // setShowConfirm(true)
+            onAdd()
           }}
           disabled={
             !isValid ||
@@ -534,7 +537,7 @@ function AddLiquidity({
           }
           padding="12px"
         >
-          <ThemedText.Body1 fontWeight={535}>{errorMessage ? errorMessage : <Trans>Preview</Trans>}</ThemedText.Body1>
+          <ThemedText.Body1 fontWeight={535}>{errorMessage ? errorMessage : <Trans>Add</Trans>}</ThemedText.Body1>
         </Button>
       </Column>
     )
