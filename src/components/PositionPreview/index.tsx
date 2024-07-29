@@ -10,18 +10,18 @@ import { RowBetween, RowFixed } from 'components/Row'
 import JSBI from 'jsbi'
 import { ReactNode, useCallback, useState } from 'react'
 import { Bound } from 'state/mint/v3/actions'
-import styled, { useTheme } from 'styled-components'
+import styled from 'styled-components/macro'
 import { ThemedText } from 'theme'
 import { useFormatter } from 'utils/formatNumbers'
 import { unwrappedToken } from 'utils/unwrappedToken'
 
 export const Break = styled.div`
-  width: 100%;
   background-color: rgba(255, 255, 255, 0.2);
   height: 1px;
+  width: 100%;
 `
 
-export const PositionPreview = ({
+export function PositionPreview({
   position,
   title,
   inRange,
@@ -33,8 +33,7 @@ export const PositionPreview = ({
   inRange: boolean
   baseCurrencyDefault?: Currency
   ticksAtLimit: { [bound: string]: boolean | undefined }
-}) => {
-  const theme = useTheme()
+}) {
   const { formatTickPrice } = useFormatter()
 
   const currency0 = unwrappedToken(position.pool.token0)

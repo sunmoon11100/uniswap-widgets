@@ -109,17 +109,7 @@ function Fixture() {
       defaultChainId={defaultChainId}
       provider={connector}
       theme={theme}
-      tokenList={[
-        ...(Array.isArray(tokenList) ? tokenList : []),
-        {
-          name: 'GrabCoinClub',
-          address: '0xBD9C89536e406478d8A42C51b35bCfb6bF8A1384',
-          symbol: 'GC',
-          decimals: 18,
-          chainId: 137,
-          logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/26960.png',
-        },
-      ]}
+      tokenList={tokenList}
       width={width}
       routerUrl={routerUrl}
       brandedFooter={brandedFooter}
@@ -136,7 +126,7 @@ function Fixture() {
   if (!window.frameElement) return widget
 
   return (
-    <Row flex align="start" justify="start" gap={0.5} style={{ background: 'black' }}>
+    <Row flex align="start" justify="start" gap={0.5}>
       {widget}
       <EventFeed events={events} onClear={() => setEvents([])} />
     </Row>

@@ -1,15 +1,14 @@
-import { Trans } from '@lingui/macro'
+import { t } from '@lingui/macro'
 import { ChainId, SUPPORTED_CHAINS } from '@uniswap/sdk-core'
 import { FeeAmount } from '@uniswap/v3-sdk'
-import { ReactNode } from 'react';
 
 export const FEE_AMOUNT_DETAIL: Record<
   FeeAmount,
-  { label: string; description: ReactNode; supportedChains: readonly ChainId[] }
+  { label: string; description: string; supportedChains: readonly ChainId[] }
 > = {
   [FeeAmount.LOWEST]: {
     label: '0.01',
-    description: <Trans>Best for very stable pairs.</Trans>,
+    description: t`Best for very stable pairs.`,
     supportedChains: [
       ChainId.ARBITRUM_ONE,
       ChainId.BNB,
@@ -25,17 +24,17 @@ export const FEE_AMOUNT_DETAIL: Record<
   },
   [FeeAmount.LOW]: {
     label: '0.05',
-    description: <Trans>Best for stable pairs.</Trans>,
+    description: t`Best for stable pairs.`,
     supportedChains: SUPPORTED_CHAINS,
   },
   [FeeAmount.MEDIUM]: {
     label: '0.3',
-    description: <Trans>Best for most pairs.</Trans>,
+    description: t`Best for most pairs.`,
     supportedChains: SUPPORTED_CHAINS,
   },
   [FeeAmount.HIGH]: {
     label: '1',
-    description: <Trans>Best for exotic pairs.</Trans>,
+    description: t`Best for exotic pairs.`,
     supportedChains: SUPPORTED_CHAINS,
   },
 }
