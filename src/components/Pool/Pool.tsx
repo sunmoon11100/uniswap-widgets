@@ -3,7 +3,7 @@ import { BrowserEvent, InterfaceElementName, InterfaceEventName } from '@uniswap
 import { useWeb3React } from '@web3-react/core'
 import { TraceEvent } from 'analytics'
 import AddLiquidity from 'components/AddLiquidity'
-import Button from 'components/Button'
+import Button, { ButtonPrimary } from 'components/Button'
 import Column from 'components/Column'
 import ModuleContainer from 'components/container/module'
 import Dialog, { Header } from 'components/Dialog'
@@ -120,6 +120,8 @@ export default function Pool() {
     handleClose()
   }
 
+  const handleReload = () => {}
+
   return (
     <ModuleContainer style={{ padding: 16 }}>
       {isOpen ? (
@@ -131,9 +133,9 @@ export default function Pool() {
 
       <Column gap={1.5}>
         <Row justify="flex-end">
-          <StyledTokenButton onClick={handleAdd}>
+          <ButtonPrimary padding="8px 16px" $borderRadius="1rem" onClick={handleAdd}>
             <Trans>Add Liquidity</Trans>
-          </StyledTokenButton>
+          </ButtonPrimary>
         </Row>
         <MainContentWrapper>
           {positionsLoading ? (
@@ -145,6 +147,7 @@ export default function Pool() {
                 return
               }}
               userHideClosedPositions={false}
+              onReload={handleReload}
             />
           ) : (
             <ErrorContainer>

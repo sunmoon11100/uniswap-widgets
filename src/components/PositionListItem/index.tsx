@@ -9,14 +9,16 @@ import { unwrappedToken } from 'utils/unwrappedToken'
 
 import { Trans } from '@lingui/macro'
 import RangeBadge from 'components/Badge/RangeBadge'
+import Button, { ButtonGray, ButtonPrimary } from 'components/Button'
+import Column from 'components/Column'
 import HoverInlineText from 'components/HoverInlineText'
+import { useLogo } from 'components/Logo'
+import DoubleLogo from 'components/Logo/DoubleCurrencyLogo'
 import { Loading } from 'components/Swap/Toolbar/Caption'
 import styled from 'styled-components'
 import { HideSmall, MEDIA_WIDTHS, SmallOnly, ThemedText, mediaWidth } from 'theme'
 import { Bound, formatTickPrice } from 'utils/formatNumbers'
 import { DAI, USDC_MAINNET, USDT, WBTC, WRAPPED_NATIVE_CURRENCY } from '../../constants/tokens'
-import DoubleLogo from 'components/Logo/DoubleCurrencyLogo'
-import { useLogo } from 'components/Logo'
 
 const LinkRow = styled.div`
   align-items: center;
@@ -104,6 +106,7 @@ interface PositionListItemProps {
   liquidity: BigNumber
   tickLower: number
   tickUpper: number
+  onDelete?: () => void
 }
 
 export function getPriceOrderingFromPositionForUI(position?: Position): {
@@ -168,6 +171,7 @@ export default function PositionListItem({
   liquidity,
   tickLower,
   tickUpper,
+  onDelete = () => null,
 }: PositionListItemProps) {
   const token0 = useToken(token0Address)
   const token1 = useToken(token1Address)
@@ -217,7 +221,12 @@ export default function PositionListItem({
             <Trans>{new Percent(feeAmount, 1_000_000).toSignificant()}%</Trans>
           </FeeTierText>
         </PrimaryPositionIdData>
-        <RangeBadge removed={removed} inRange={!outOfRange} />
+        <Column flex justify="space-between" align="flex-end" gap={0.25}>
+          <RangeBadge removed={removed} inRange={!outOfRange} />
+          <Button padding="4px 8px" style={{ width: 'fit-content' }} onClick={onDelete}>
+            X
+          </Button>
+        </Column>
       </div>
 
       {priceLower && priceUpper ? (

@@ -1,6 +1,9 @@
 import { Trans } from '@lingui/macro'
+import Dialog, { Header } from 'components/Dialog'
 import PositionListItem from 'components/PositionListItem'
-import React from 'react'
+import RemoveLiquidity from 'components/RemoveLiquidity'
+import { BigNumber } from 'ethers'
+import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import { MEDIA_WIDTHS } from 'theme'
 import { PositionDetails } from 'types/position'
@@ -60,15 +63,39 @@ type PositionListProps = React.PropsWithChildren<{
   positions: PositionDetails[]
   setUserHideClosedPositions: any
   userHideClosedPositions: boolean
+  onReload?: () => void
 }>
 
 export default function PositionList({
   positions,
   setUserHideClosedPositions,
   userHideClosedPositions,
+  onReload = () => null,
 }: PositionListProps) {
+  const [isOpen, setIsOpen] = useState(false)
+  const [tokenId, setTokenId] = useState<BigNumber>()
+
+  const handleDelete = (v: BigNumber) => {
+    setTokenId(v)
+    setIsOpen(true)
+  }
+
+  const handleClose = () => setIsOpen(false)
+
+  const handleReload = () => {
+    handleClose()
+    onReload()
+  }
+
   return (
     <>
+      {isOpen && tokenId ? (
+        <Dialog color="module" onClose={handleClose}>
+          <Header title={<Trans>Remove Liquidity</Trans>} />
+          <RemoveLiquidity tokenId={tokenId} onClose={handleClose} onReload={handleReload} />
+        </Dialog>
+      ) : null}
+
       <DesktopHeader>
         <div>
           <Trans>Your positions</Trans>
@@ -97,7 +124,7 @@ export default function PositionList({
         </ToggleWrap>
       </MobileHeader>
       {positions.map((p) => (
-        <PositionListItem key={p.tokenId.toString()} {...p} />
+        <PositionListItem key={p.tokenId.toString()} {...p} onDelete={() => handleDelete(p.tokenId)} />
       ))}
     </>
   )

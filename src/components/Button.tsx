@@ -193,3 +193,56 @@ export const ButtonEmpty = styled(BaseButton)`
     cursor: auto;
   }
 `
+
+export const ButtonPrimary = styled(BaseButton)`
+  background-color: ${({ theme }) => theme.accent};
+  font-size: 20px;
+  font-weight: 535;
+  padding: ${({ padding }) => padding ?? '16px'};
+  color: ${({ theme }) => 'white'};
+  &:focus {
+    box-shadow: 0 0 0 1pt ${({ theme }) => darken(0.05, theme.accent)};
+    background-color: ${({ theme }) => darken(0.05, theme.accent)};
+  }
+  &:hover {
+    background-color: ${({ theme }) => darken(0.05, theme.accent)};
+  }
+  &:active {
+    box-shadow: 0 0 0 1pt ${({ theme }) => darken(0.1, theme.accent)};
+    background-color: ${({ theme }) => darken(0.1, theme.accent)};
+  }
+  &:disabled {
+    background-color: ${({ theme, altDisabledStyle, disabled }) =>
+      altDisabledStyle ? (disabled ? theme.accent : theme.outline) : theme.outline};
+    color: white;
+    cursor: auto;
+    box-shadow: none;
+    border: 1px solid transparent;
+    outline: none;
+  }
+`
+
+const ButtonConfirmedStyle = styled(BaseButton)`
+  background-color: ${({ theme }) => theme.module};
+  color: ${({ theme }) => theme.warning};
+  /* border: 1px solid ${({ theme }) => theme.success}; */
+
+  &:disabled {
+    opacity: 50%;
+    background-color: ${({ theme }) => theme.module};
+    color: ${({ theme }) => theme.warningSoft};
+    cursor: auto;
+  }
+`
+
+export function ButtonConfirmed({
+  confirmed,
+  altDisabledStyle,
+  ...rest
+}: { confirmed?: boolean; altDisabledStyle?: boolean } & ButtonProps) {
+  if (confirmed) {
+    return <ButtonConfirmedStyle {...rest} />
+  } else {
+    return <ButtonPrimary {...rest} altDisabledStyle={altDisabledStyle} />
+  }
+}
