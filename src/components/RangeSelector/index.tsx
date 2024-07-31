@@ -1,5 +1,6 @@
 import { Trans } from '@lingui/macro'
 import { Currency, Price, Token } from '@uniswap/sdk-core'
+import Column from 'components/Column'
 import StepCounter from 'components/InputStepCounter/InputStepCounter'
 import { AutoRow } from 'components/Row'
 import { Bound } from 'state/mint/v3/actions'
@@ -40,7 +41,7 @@ export default function RangeSelector({
   const rightPrice = isSorted ? priceUpper : priceLower?.invert()
 
   return (
-    <AutoRow gap="4px">
+    <Column gap={0.5}>
       <StepCounter
         value={ticksAtLimit[isSorted ? Bound.LOWER : Bound.UPPER] ? '0' : leftPrice?.toSignificant(8) ?? ''}
         onUserInput={onLeftRangeInput}
@@ -67,6 +68,6 @@ export default function RangeSelector({
         tokenB={currencyB?.symbol}
         title={<Trans>High price</Trans>}
       />
-    </AutoRow>
+    </Column>
   )
 }

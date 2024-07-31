@@ -34,7 +34,7 @@ const InputColumn = styled(Column)<{ disableHover?: boolean; isWide: boolean }>`
   background-color: ${({ theme }) => theme.interactive};
   border-radius: ${({ theme }) => theme.borderRadius.medium}rem;
   margin-bottom: 0.25rem;
-  padding: ${({ isWide }) => (isWide ? '1rem 0' : '1rem 0 1.5rem')};
+  padding: ${({ isWide }) => (isWide ? '1rem 0' : '1rem 0.75rem 1.5rem')};
   position: relative;
 
   &:before {
@@ -146,7 +146,7 @@ export function FieldWrapper({
       onClick={onClick}
       className={className}
     >
-      <Row pad={1 /* rem */}>
+      <Row>
         <ThemedText.Subhead2 color={'secondary'}>{subheader}</ThemedText.Subhead2>
       </Row>
       <TokenInput

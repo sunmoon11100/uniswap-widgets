@@ -611,7 +611,7 @@ function AddLiquidity({
                   )}
                 </RowBetween>
 
-                <Column>
+                <Row gap="4px">
                   <CurrencyInputPanel
                     value={formattedAmounts[Field.CURRENCY_A]}
                     onUserInput={onFieldAInput}
@@ -639,7 +639,7 @@ function AddLiquidity({
                     // id="add-liquidity-input-tokenb"
                     showCommonBases
                   />
-                </Column>
+                </Row>
 
                 <FeeSelector
                   disabled={!quoteCurrency || !baseCurrency}
@@ -648,7 +648,7 @@ function AddLiquidity({
                   currencyA={baseCurrency ?? undefined}
                   currencyB={quoteCurrency ?? undefined}
                 />
-              </AutoColumn>{' '}
+              </AutoColumn>
             </>
           )}
           {hasExistingPosition && existingPosition && (

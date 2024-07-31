@@ -54,20 +54,9 @@ const InboxIcon = styled(Inbox)`
 
 function PositionsLoadingPlaceholder() {
   return (
-    <>
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-    </>
+    <ThemedText.Subhead1>
+      <Trans>Loading</Trans>...
+    </ThemedText.Subhead1>
   )
 }
 

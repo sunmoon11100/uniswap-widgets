@@ -22,9 +22,7 @@ export const ValueInput = styled(DecimalInput)`
   ${loadingTransitionCss}
 `
 
-export const TokenInputColumn = styled(Column)`
-  margin: 0.25rem 1rem 0;
-`
+export const TokenInputColumn = styled(Column)``
 
 export interface TokenInputHandle {
   focus: () => void
