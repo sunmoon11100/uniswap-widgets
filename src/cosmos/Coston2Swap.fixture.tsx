@@ -1,4 +1,4 @@
-import { darkTheme, defaultTheme, lightTheme, SwapWidget, Theme } from '@uniswap/widgets'
+import { darkTheme, defaultTheme, lightTheme, SwapWidget } from '@uniswap/widgets'
 import Row from 'components/Row'
 import { CHAIN_NAMES_TO_IDS } from 'constants/chains'
 import { useEffect } from 'react'
