@@ -54,9 +54,11 @@ const InboxIcon = styled(Inbox)`
 
 function PositionsLoadingPlaceholder() {
   return (
-    <ThemedText.Subhead1>
-      <Trans>Loading</Trans>...
-    </ThemedText.Subhead1>
+    <Row justify="center" pad={1}>
+      <ThemedText.Subhead1>
+        <Trans>Loading</Trans>...
+      </ThemedText.Subhead1>
+    </Row>
   )
 }
 

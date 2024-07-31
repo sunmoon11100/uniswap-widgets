@@ -360,11 +360,11 @@ function Remove({ tokenId, onReload = () => null }: { tokenId: BigNumber; onRelo
                 <ThemedText.Body1 fontWeight={485}>
                   <Trans>Amount</Trans>
                 </ThemedText.Body1>
-                <RowBetween>
+                <RowBetween gap="4px">
                   <ResponsiveHeaderText>
                     <Trans>{percentForSlider}%</Trans>
                   </ResponsiveHeaderText>
-                  <AutoRow gap="4px" justify="flex-end">
+                  <AutoRow gap="2px" justify="flex-end">
                     <SmallMaxButton onClick={() => onPercentSelect(25)} width="20%">
                       <Trans>25%</Trans>
                     </SmallMaxButton>

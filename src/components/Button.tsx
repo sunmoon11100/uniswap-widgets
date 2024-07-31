@@ -101,7 +101,7 @@ export const ButtonGray = styled(BaseButton)`
 `
 
 export const ButtonOutlined = styled(BaseButton)`
-  border: 1px solid ${({ theme }) => theme.outline};
+  border: 1px solid ${({ theme }) => theme.hint};
   background-color: transparent;
   color: ${({ theme }) => theme.primary};
   &:focus {

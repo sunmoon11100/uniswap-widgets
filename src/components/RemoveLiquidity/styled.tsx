@@ -36,6 +36,7 @@ export const MaxButton = styled.button<{ width: string }>`
 `
 
 export const SmallMaxButton = styled(MaxButton)`
+  color: ${({ theme }) => theme.primary};
   font-size: 12px;
 `
 
