@@ -21,16 +21,16 @@ import { Bound, formatTickPrice } from 'utils/formatNumbers'
 import { DAI, USDC_MAINNET, USDT, WBTC, WRAPPED_NATIVE_CURRENCY } from '../../constants/tokens'
 
 const LinkRow = styled.div`
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  display: flex;
-  display: flex;
   flex-direction: column;
   font-weight: 535;
-  justify-content: space-between;
-  padding: 16px;
+  padding: 8px;
   text-decoration: none;
   user-select: none;
+  border-bottom: solid 1px ${({ theme }) => theme.outline};
 
   & > div:not(:first-child) {
     text-align: center;
@@ -57,7 +57,6 @@ const RangeLineItem = styled(DataLineItem)`
   align-items: center;
   display: flex;
   flex-direction: row;
-  margin-top: 4px;
   width: 100%;
 `
 

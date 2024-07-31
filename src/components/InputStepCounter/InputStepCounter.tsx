@@ -34,7 +34,8 @@ const SmallButton = styled(ButtonGray)`
 `
 
 const FocusedOutlineCard = styled(OutlineCard)<{ active?: boolean; pulsing?: boolean }>`
-  border-color: ${({ active, theme }) => active && theme.active};
+  border-color: transparent;
+  background-color: ${({ theme }) => theme.interactive};
   padding: 12px;
   animation: ${({ pulsing, theme }) => pulsing && pulse(theme.accent)} 0.8s linear;
 `
@@ -162,7 +163,7 @@ function StepCounter({
           </InputTitle>
         </InputColumn>
 
-        <AutoColumn gap="4px">
+        <AutoColumn gap="4px" justify="space-between">
           {!locked && (
             <SmallButton data-testid="increment-price-range" onClick={handleIncrement} disabled={incrementDisabled}>
               <ButtonLabel disabled={incrementDisabled} fontSize="12px">

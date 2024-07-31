@@ -3,14 +3,13 @@ import { BrowserEvent, InterfaceElementName, InterfaceEventName } from '@uniswap
 import { useWeb3React } from '@web3-react/core'
 import { TraceEvent } from 'analytics'
 import AddLiquidity from 'components/AddLiquidity'
-import Button, { ButtonPrimary } from 'components/Button'
+import Button from 'components/Button'
 import Column from 'components/Column'
 import ModuleContainer from 'components/container/module'
 import Dialog, { Header } from 'components/Dialog'
 import PositionList from 'components/PositionList'
 import Row from 'components/Row'
 import ConnectWalletButton from 'components/Swap/SwapActionButton/ConnectWalletButton'
-import { SwapInfoProvider } from 'hooks/swap/useSwapInfo'
 import { useV3Positions } from 'hooks/useV3Positions'
 import { Inbox } from 'icons'
 import { useMemo, useState } from 'react'
@@ -27,16 +26,20 @@ const MainContentWrapper = styled.main`
   flex-direction: column;
   overflow: hidden;
   padding: 0;
+  align-items: stretch;
+  gap: 4px;
 `
 
 const ErrorContainer = styled.div`
-  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: stretch;
   margin: auto;
   max-width: 300px;
   min-height: 25vh;
+  padding-bottom: 8px;
+  gap: 8px;
 `
 
 const IconStyle = css`
@@ -76,10 +79,15 @@ function WrongNetworkCard() {
   )
 }
 
-const StyledTokenButton = styled(Button)`
-  border-radius: ${({ theme }) => theme.borderRadius.medium}rem;
-  min-height: 2rem;
-  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+const AddLiquidityButton = styled(Button)`
+  background-color: ${({ theme }) => theme.accent};
+  padding: 12px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  &:hover {
+    background-color: ${({ theme }) => theme.accentSoft};
+  }
 `
 
 export default function Pool() {
@@ -133,9 +141,11 @@ export default function Pool() {
 
       <Column gap={1.5}>
         <Row justify="flex-end">
-          <ButtonPrimary padding="8px 16px" $borderRadius="1rem" onClick={handleAdd}>
-            <Trans>Add Liquidity</Trans>
-          </ButtonPrimary>
+          <AddLiquidityButton padding="12px" onClick={handleAdd}>
+            <ThemedText.Body1>
+              + <Trans>Add Liquidity</Trans>
+            </ThemedText.Body1>
+          </AddLiquidityButton>
         </Row>
         <MainContentWrapper>
           {positionsLoading ? (

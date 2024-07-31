@@ -62,12 +62,12 @@ export const lightTheme: Colors = {
 
 export const darkTheme: Colors = {
   // surface
-  accent: 'hsla(273, 69%, 49%, 0.7)',
+  accent: '#8527D4',
   accentSoft: 'RGB(33,52,94)',
-  container: 'RGB(22,16,39)',
-  module: 'hsl(222, 37%, 12%)',
-  interactive: 'hsla(223, 28%, 22%, 1)',
-  outline: 'hsla(273, 69%, 49%, 0.3)',
+  container: '#140D25',
+  module: '#061930',
+  interactive: 'hsla(209, 95%, 7%, 1)',
+  outline: '#3B185F',
   dialog: black,
   scrim: 'hsla(224, 33%, 16%, 0.5)',
 

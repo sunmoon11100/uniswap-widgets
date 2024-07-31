@@ -597,12 +597,12 @@ function AddLiquidity({
             <>
               <AutoColumn gap="8px">
                 <RowBetween>
-                  <ThemedText.Caption>
+                  <ThemedText.Subhead1>
                     <Trans>Select pair</Trans>
-                  </ThemedText.Caption>
+                  </ThemedText.Subhead1>
                   {!hasExistingPosition && (
                     <Row justifyContent="flex-end" style={{ width: 'fit-content', minWidth: 'fit-content' }}>
-                      <Button onClick={clearAll}>
+                      <Button onClick={clearAll} padding="2px">
                         <ThemedText.Caption fontSize="12px">
                           <Trans>Clear all</Trans>
                         </ThemedText.Caption>

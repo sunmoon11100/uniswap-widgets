@@ -94,7 +94,7 @@ export function TokenSelectDialogContent({ value, onSelect, onClose }: TokenSele
 
   if (!listHasTokens && isLoaded) {
     return (
-      <Dialog color="container" onClose={onClose}>
+      <Dialog color="module" onClose={onClose}>
         <Header title={<Trans>Select token</Trans>} />
         <NoTokensAvailableOnNetwork />
       </Dialog>

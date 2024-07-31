@@ -8,7 +8,6 @@ const Button = styled(ButtonOutlined).attrs(() => ({
   padding: '6px',
   $borderRadius: '8px',
 }))`
-  color: ${({ theme }) => theme.accent};
   flex: 1;
 `
 

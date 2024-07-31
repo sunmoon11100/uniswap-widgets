@@ -86,17 +86,17 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps & Compon
 )
 
 export const ButtonGray = styled(BaseButton)`
-  background-color: ${({ theme }) => theme.container};
-  color: ${({ theme }) => theme.accent};
-  border: 1px solid ${({ theme }) => theme.outline};
+  background-color: ${({ theme }) => theme.interactive};
+  color: ${({ theme }) => theme.primary};
+  border: 1px solid ${({ theme }) => theme.hint};
   font-size: 16px;
   font-weight: 535;
 
   &:hover {
-    background-color: ${({ theme, disabled }) => !disabled && darken(0.05, theme.module)};
+    background-color: ${({ theme, disabled }) => !disabled && darken(0.05, theme.interactive)};
   }
   &:active {
-    background-color: ${({ theme, disabled }) => !disabled && darken(0.1, theme.module)};
+    background-color: ${({ theme, disabled }) => !disabled && darken(0.1, theme.interactive)};
   }
 `
 
