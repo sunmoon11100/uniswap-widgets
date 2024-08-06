@@ -246,3 +246,11 @@ export function ButtonConfirmed({
     return <ButtonPrimary {...rest} altDisabledStyle={altDisabledStyle} />
   }
 }
+
+export const SmallButtonPrimary = styled(ButtonPrimary)`
+  width: auto;
+  font-size: 16px;
+  padding: ${({ padding }) => padding ?? '8px 12px'};
+
+  border-radius: 12px;
+`

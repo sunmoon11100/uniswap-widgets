@@ -17,7 +17,6 @@ const PositionPageButtonPrimary = styled(Button)`
 const PageWrapper = styled.div`
   padding: 68px 16px 16px 16px;
 
-  min-width: 800px;
   max-width: 960px;
 
   @media only screen and (max-width: ${({ theme }) => `${WIDGET_BREAKPOINTS.MEDIUM}px`}) {

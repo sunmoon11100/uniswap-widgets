@@ -31,7 +31,7 @@ const CircleLogoImage = styled.img`
 `
 
 interface CurrencyLogoProps {
-  currency: Currency
+  currency?: Currency
   onError?: () => void
 }
 
@@ -41,8 +41,8 @@ export function CurrencyLogo({ currency, onError }: CurrencyLogoProps) {
 }
 
 interface DoubleCurrencyLogoProps {
-  currency0: Currency
-  currency1: Currency
+  currency0?: Currency
+  currency1?: Currency
   onError0?: () => void
   onError1?: () => void
 }

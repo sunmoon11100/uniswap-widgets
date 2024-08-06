@@ -3840,7 +3840,7 @@
 
 "@uniswap/redux-multicall@^1.1.8":
   version "1.1.8"
-  resolved "https://registry.npmjs.org/@uniswap/redux-multicall/-/redux-multicall-1.1.8.tgz"
+  resolved "https://registry.yarnpkg.com/@uniswap/redux-multicall/-/redux-multicall-1.1.8.tgz#9cc5090305b10df68fb6162eb1ba7c2c762f5e7f"
   integrity sha512-LttOBVJuoRNC6N4MHsb5dF2GszLsj1ddPKKccEw1XOX17bGrFdm2A6GwKgES+v+Hj3lluDbQL6atcQtymP21iw==
 
 "@uniswap/router-sdk@^1.6.0":

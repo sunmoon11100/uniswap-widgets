@@ -1,5 +1,6 @@
 import { Trans } from '@lingui/macro'
 import Dialog, { Header } from 'components/Dialog'
+import PositionPage from 'components/PositionDetail'
 import PositionListItem from 'components/PositionListItem'
 import RemoveLiquidity from 'components/RemoveLiquidity'
 import { BigNumber } from 'ethers'
@@ -72,27 +73,51 @@ export default function PositionList({
   userHideClosedPositions,
   onReload = () => null,
 }: PositionListProps) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpenDelete, setIsOpenDelete] = useState(false)
   const [tokenId, setTokenId] = useState<BigNumber>()
+  const [isOpen, setIsOpen] = useState(false)
+  const [selectedPosition, setSelectedPosition] = useState<PositionDetails>()
 
-  const handleDelete = (v: BigNumber) => {
-    setTokenId(v)
+  const handleOpen = (v: PositionDetails) => {
+    setSelectedPosition(v)
     setIsOpen(true)
   }
 
   const handleClose = () => setIsOpen(false)
 
+  const handleDelete = (v: BigNumber) => {
+    setTokenId(v)
+    setIsOpenDelete(true)
+  }
+
+  const handleCloseDelete = () => setIsOpenDelete(false)
+
   const handleReload = () => {
     handleClose()
+    handleCloseDelete()
     onReload()
   }
 
+  const handleIncrease = () => {}
+
   return (
     <>
-      {isOpen && tokenId ? (
+      {isOpen && selectedPosition?.tokenId ? (
         <Dialog color="module" onClose={handleClose}>
+          <Header title={<Trans>Position Detail</Trans>} />
+          <PositionPage
+            positionDetails={selectedPosition}
+            onClose={handleClose}
+            onIncrease={() => handleIncrease()}
+            onDelete={() => handleDelete(selectedPosition.tokenId)}
+          />
+        </Dialog>
+      ) : null}
+
+      {isOpenDelete && tokenId ? (
+        <Dialog color="module" onClose={handleCloseDelete}>
           <Header title={<Trans>Remove Liquidity</Trans>} />
-          <RemoveLiquidity tokenId={tokenId} onClose={handleClose} onReload={handleReload} />
+          <RemoveLiquidity tokenId={tokenId} onClose={handleCloseDelete} onReload={handleReload} />
         </Dialog>
       ) : null}
 
@@ -124,7 +149,7 @@ export default function PositionList({
         </ToggleWrap>
       </MobileHeader>
       {positions.map((p) => (
-        <PositionListItem key={p.tokenId.toString()} {...p} onDelete={() => handleDelete(p.tokenId)} />
+        <PositionListItem key={p.tokenId.toString()} {...p} onOpen={() => handleOpen(p)} />
       ))}
     </>
   )

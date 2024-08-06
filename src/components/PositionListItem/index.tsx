@@ -105,6 +105,7 @@ interface PositionListItemProps {
   liquidity: BigNumber
   tickLower: number
   tickUpper: number
+  onOpen?: () => void
   onDelete?: () => void
 }
 
@@ -170,6 +171,7 @@ export default function PositionListItem({
   liquidity,
   tickLower,
   tickUpper,
+  onOpen = () => null,
   onDelete = () => null,
 }: PositionListItemProps) {
   const token0 = useToken(token0Address)
@@ -205,7 +207,7 @@ export default function PositionListItem({
   const { src: logoSrc2, invalidateSrc: invalidateLogoSrc2 } = useLogo(currencyQuote)
 
   return (
-    <LinkRow>
+    <LinkRow onClick={() => onOpen()}>
       <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
         <PrimaryPositionIdData>
           {/* should show the logo */}
