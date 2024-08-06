@@ -65,7 +65,7 @@ export function PositionPreview({
   const removed = position?.liquidity && JSBI.equal(position?.liquidity, JSBI.BigInt(0))
 
   return (
-    <AutoColumn gap="md" style={{ marginTop: '0.5rem' }}>
+    <AutoColumn gap="4px" style={{ marginTop: '0.5rem' }}>
       <RowBetween style={{ marginBottom: '0.5rem' }}>
         <RowFixed>
           <DoubleCurrencyLogo
@@ -82,7 +82,7 @@ export function PositionPreview({
       </RowBetween>
 
       <LightCard>
-        <AutoColumn gap="md">
+        <AutoColumn gap="4px">
           <RowBetween>
             <RowFixed>
               <CurrencyLogo currency={currency0} />
@@ -113,7 +113,7 @@ export function PositionPreview({
         </AutoColumn>
       </LightCard>
 
-      <AutoColumn gap="md">
+      <AutoColumn gap="4px">
         <RowBetween>
           {title ? <ThemedText.Body1>{title}</ThemedText.Body1> : <div />}
           <RateToggle
@@ -123,8 +123,8 @@ export function PositionPreview({
           />
         </RowBetween>
 
-        <RowBetween>
-          <LightCard width="48%" padding="8px">
+        <RowBetween gap={'8px'}>
+          <LightCard width="100%" padding="8px">
             <AutoColumn gap="4px" justify="center">
               <ThemedText.Body1 fontSize="12px">
                 <Trans>Min price</Trans>
@@ -147,7 +147,7 @@ export function PositionPreview({
             </AutoColumn>
           </LightCard>
 
-          <LightCard width="48%" padding="8px">
+          <LightCard width="100%" padding="8px">
             <AutoColumn gap="4px" justify="center">
               <ThemedText.Body1 fontSize="12px">
                 <Trans>Max price</Trans>

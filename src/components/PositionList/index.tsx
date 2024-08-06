@@ -1,4 +1,5 @@
 import { Trans } from '@lingui/macro'
+import AddLiquidity from 'components/AddLiquidity'
 import Dialog, { Header } from 'components/Dialog'
 import PositionPage from 'components/PositionDetail'
 import PositionListItem from 'components/PositionListItem'
@@ -76,7 +77,14 @@ export default function PositionList({
   const [isOpenDelete, setIsOpenDelete] = useState(false)
   const [tokenId, setTokenId] = useState<BigNumber>()
   const [isOpen, setIsOpen] = useState(false)
+  const [isOpenIncrease, setIsOpenIncrease] = useState(false)
   const [selectedPosition, setSelectedPosition] = useState<PositionDetails>()
+  const [increaseFormData, setIncreaseFormData] = useState<{
+    currencyIdA: string
+    currencyIdB: string
+    feeAmount: number
+    tokenId: BigNumber
+  }>()
 
   const handleOpen = (v: PositionDetails) => {
     setSelectedPosition(v)
@@ -98,7 +106,12 @@ export default function PositionList({
     onReload()
   }
 
-  const handleIncrease = () => {}
+  const handleIncrease = (v: { currencyIdA: string; currencyIdB: string; feeAmount: number; tokenId: BigNumber }) => {
+    setIsOpenIncrease(true)
+    setIncreaseFormData(v)
+  }
+
+  const handleCloseIncrease = () => setIsOpenIncrease(false)
 
   return (
     <>
@@ -108,9 +121,26 @@ export default function PositionList({
           <PositionPage
             positionDetails={selectedPosition}
             onClose={handleClose}
-            onIncrease={() => handleIncrease()}
+            onIncrease={(v) => handleIncrease(v)}
             onDelete={() => handleDelete(selectedPosition.tokenId)}
           />
+        </Dialog>
+      ) : null}
+
+      {isOpenIncrease && selectedPosition?.tokenId ? (
+        <Dialog color="module" onClose={handleCloseIncrease}>
+          <Header title={<Trans>Increase Liquidity</Trans>} />
+          {increaseFormData?.currencyIdA &&
+          increaseFormData?.currencyIdB &&
+          increaseFormData?.feeAmount &&
+          increaseFormData?.tokenId ? (
+            <AddLiquidity
+              currencyIdA={increaseFormData?.currencyIdA}
+              currencyIdB={increaseFormData?.currencyIdB}
+              feeAmount={increaseFormData?.feeAmount?.toString()}
+              tokenId={increaseFormData?.tokenId?.toString()}
+            />
+          ) : null}
         </Dialog>
       ) : null}
 

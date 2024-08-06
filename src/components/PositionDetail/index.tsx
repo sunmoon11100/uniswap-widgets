@@ -41,6 +41,8 @@ import RateToggle from '../../components/RateToggle'
 import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
 import { LoadingRows } from './styled'
 import ScrollablePage from 'components/scrollable-page'
+import { currencyId } from 'utils/currencyId'
+import { BigNumber } from 'ethers'
 
 const PageWrapper = styled.div`
   padding: 68px 16px 16px 16px;
@@ -343,7 +345,7 @@ export default function PositionPage({
   onDelete = () => null,
 }: {
   positionDetails: PositionDetails
-  onIncrease?: () => void
+  onIncrease?: ({}: { currencyIdA: string; currencyIdB: string; feeAmount: number; tokenId: BigNumber }) => void
   onClose?: () => void
   onDelete?: () => void
 }) {
@@ -370,7 +372,7 @@ function PositionDetail({
 }: {
   positionDetails?: PositionDetails
   onClose?: () => void
-  onIncrease?: () => void
+  onIncrease?: ({}: { currencyIdA: string; currencyIdB: string; feeAmount: number; tokenId: BigNumber }) => void
   onDelete?: () => void
 }) {
   //   const { tokenId: tokenIdFromUrl } = useParams<{ tokenId?: string }>()
@@ -687,7 +689,14 @@ function PositionDetail({
                   <ActionButtonResponsiveRow>
                     {currency0 && currency1 && feeAmount && tokenId ? (
                       <ButtonGray
-                        onClick={onIncrease}
+                        onClick={() =>
+                          onIncrease({
+                            currencyIdA: currencyId(currency0),
+                            currencyIdB: currencyId(currency1),
+                            feeAmount: feeAmount,
+                            tokenId: tokenId,
+                          })
+                        }
                         padding="6px 8px"
                         width="fit-content"
                         $borderRadius="12px"

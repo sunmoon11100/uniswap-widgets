@@ -84,21 +84,27 @@ const StyledBodyWrapper = styled(BodyWrapper)<{ $hasExistingPosition: boolean }>
   max-width: 640px;
 `
 
-export default function AddLiquidityWrapper({ onClose = () => null }: { onClose?: () => void } = {}) {
-  const { chainId } = useWeb3React()
-  if (isSupportedChainId(chainId)) {
-    return <AddLiquidity />
-  } else {
-    return <PositionPageUnsupportedContent onClose={onClose} />
-  }
-}
-
 interface AddLiquidityProps {
   currencyIdA?: string
   currencyIdB?: string
   feeAmount?: string
   tokenId?: string
   onClose?: () => void
+}
+
+export default function AddLiquidityWrapper({
+  currencyIdA,
+  currencyIdB,
+  feeAmount,
+  tokenId,
+  onClose = () => null,
+}: AddLiquidityProps = {}) {
+  const { chainId } = useWeb3React()
+  if (isSupportedChainId(chainId)) {
+    return <AddLiquidity currencyIdA={currencyIdA} currencyIdB={currencyIdB} feeAmount={feeAmount} tokenId={tokenId} />
+  } else {
+    return <PositionPageUnsupportedContent onClose={onClose} />
+  }
 }
 
 function AddLiquidity({
