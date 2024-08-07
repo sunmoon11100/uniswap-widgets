@@ -54,17 +54,17 @@ export default function TokenButton({ value, approved, disabled, onClick }: Toke
         {value ? (
           <>
             <Logo currency={value} symbol={value.symbol} />
-            <ThemedText.ButtonLarge color={'currentColor'}>
+            <ThemedText.ButtonMedium color={'currentColor'}>
               <span>{value.symbol}</span>
-            </ThemedText.ButtonLarge>
+            </ThemedText.ButtonMedium>
           </>
         ) : (
-          <ThemedText.ButtonLarge
+          <ThemedText.ButtonMedium
             color={'onAccent'}
             style={{ maxWidth: '10rem', textOverflow: 'ellipsis', overflow: 'hidden' }}
           >
             <Trans>Select token</Trans>
-          </ThemedText.ButtonLarge>
+          </ThemedText.ButtonMedium>
         )}
         <ChevronDown strokeWidth={2} color={value ? 'primary' : 'onAccent'} />
       </TokenButtonRow>
