@@ -170,7 +170,7 @@ function CurrentPriceCard({
 
   return (
     <LightCard padding="12px">
-      <AutoColumn gap="sm" justify="center">
+      <AutoColumn gap="4px" justify="center">
         <ExtentsText>
           <Trans>Current price</Trans>
         </ExtentsText>
@@ -583,9 +583,9 @@ function PositionDetail({
 
   function modalHeader() {
     return (
-      <AutoColumn gap="md" style={{ marginTop: '20px' }}>
+      <AutoColumn gap="4px" style={{ marginTop: '20px' }}>
         <LightCard padding="12px 16px">
-          <AutoColumn gap="md">
+          <AutoColumn gap="4px">
             <RowBetween>
               <RowFixed>
                 <CurrencyLogo currency={feeValueUpper?.currency} />
@@ -762,12 +762,12 @@ function PositionDetail({
                         <Trans>Liquidity</Trans>
                       </Label>
                       {fiatValueOfLiquidity?.greaterThan(new Fraction(1, 100)) ? (
-                        <ThemedText.Subhead1 fontSize="36px" fontWeight={535}>
+                        <ThemedText.Subhead1 fontSize="28px" fontWeight={535}>
                           <Trans>${fiatValueOfLiquidity.toFixed(2, { groupSeparator: ',' })}</Trans>
                         </ThemedText.Subhead1>
                       ) : (
-                        <ThemedText.Subhead1 color={'accent'} fontSize="36px" fontWeight={535}>
-                          <Trans>$-</Trans>
+                        <ThemedText.Subhead1 color={'accent'} fontSize="28px" fontWeight={535}>
+                          <Trans>-</Trans>
                         </ThemedText.Subhead1>
                       )}
                     </AutoColumn>
@@ -808,20 +808,20 @@ function PositionDetail({
                   </AutoColumn>
                 </DarkCard>
                 <DarkCard>
-                  <AutoColumn gap="md" style={{ width: '100%' }}>
-                    <AutoColumn gap="md">
+                  <AutoColumn gap="4px" style={{ width: '100%' }}>
+                    <AutoColumn gap="4px">
                       <RowBetween style={{ alignItems: 'flex-start' }}>
-                        <AutoColumn gap="md">
+                        <AutoColumn gap="4px">
                           <Label>
                             <Trans>Unclaimed fees</Trans>
                           </Label>
                           {fiatValueOfFees?.greaterThan(new Fraction(1, 100)) ? (
-                            <ThemedText.Subhead1 color={'success'} fontSize="36px" fontWeight={535}>
+                            <ThemedText.Subhead1 color={'success'} fontSize="28px" fontWeight={535}>
                               <Trans>${fiatValueOfFees.toFixed(2, { groupSeparator: ',' })}</Trans>
                             </ThemedText.Subhead1>
                           ) : (
-                            <ThemedText.Subhead1 color={'accent'} fontSize="36px" fontWeight={535}>
-                              <Trans>$-</Trans>
+                            <ThemedText.Subhead1 color={'accent'} fontSize="28px" fontWeight={535}>
+                              <Trans>-</Trans>
                             </ThemedText.Subhead1>
                           )}
                         </AutoColumn>
@@ -863,7 +863,7 @@ function PositionDetail({
                       </RowBetween>
                     </AutoColumn>
                     <LightCard padding="12px 16px">
-                      <AutoColumn gap="md">
+                      <AutoColumn gap="4px">
                         <RowBetween>
                           <RowFixed>
                             <CurrencyLogo currency={feeValueUpper?.currency} />
@@ -893,7 +893,7 @@ function PositionDetail({
                       </AutoColumn>
                     </LightCard>
                     {showCollectAsWeth && (
-                      <AutoColumn gap="md">
+                      <AutoColumn gap="4px">
                         <RowBetween>
                           <ThemedText.Body1>
                             <Trans>Collect as {nativeWrappedSymbol}</Trans>
@@ -936,7 +936,7 @@ function PositionDetail({
 
                 <RowBetween>
                   <LightCard padding="12px" width="100%">
-                    <AutoColumn gap="sm" justify="center">
+                    <AutoColumn gap="4px" justify="center">
                       <ExtentsText>
                         <Trans>Min price</Trans>
                       </ExtentsText>
@@ -965,7 +965,7 @@ function PositionDetail({
 
                   <DoubleArrow>⟷</DoubleArrow>
                   <LightCard padding="12px" width="100%">
-                    <AutoColumn gap="sm" justify="center">
+                    <AutoColumn gap="4px" justify="center">
                       <ExtentsText>
                         <Trans>Max price</Trans>
                       </ExtentsText>

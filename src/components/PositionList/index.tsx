@@ -139,6 +139,7 @@ export default function PositionList({
               currencyIdB={increaseFormData?.currencyIdB}
               feeAmount={increaseFormData?.feeAmount?.toString()}
               tokenId={increaseFormData?.tokenId?.toString()}
+              onClose={handleCloseIncrease}
             />
           ) : null}
         </Dialog>

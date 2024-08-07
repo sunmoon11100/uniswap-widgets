@@ -101,7 +101,15 @@ export default function AddLiquidityWrapper({
 }: AddLiquidityProps = {}) {
   const { chainId } = useWeb3React()
   if (isSupportedChainId(chainId)) {
-    return <AddLiquidity currencyIdA={currencyIdA} currencyIdB={currencyIdB} feeAmount={feeAmount} tokenId={tokenId} />
+    return (
+      <AddLiquidity
+        currencyIdA={currencyIdA}
+        currencyIdB={currencyIdB}
+        feeAmount={feeAmount}
+        tokenId={tokenId}
+        onClose={onClose}
+      />
+    )
   } else {
     return <PositionPageUnsupportedContent onClose={onClose} />
   }
@@ -175,6 +183,7 @@ function AddLiquidity({
 
   const isValid = !errorMessage && !invalidRange
 
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   // modal and loading
   const [showConfirm, setShowConfirm] = useState<boolean>(false)
   const [attemptingTxn, setAttemptingTxn] = useState<boolean>(false) // clicked confirm
@@ -287,47 +296,56 @@ function AddLiquidity({
 
       setAttemptingTxn(true)
 
-      provider
-        .getSigner()
-        .estimateGas(txn)
-        .then((estimate) => {
-          const newTxn = {
-            ...txn,
-            gasLimit: calculateGasMargin(estimate),
-          }
+      return await new Promise((resolveEstimate, rejectEstimate) => {
+        provider
+          .getSigner()
+          .estimateGas(txn)
+          .then(async (estimate) => {
+            const newTxn = {
+              ...txn,
+              gasLimit: calculateGasMargin(estimate),
+            }
 
-          return provider
-            .getSigner()
-            .sendTransaction(newTxn)
-            .then((response: TransactionResponse) => {
-              setAttemptingTxn(false)
-              const transactionInfo: TransactionInfo = {
-                type: TransactionType.ADD_LIQUIDITY_V3_POOL,
-                baseCurrencyId: currencyId(baseCurrency),
-                quoteCurrencyId: currencyId(quoteCurrency),
-                createPool: Boolean(noLiquidity),
-                expectedAmountBaseRaw: parsedAmounts[Field.CURRENCY_A]?.quotient?.toString() ?? '0',
-                expectedAmountQuoteRaw: parsedAmounts[Field.CURRENCY_B]?.quotient?.toString() ?? '0',
-                feeAmount: position.pool.fee,
-              }
-              setTxHash(response.hash)
-              sendAnalyticsEvent(LiquidityEventName.ADD_LIQUIDITY_SUBMITTED, {
-                label: [currencies[Field.CURRENCY_A]?.symbol, currencies[Field.CURRENCY_B]?.symbol].join('/'),
-                ...trace,
-                ...transactionInfo,
-              })
+            const retEstimate = await new Promise((resolve, reject) => {
+              provider
+                .getSigner()
+                .sendTransaction(newTxn)
+                .then((response: TransactionResponse) => {
+                  setAttemptingTxn(false)
+                  const transactionInfo: TransactionInfo = {
+                    type: TransactionType.ADD_LIQUIDITY_V3_POOL,
+                    baseCurrencyId: currencyId(baseCurrency),
+                    quoteCurrencyId: currencyId(quoteCurrency),
+                    createPool: Boolean(noLiquidity),
+                    expectedAmountBaseRaw: parsedAmounts[Field.CURRENCY_A]?.quotient?.toString() ?? '0',
+                    expectedAmountQuoteRaw: parsedAmounts[Field.CURRENCY_B]?.quotient?.toString() ?? '0',
+                    feeAmount: position.pool.fee,
+                  }
+                  setTxHash(response.hash)
+                  sendAnalyticsEvent(LiquidityEventName.ADD_LIQUIDITY_SUBMITTED, {
+                    label: [currencies[Field.CURRENCY_A]?.symbol, currencies[Field.CURRENCY_B]?.symbol].join('/'),
+                    ...trace,
+                    ...transactionInfo,
+                  })
 
-              onClose()
+                  onClose()
+
+                  resolve(response)
+                })
             })
-        })
-        .catch((error) => {
-          console.error('Failed to send transaction', error)
-          setAttemptingTxn(false)
-          // we only care if the error is something _other_ than the user rejected the tx
-          if (error?.code !== 4001) {
-            console.error(error)
-          }
-        })
+            return resolveEstimate(retEstimate)
+          })
+          .catch((error) => {
+            console.error('Failed to send transaction', error)
+            setAttemptingTxn(false)
+            // we only care if the error is something _other_ than the user rejected the tx
+            if (error?.code !== 4001) {
+              console.error(error)
+            }
+
+            rejectEstimate()
+          })
+      })
     } else {
       return
     }
@@ -532,18 +550,23 @@ function AddLiquidity({
           color={
             !isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B] ? 'error' : 'accent'
           }
-          onClick={() => {
+          onClick={async () => {
             // setShowConfirm(true)
-            onAdd()
+            setIsLoading(true)
+            await onAdd()
+            setIsLoading(false)
           }}
           disabled={
+            isLoading ||
             !isValid ||
             (!argentWalletContract && approvalA !== ApprovalState.APPROVED && !depositADisabled) ||
             (!argentWalletContract && approvalB !== ApprovalState.APPROVED && !depositBDisabled)
           }
           padding="12px"
         >
-          <ThemedText.Body1 fontWeight={535}>{errorMessage ? errorMessage : <Trans>Add</Trans>}</ThemedText.Body1>
+          <ThemedText.Body1 fontWeight={535}>
+            {errorMessage ? errorMessage : isLoading ? <Trans>Loading ...</Trans> : <Trans>Add</Trans>}
+          </ThemedText.Body1>
         </Button>
       </Column>
     )
@@ -842,7 +865,7 @@ function AddLiquidity({
           )}
           <div>
             <DynamicSection disabled={invalidPool || invalidRange || (noLiquidity && !startPriceTypedValue)}>
-              <AutoColumn gap="md">
+              <AutoColumn gap="4px">
                 <ThemedText.Body1>
                   {hasExistingPosition ? <Trans>Add more liquidity</Trans> : <Trans>Deposit amounts</Trans>}
                 </ThemedText.Body1>
