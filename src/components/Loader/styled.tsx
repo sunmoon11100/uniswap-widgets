@@ -1,4 +1,5 @@
 import styled, { css, keyframes } from 'styled-components'
+import { transitions } from 'theme'
 
 export const loadingAnimation = keyframes`
   0% {
@@ -14,9 +15,9 @@ const shimmerMixin = css`
   animation-fill-mode: both;
   background: linear-gradient(
     to left,
-    ${({ theme }) => theme.surface1} 25%,
-    ${({ theme }) => theme.surface3} 50%,
-    ${({ theme }) => theme.surface1} 75%
+    ${({ theme }) => theme.module} 25%,
+    ${({ theme }) => theme.container} 50%,
+    ${({ theme }) => theme.module} 75%
   );
   background-size: 400%;
   will-change: background-position;
@@ -43,7 +44,7 @@ export const loadingOpacityMixin = css<{ $loading: boolean }>`
   filter: ${({ $loading }) => ($loading ? 'grayscale(1)' : 'none')};
   opacity: ${({ $loading }) => ($loading ? '0.6' : '1')};
   transition: ${({ $loading, theme }) =>
-    $loading ? 'none' : `opacity ${theme.transition.duration.medium} ${theme.transition.timing.inOut}`};
+    $loading ? 'none' : `opacity ${transitions.duration.medium} ${transitions.timing.inOut}`};
 `
 
 export const LoadingOpacityContainer = styled.div<{ $loading: boolean }>`

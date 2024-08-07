@@ -113,7 +113,7 @@ export function ButtonSmall(props: TextProps) {
 
 export function TransitionButton(props: TextProps & { buttonSize: 'small' | 'medium' | 'large' }) {
   const className = `button button-${props.buttonSize}`
-  const fontSize = { small: 14, medium: 16, large: 20 }[props.buttonSize]
+  const fontSize = { small: 14, medium: 16, large: 18 }[props.buttonSize]
   const lineHeight = `${fontSize}px`
   return (
     <TransitionTextWrapper
