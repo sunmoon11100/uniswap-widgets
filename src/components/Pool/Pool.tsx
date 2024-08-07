@@ -85,6 +85,7 @@ export default function Pool() {
   const { account, chainId, isActive } = useWeb3React()
 
   const [isOpen, setIsOpen] = useState(false)
+  const [userHideClosedPositions, setUserHideClosedPositions] = useState(false)
 
   const { positions, loading: positionsLoading } = useV3Positions(account)
 
@@ -97,8 +98,8 @@ export default function Pool() {
   ) ?? [[], []]
 
   const userSelectedPositionSet = useMemo(
-    () => [...openPositions, ...closedPositions],
-    [closedPositions, openPositions]
+    () => [...openPositions, ...(userHideClosedPositions ? [] : closedPositions)],
+    [closedPositions, openPositions, userHideClosedPositions]
   )
 
   if (!supportedChainId(chainId)) {
@@ -144,10 +145,8 @@ export default function Pool() {
           ) : userSelectedPositionSet && closedPositions && userSelectedPositionSet.length > 0 ? (
             <PositionList
               positions={userSelectedPositionSet}
-              setUserHideClosedPositions={() => {
-                return
-              }}
-              userHideClosedPositions={false}
+              setUserHideClosedPositions={setUserHideClosedPositions}
+              userHideClosedPositions={userHideClosedPositions}
               onReload={handleReload}
             />
           ) : (
