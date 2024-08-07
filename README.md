@@ -1,7 +1,6 @@
 # Uniswap Labs Widgets
 
 [![npm](https://img.shields.io/npm/v/@sunmoon11100/uniswap-widgets)](https://www.npmjs.com/package/@sunmoon11100/uniswap-widgets)
-[![Unit tests](https://github.com/sunmoon11100/uniswap-widgets/actions/workflows/test.yaml/badge.svg)](https://github.com/sunmoon11100/uniswap-widgets/actions/workflows/test.yaml)
 
 The `@sunmoon11100/uniswap-widgets` package is an [npm package](https://www.npmjs.com/package/@sunmoon11100/uniswap-widgets) of React components used to provide subsets of the Uniswap Protocol functionality in a small and configurable user interface element.
 
@@ -15,10 +14,10 @@ You can customize the theme (colors, fonts, border radius, and more) to match th
 
 Install the widgets library via `npm` or `yarn`.
 
-```js
+```shell
 yarn add @sunmoon11100/uniswap-widgets
 ```
-```js
+```shell
 npm i --save @sunmoon11100/uniswap-widgets
 ```
 
@@ -40,6 +39,6 @@ Others have also also released the widget in production to their userbase:
 - [Friends With Benefits](https://www.fwb.help/)
 - [Oasis](https://oasis.app/)
 
-## Legal notice
+PIXEL: 
 
-Uniswap Labs encourages integrators to evaluate their own regulatory obligations when integrating this widget into their products, including, but not limited to, those related to economic or trade sanctions compliance.
+- [Coston2](https://github.com/sunmoon11100/uniswap-widgets/blob/main/src/cosmos/Coston2Swap.fixture.tsx)
