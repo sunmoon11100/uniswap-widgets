@@ -41,14 +41,14 @@ function Fixture() {
 
   const widget = (
     <SwapWidget
-      hideConnectionUI={true}
-      defaultChainId={defaultChainId}
+      // hideConnectionUI={true}
+      // defaultChainId={defaultChainId}
       defaultInputTokenAddress={'0xC67DCE33D7A8efA5FfEB961899C73fe01bCe9273'}
       defaultOutputTokenAddress={'0xa6FfF50C671023eCbd83F4a259bB0fDA20faEbC4'}
-      provider={connector}
-      theme={theme}
+      // provider={connector}
+      // theme={theme}
       tokenList={tokenList}
-      width={width}
+      // width={width}
       brandedFooter={false}
     />
   )
