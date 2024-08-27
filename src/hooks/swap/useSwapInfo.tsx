@@ -186,8 +186,6 @@ export function SwapInfoProvider({ children }: PropsWithChildren) {
     }
   }, [onInitialSwapQuote, swap, swapInfo.trade.state, swapInfo.trade.trade])
 
-  console.log(onInitialSwapQuote, swap, swapInfo.trade.state, swapInfo.trade.trade)
-
   return <SwapInfoContext.Provider value={swapInfo}>{children}</SwapInfoContext.Provider>
 }
 

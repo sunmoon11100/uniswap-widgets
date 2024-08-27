@@ -5,7 +5,7 @@ import useIsValidBlock from 'hooks/useIsValidBlock'
 import { useStablecoinAmountFromFiatValue } from 'hooks/useStablecoinAmountFromFiatValue'
 import useTimeout from 'hooks/useTimeout'
 import ms from 'ms.macro'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useGetQuoteArgs } from 'state/routing/args'
 import { useGetTradeQuoteQueryState, useLazyGetTradeQuoteQuery } from 'state/routing/slice'
 import { InterfaceTrade, QuoteState, TradeState } from 'state/routing/types'
@@ -70,14 +70,17 @@ export function useRouterTrade(
 
   // An already-fetched value should be refetched if it is older than the pollingInterval.
   // Without explicit refetch, it would not be refetched until another pollingInterval has elapsed.
-  const [trigger] = useLazyGetTradeQuoteQuery({ pollingInterval })
-  const request = useCallback(() => {
-    const { refetch } = trigger(queryArgs, /*preferCacheValue=*/ true)
-    if (fulfilledTimeStamp && Date.now() - fulfilledTimeStamp > pollingInterval) {
-      refetch()
-    }
-  }, [fulfilledTimeStamp, pollingInterval, queryArgs, trigger])
-  useTimeout(request, 200)
+  // const [trigger] = useLazyGetTradeQuoteQuery({ pollingInterval })
+  // const request = useCallback(() => {
+
+  //   console.log("fetch the quote query")
+
+  //   const { refetch } = trigger(queryArgs, /*preferCacheValue=*/ true)
+  //   if (fulfilledTimeStamp && Date.now() - fulfilledTimeStamp > pollingInterval) {
+  //     refetch()
+  //   }
+  // }, [fulfilledTimeStamp, pollingInterval, queryArgs, trigger])
+  // useTimeout(request, 2000)
 
   const isCurrent = currentTradeResult === tradeResult
   const isValidBlock = useIsValidBlock(Number(tradeResult?.blockNumber))
