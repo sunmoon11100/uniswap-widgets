@@ -1,10 +1,10 @@
-import { NEVER_RELOAD } from '@uniswap/redux-multicall'
 import { BigNumber } from '@ethersproject/bignumber'
+import { NEVER_RELOAD } from '@uniswap/redux-multicall'
 import JSBI from 'jsbi'
 import { useMemo } from 'react'
 
-import { useV3NFTPositionManagerContract } from './useContract'
 import { useSingleCallResult } from './multicall'
+import { useV3NFTPositionManagerContract } from './useContract'
 
 type TokenId = number | JSBI | BigNumber
 

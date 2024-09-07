@@ -31,9 +31,16 @@ function Fixture() {
       chainId: 114,
     },
     {
-      name: 'Pixel Shard',
-      address: '0xa6FfF50C671023eCbd83F4a259bB0fDA20faEbC4',
-      symbol: 'PXLs',
+      name: 'USDT',
+      address: '0x02518f90d87826F2E67d3Cf5D8b45882f8874Ab3',
+      symbol: 'USDT',
+      decimals: 18,
+      chainId: 114,
+    },
+    {
+      name: 'USDC',
+      address: '0x4Df23a8DBB77aCD6Bdb05dbd5D48b4781FbF952E',
+      symbol: 'USDC',
       decimals: 18,
       chainId: 114,
     },
@@ -41,14 +48,14 @@ function Fixture() {
 
   const widget = (
     <SwapWidget
-      // hideConnectionUI={true}
-      // defaultChainId={defaultChainId}
+      hideConnectionUI={true}
+      defaultChainId={defaultChainId}
       defaultInputTokenAddress={'0xC67DCE33D7A8efA5FfEB961899C73fe01bCe9273'}
-      defaultOutputTokenAddress={'0xa6FfF50C671023eCbd83F4a259bB0fDA20faEbC4'}
+      defaultOutputTokenAddress={'0x02518f90d87826F2E67d3Cf5D8b45882f8874Ab3'}
       // provider={connector}
       // theme={theme}
       tokenList={tokenList}
-      // width={width}
+      width={width}
       brandedFooter={false}
     />
   )

@@ -10,19 +10,20 @@ import Settings from 'components/Swap/Settings'
 import Widget, { WidgetProps } from 'components/Widget'
 import { useState } from 'react'
 import styled from 'styled-components/macro'
+export { getAssetsRepoURI, getNativeLogoURI, Logo, LogoUpdater, useLogo, useLogos } from './components/Logo'
 export type { JsonRpcProvider } from '@ethersproject/providers'
-export { TradeType } from '@uniswap/sdk-core'
 export type { Currency } from '@uniswap/sdk-core'
+export { TradeType } from '@uniswap/sdk-core'
 export type { TokenInfo } from '@uniswap/token-lists'
-export { DialogAnimationType } from 'components/Dialog'
 export type { DialogOptions, DialogWidgetProps } from 'components/Dialog'
-export { SwapWidgetSkeleton } from 'components/Swap/Skeleton'
+export { DialogAnimationType } from 'components/Dialog'
 export type { SwapWidgetSkeletonProps } from 'components/Swap/Skeleton'
+export { SwapWidgetSkeleton } from 'components/Swap/Skeleton'
 export { SupportedChainId } from 'constants/chains'
-export { DEFAULT_LOCALE, SUPPORTED_LOCALES } from 'constants/locales'
 export type { SupportedLocale } from 'constants/locales'
-export { UnknownError, UserRejectedRequestError, WidgetError } from 'errors'
+export { DEFAULT_LOCALE, SUPPORTED_LOCALES } from 'constants/locales'
 export type { WidgetPromise } from 'errors'
+export { UnknownError, UserRejectedRequestError, WidgetError } from 'errors'
 export { RouterPreference } from 'hooks/routing/types'
 export type { SwapController } from 'hooks/swap/useSyncController'
 export type { FeeOptions } from 'hooks/swap/useSyncConvenienceFee'
@@ -39,7 +40,6 @@ export type {
 export { EMPTY_TOKEN_LIST, UNISWAP_TOKEN_LIST } from 'hooks/useTokenList'
 export { validateTokenList, validateTokens } from 'hooks/useTokenList/validateTokenList'
 export type { JsonRpcConnectionMap } from 'hooks/web3/useJsonRpcUrlsMap'
-export { Field } from 'state/swap'
 export type {
   OnAmountChange,
   OnExpandSwapDetails,
@@ -64,8 +64,8 @@ export type {
   SwapPerfEventHandlers,
   SwapSettingsEventHandlers,
 } from 'state/swap'
+export { Field } from 'state/swap'
 export type { Slippage } from 'state/swap/settings'
-export { TransactionType } from 'state/transactions'
 export type {
   ApprovalTransactionInfo,
   ExactInputSwapTransactionInfo,
@@ -76,10 +76,10 @@ export type {
   UnwrapTransactionInfo,
   WrapTransactionInfo,
 } from 'state/transactions'
-export { darkTheme, defaultTheme, lightTheme } from 'theme'
+export { TransactionType } from 'state/transactions'
 export type { Theme } from 'theme'
+export { darkTheme, defaultTheme, lightTheme } from 'theme'
 export { invertTradeType, toTradeType } from 'utils/tradeType'
-export { Logo, LogoUpdater, getAssetsRepoURI, getNativeLogoURI, useLogo, useLogos } from './components/Logo'
 
 const TabButton = styled.div<{ isActive?: boolean }>`
   border-bottom: solid 2px ${({ theme, isActive }) => (isActive ? theme.outline : 'transparent')};

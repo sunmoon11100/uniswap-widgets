@@ -11,9 +11,9 @@ export const InteractiveContainerRounded = styled(InteractiveContainer)<{
   padding?: string
   borderColor?: Color
 }>`
-  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'inherit')};
-  padding: ${({ padding }) => (padding ? padding : '8px')};
-  border-radius: ${({ theme }) => theme.borderRadius.medium}rem;
   border: ${({ theme, border, borderColor }) =>
     border ? `solid 1px ${theme[borderColor ? borderColor : 'outline']}` : 'None'};
+  border-radius: ${({ theme }) => theme.borderRadius.medium}rem;
+  padding: ${({ padding }) => (padding ? padding : '8px')};
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'inherit')};
 `

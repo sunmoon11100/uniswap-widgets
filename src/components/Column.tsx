@@ -34,10 +34,10 @@ export const AutoColumn = styled.div<{
   grow?: true
 }>`
   display: grid;
+  flex-grow: ${({ grow }) => grow && 1};
   grid-auto-rows: auto;
   grid-row-gap: ${({ gap, theme }) => gap};
   justify-items: ${({ justify }) => justify && justify};
-  flex-grow: ${({ grow }) => grow && 1};
 `
 
 export default Column

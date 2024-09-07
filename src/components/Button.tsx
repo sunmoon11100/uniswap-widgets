@@ -1,11 +1,12 @@
 import { Icon } from 'icons'
 import { darken } from 'polished'
 import { ComponentProps, forwardRef } from 'react'
+import { Check } from 'react-feather'
 import { ButtonProps } from 'rebass'
 import styled, { useTheme } from 'styled-components/macro'
 import { AnimationSpeed, Color } from 'theme'
+
 import { RowBetween } from './Row'
-import { Check } from 'react-feather'
 
 // type ButtonProps = Omit<ButtonPropsOriginal, 'css'>
 
@@ -17,7 +18,6 @@ export type BaseButtonProps = {
 }
 
 export const BaseButton = styled.button<BaseButtonProps>`
-  position: relative;
   background-color: transparent;
   border: none;
   border-radius: ${({ $borderRadius }) => $borderRadius ?? '0.5rem'};
@@ -29,6 +29,7 @@ export const BaseButton = styled.button<BaseButtonProps>`
   line-height: inherit;
   margin: 0;
   padding: ${({ padding }) => padding ?? '0'};
+  position: relative;
   width: ${({ width }) => width ?? '100%'};
 
   :enabled {
@@ -87,8 +88,8 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps & Compon
 
 export const ButtonGray = styled(BaseButton)`
   background-color: ${({ theme }) => theme.interactive};
-  color: ${({ theme }) => theme.primary};
   border: 1px solid ${({ theme }) => theme.hint};
+  color: ${({ theme }) => theme.primary};
   font-size: 16px;
   font-weight: 535;
 
@@ -101,8 +102,8 @@ export const ButtonGray = styled(BaseButton)`
 `
 
 export const ButtonOutlined = styled(BaseButton)`
-  border: 1px solid ${({ theme }) => theme.hint};
   background-color: transparent;
+  border: 1px solid ${({ theme }) => theme.hint};
   color: ${({ theme }) => theme.primary};
   &:focus {
     box-shadow: 0 0 0 1px ${({ theme }) => theme.outline};
@@ -114,8 +115,8 @@ export const ButtonOutlined = styled(BaseButton)`
     box-shadow: 0 0 0 1px ${({ theme }) => theme.outline};
   }
   &:disabled {
-    opacity: 50%;
     cursor: auto;
+    opacity: 50%;
   }
 `
 
@@ -126,21 +127,21 @@ const ActiveOutlined = styled(ButtonOutlined)`
 `
 
 const CheckboxWrapper = styled.div`
-  width: 20px;
   padding: 0 10px;
   position: absolute;
-  top: 11px;
   right: 15px;
+  top: 11px;
+  width: 20px;
 `
 
 const Circle = styled.div`
-  height: 17px;
-  width: 17px;
-  border-radius: 50%;
-  background-color: ${({ theme }) => theme.accent};
-  display: flex;
   align-items: center;
+  background-color: ${({ theme }) => theme.accent};
+  border-radius: 50%;
+  display: flex;
+  height: 17px;
   justify-content: center;
+  width: 17px;
 `
 
 const ResponsiveCheck = styled(Check)`
@@ -173,11 +174,11 @@ export function ButtonRadioChecked({ active = false, children, ...rest }: { acti
 }
 
 export const ButtonEmpty = styled(BaseButton)`
+  align-items: center;
   background-color: transparent;
   color: ${({ theme }) => theme.accent};
   display: flex;
   justify-content: center;
-  align-items: center;
 
   &:focus {
     text-decoration: underline;
@@ -189,35 +190,35 @@ export const ButtonEmpty = styled(BaseButton)`
     text-decoration: none;
   }
   &:disabled {
-    opacity: 50%;
     cursor: auto;
+    opacity: 50%;
   }
 `
 
 export const ButtonPrimary = styled(BaseButton)`
   background-color: ${({ theme }) => theme.accent};
+  color: ${({ theme }) => 'white'};
   font-size: 20px;
   font-weight: 535;
   padding: ${({ padding }) => padding ?? '16px'};
-  color: ${({ theme }) => 'white'};
   &:focus {
-    box-shadow: 0 0 0 1pt ${({ theme }) => darken(0.05, theme.accent)};
     background-color: ${({ theme }) => darken(0.05, theme.accent)};
+    box-shadow: 0 0 0 1pt ${({ theme }) => darken(0.05, theme.accent)};
   }
   &:hover {
     background-color: ${({ theme }) => darken(0.05, theme.accent)};
   }
   &:active {
-    box-shadow: 0 0 0 1pt ${({ theme }) => darken(0.1, theme.accent)};
     background-color: ${({ theme }) => darken(0.1, theme.accent)};
+    box-shadow: 0 0 0 1pt ${({ theme }) => darken(0.1, theme.accent)};
   }
   &:disabled {
     background-color: ${({ theme, altDisabledStyle, disabled }) =>
       altDisabledStyle ? (disabled ? theme.accent : theme.outline) : theme.outline};
+    border: 1px solid transparent;
+    box-shadow: none;
     color: white;
     cursor: auto;
-    box-shadow: none;
-    border: 1px solid transparent;
     outline: none;
   }
 `
@@ -228,10 +229,10 @@ const ButtonConfirmedStyle = styled(BaseButton)`
   /* border: 1px solid ${({ theme }) => theme.success}; */
 
   &:disabled {
-    opacity: 50%;
     background-color: ${({ theme }) => theme.module};
     color: ${({ theme }) => theme.warningSoft};
     cursor: auto;
+    opacity: 50%;
   }
 `
 
@@ -248,9 +249,9 @@ export function ButtonConfirmed({
 }
 
 export const SmallButtonPrimary = styled(ButtonPrimary)`
-  width: auto;
+  border-radius: 12px;
   font-size: 16px;
   padding: ${({ padding }) => padding ?? '8px 12px'};
 
-  border-radius: 12px;
+  width: auto;
 `

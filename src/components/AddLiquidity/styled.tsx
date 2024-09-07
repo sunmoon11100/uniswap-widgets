@@ -2,17 +2,17 @@ import { AutoColumn } from 'components/Column'
 import { Input } from 'components/NumericalInput'
 import styled from 'styled-components'
 import { mediaWidth } from 'theme'
-import { SCREEN_BREAKPOINTS, WIDGET_BREAKPOINTS } from 'theme/breakpoints'
+import { WIDGET_BREAKPOINTS } from 'theme/breakpoints'
 
 export const Wrapper = styled.div`
-  position: relative;
   padding: 26px 16px;
+  position: relative;
 `
 
 export const ScrollablePage = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   ${({ theme }) => mediaWidth.deprecated_upToMedium`
     margin: 0 auto;
@@ -34,19 +34,19 @@ export const DynamicSection = styled(AutoColumn)<{ disabled?: boolean }>`
 
 export const StyledInput = styled(Input)`
   background-color: ${({ theme }) => theme.container};
-  text-align: left;
   font-size: 18px;
+  text-align: left;
   width: 100%;
 `
 
 /* two-column layout where DepositAmount is moved at the very end on mobile. */
 export const ResponsiveTwoColumns = styled.div<{ wide: boolean }>`
+  border-top: 1px solid ${({ theme }) => theme.container};
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding-top: 20px;
 
-  border-top: 1px solid ${({ theme }) => theme.container};
+  padding-top: 20px;
 
   ${({ theme }) => mediaWidth.deprecated_upToMedium`
     margin-top: 0;

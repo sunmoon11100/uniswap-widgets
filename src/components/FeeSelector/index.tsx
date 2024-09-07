@@ -1,9 +1,12 @@
 import { Trans } from '@lingui/macro'
+import { useTrace } from '@uniswap/analytics'
 import { FeePoolSelectAction, LiquidityEventName } from '@uniswap/analytics-events'
 import { Currency } from '@uniswap/sdk-core'
 import { FeeAmount } from '@uniswap/v3-sdk'
 import { useWeb3React } from '@web3-react/core'
 import { sendAnalyticsEvent } from 'analytics'
+import { DynamicSection } from 'components/AddLiquidity/styled'
+import { ButtonGray } from 'components/Button'
 import Card from 'components/Card'
 import { AutoColumn } from 'components/Column'
 import { RowBetween } from 'components/Row'
@@ -13,11 +16,8 @@ import usePrevious from 'hooks/usePrevious'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Box } from 'rebass'
 import styled, { keyframes } from 'styled-components'
-
-import { useTrace } from '@uniswap/analytics'
-import { DynamicSection } from 'components/AddLiquidity/styled'
-import { ButtonGray } from 'components/Button'
 import { ThemedText } from 'theme'
+
 import { FeeOption } from './FeeOption'
 import { FeeTierPercentageBadge } from './FeeTierPercentageBadge'
 import { FEE_AMOUNT_DETAIL } from './shared'
@@ -36,9 +36,9 @@ const pulse = (color: string) => keyframes`
   }
 `
 const FocusedOutlineCard = styled(Card)<{ pulsing: boolean }>`
-  border: 1px solid ${({ theme }) => theme.outline};
-  animation: ${({ pulsing, theme }) => pulsing && pulse(theme.accent)} 0.6s linear;
   align-self: center;
+  animation: ${({ pulsing, theme }) => pulsing && pulse(theme.accent)} 0.6s linear;
+  border: 1px solid ${({ theme }) => theme.outline};
 `
 
 const Select = styled.div`

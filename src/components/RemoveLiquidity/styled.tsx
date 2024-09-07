@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { mediaWidth } from 'theme'
 
 export const Wrapper = styled.div`
-  position: relative;
-  padding: 20px;
   min-width: 460px;
+  padding: 20px;
+  position: relative;
 
   ${({ theme }) => mediaWidth.deprecated_upToExtraSmall`
     min-width: 340px;
@@ -13,19 +13,19 @@ export const Wrapper = styled.div`
 `
 
 export const MaxButton = styled.button<{ width: string }>`
-  padding: 0.5rem 1rem;
   background-color: ${({ theme }) => theme.accentSoft};
   border: 1px solid ${({ theme }) => theme.accentSoft};
   border-radius: 0.5rem;
-  font-size: 1rem;
+  color: ${({ theme }) => theme.accent};
+  cursor: pointer;
   ${({ theme }) => mediaWidth.deprecated_upToSmall`
     padding: 0.25rem 0.5rem;
   `};
+  font-size: 1rem;
   font-weight: 535;
-  cursor: pointer;
   margin: 0.25rem;
   overflow: hidden;
-  color: ${({ theme }) => theme.accent};
+  padding: 0.5rem 1rem;
   :hover {
     border: 1px solid ${({ theme }) => theme.accent};
   }

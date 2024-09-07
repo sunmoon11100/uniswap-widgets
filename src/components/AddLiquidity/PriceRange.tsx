@@ -3,6 +3,7 @@ import Button from 'components/Button'
 import Column from 'components/Column'
 import Row from 'components/Row'
 import { ThemedText } from 'theme'
+
 import PriceInput from './PriceInput'
 
 function PriceRange() {

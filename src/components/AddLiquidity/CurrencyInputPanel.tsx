@@ -1,5 +1,5 @@
-import { Trans, t } from '@lingui/macro'
-import { NumberType, formatCurrencyAmount } from '@uniswap/conedison/format'
+import { t, Trans } from '@lingui/macro'
+import { formatCurrencyAmount, NumberType } from '@uniswap/conedison/format'
 import { Currency } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
 import { TextButton } from 'components/Button'

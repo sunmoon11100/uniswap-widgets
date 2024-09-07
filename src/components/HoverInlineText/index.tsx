@@ -9,8 +9,8 @@ const TextWrapper = styled.span<{
   adjustSize?: boolean
   textColor?: string
 }>`
-  margin-left: ${({ margin }) => (margin ? '4px' : 'none')};
   font-size: ${({ fontSize }) => fontSize ?? 'inherit'};
+  margin-left: ${({ margin }) => (margin ? '4px' : 'none')};
 
   @media screen and (max-width: 600px) {
     font-size: ${({ adjustSize }) => (adjustSize ? '12px' : 'none')};

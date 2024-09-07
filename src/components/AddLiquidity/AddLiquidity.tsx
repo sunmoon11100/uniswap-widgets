@@ -6,10 +6,11 @@ import { BrowserEvent, InterfaceElementName, InterfaceEventName, LiquidityEventN
 import { Currency, CurrencyAmount, NONFUNGIBLE_POSITION_MANAGER_ADDRESSES, Percent } from '@uniswap/sdk-core'
 import { FeeAmount, NonfungiblePositionManager } from '@uniswap/v3-sdk'
 import { useWeb3React } from '@web3-react/core'
-import { TraceEvent, sendAnalyticsEvent } from 'analytics'
+import { sendAnalyticsEvent, TraceEvent } from 'analytics'
 import Button from 'components/Button'
 import { BlueCard, OutlineCard, YellowCard } from 'components/Card'
 import Column, { AutoColumn } from 'components/Column'
+import Dots from 'components/dots'
 import FeeSelector from 'components/FeeSelector'
 import HoverInlineText from 'components/HoverInlineText'
 import PositionPageUnsupportedContent from 'components/Pool/PositionPageUnsupportedContent'
@@ -18,9 +19,8 @@ import RangeSelector from 'components/RangeSelector'
 import PresetsButtons from 'components/RangeSelector/PresetsButtons'
 import RateToggle from 'components/RateToggle'
 import Row, { AutoRow, RowBetween, RowFixed } from 'components/Row'
-import ConnectWalletButton from 'components/Swap/SwapActionButton/ConnectWalletButton'
-import Dots from 'components/dots'
 import ScrollablePage from 'components/scrollable-page'
+import ConnectWalletButton from 'components/Swap/SwapActionButton/ConnectWalletButton'
 import { isSupportedChainId } from 'constants/chainInfo'
 import { WRAPPED_NATIVE_CURRENCY } from 'constants/tokens'
 import { useSingleCallResult } from 'hooks/multicall'
@@ -52,10 +52,11 @@ import { calculateGasMargin } from 'utils/calculateGasMargin'
 import { currencyId } from 'utils/currencyId'
 import { WrongChainError } from 'utils/errors'
 import { maxAmountSpend } from 'utils/maxAmountSpend'
+
 import CurrencyInputPanel from './CurrencyInputPanel'
 import OwnershipWarning from './OwnershipWarning'
-import UnsupportedCurrencyFooter from './UnsupportedCurrencyFooter'
 import { DynamicSection, StyledInput } from './styled'
+import UnsupportedCurrencyFooter from './UnsupportedCurrencyFooter'
 
 const DEFAULT_ADD_IN_RANGE_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
 
@@ -65,23 +66,23 @@ interface BodyWrapperProps {
 }
 
 export const BodyWrapper = styled.main<BodyWrapperProps>`
-  position: relative;
-  margin-top: ${({ $margin }) => $margin ?? '0px'};
-  max-width: ${({ $maxWidth }) => $maxWidth ?? '420px'};
-  width: 100%;
   background: ${({ theme }) => theme.container};
-  border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.outline};
-  margin-top: 1rem;
+  border-radius: 16px;
+  font-feature-settings: 'ss01' on, 'ss02' on, 'cv01' on, 'cv03' on;
   margin-left: auto;
   margin-right: auto;
-  font-feature-settings: 'ss01' on, 'ss02' on, 'cv01' on, 'cv03' on;
+  margin-top: 1rem;
+  margin-top: ${({ $margin }) => $margin ?? '0px'};
+  max-width: ${({ $maxWidth }) => $maxWidth ?? '420px'};
+  position: relative;
+  width: 100%;
 `
 // z-index: ${Z_INDEX.default};
 
 const StyledBodyWrapper = styled(BodyWrapper)<{ $hasExistingPosition: boolean }>`
-  padding: ${({ $hasExistingPosition }) => ($hasExistingPosition ? '10px' : 0)};
   max-width: 640px;
+  padding: ${({ $hasExistingPosition }) => ($hasExistingPosition ? '10px' : 0)};
 `
 
 interface AddLiquidityProps {
@@ -505,18 +506,19 @@ function AddLiquidity({
         <ConnectWalletButton />
       </TraceEvent>
     ) : (
-      <Column gap={8}>
+      <Column gap={1}>
         {(approvalA === ApprovalState.NOT_APPROVED ||
           approvalA === ApprovalState.PENDING ||
           approvalB === ApprovalState.NOT_APPROVED ||
           approvalB === ApprovalState.PENDING) &&
           isValid && (
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: 8 }}>
               {showApprovalA && (
                 <Button
-                  color="primary"
+                  // color="primary"
                   onClick={approveACallback}
                   disabled={approvalA === ApprovalState.PENDING}
+                  padding="8px"
                   // width={showApprovalB ? '48%' : '100%'}
                 >
                   {approvalA === ApprovalState.PENDING ? (
@@ -530,9 +532,10 @@ function AddLiquidity({
               )}
               {showApprovalB && (
                 <Button
-                  color="primary"
+                  // color="primary"
                   onClick={approveBCallback}
                   disabled={approvalB === ApprovalState.PENDING}
+                  padding="8px"
                   // width={showApprovalA ? '48%' : '100%'}
                 >
                   {approvalB === ApprovalState.PENDING ? (

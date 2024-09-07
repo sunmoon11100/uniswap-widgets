@@ -8,16 +8,18 @@ import Badge from 'components/Badge'
 import { ButtonConfirmed, ButtonGray, SmallButtonPrimary } from 'components/Button'
 import { DarkCard, LightCard } from 'components/Card'
 import Column, { AutoColumn } from 'components/Column'
+import Dots from 'components/dots'
 import ExternalLink from 'components/ExternalLink'
 import { LoadingFullscreen } from 'components/Loader/styled'
 import { CurrencyLogo, DoubleCurrencyLogo } from 'components/Logo/DoubleCurrencyLogo'
 import PositionPageUnsupportedContent from 'components/Pool/PositionPageUnsupportedContent'
 import { getPriceOrderingFromPositionForUI } from 'components/PositionListItem'
 import { RowBetween, RowFixed } from 'components/Row'
+import ScrollablePage from 'components/scrollable-page'
 import Toggle from 'components/Toggle'
-import Dots from 'components/dots'
 import { isSupportedChainId } from 'constants/chainInfo'
 import { SupportedChainId } from 'constants/chains'
+import { BigNumber } from 'ethers'
 import { useSingleCallResult } from 'hooks/multicall'
 import { useV3NFTPositionManagerContract } from 'hooks/useContract'
 import { useToken } from 'hooks/useCurrency'
@@ -33,21 +35,20 @@ import styled, { useTheme } from 'styled-components'
 import { HideExtraSmall, HideSmall, ThemedText } from 'theme'
 import { WIDGET_BREAKPOINTS } from 'theme/breakpoints'
 import { PositionDetails } from 'types/position'
+import { currencyId } from 'utils/currencyId'
 import { formatCurrencyAmount } from 'utils/formatCurrencyAmount'
 import { NumberType, useFormatter } from 'utils/formatNumbers'
 import { unwrappedToken } from 'utils/unwrappedToken'
+
 import RangeBadge from '../../components/Badge/RangeBadge'
 import RateToggle from '../../components/RateToggle'
 import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
 import { LoadingRows } from './styled'
-import ScrollablePage from 'components/scrollable-page'
-import { currencyId } from 'utils/currencyId'
-import { BigNumber } from 'ethers'
 
 const PageWrapper = styled.div`
-  padding: 68px 16px 16px 16px;
-
   max-width: 960px;
+
+  padding: 68px 16px 16px 16px;
 
   @media only screen and (max-width: ${({ theme }) => `${WIDGET_BREAKPOINTS.MEDIUM}px`}) {
     min-width: 100%;
@@ -61,32 +62,32 @@ const PageWrapper = styled.div`
 `
 
 const BadgeText = styled.div`
-  font-weight: 535;
-  font-size: 14px;
   color: ${({ theme }) => theme.accent};
+  font-size: 14px;
+  font-weight: 535;
 `
 
 // responsive text
 // disable the warning because we don't use the end prop, we just want to filter it out
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Label = styled(({ end, ...props }) => <ThemedText.Body1 {...props} />)<{ end?: boolean }>`
+  align-items: center;
   display: flex;
   font-size: 16px;
   justify-content: ${({ end }) => (end ? 'flex-end' : 'flex-start')};
-  align-items: center;
 `
 
 const ExtentsText = styled.span`
   color: ${({ theme }) => theme.primary};
   font-size: 14px;
-  text-align: center;
-  margin-right: 4px;
   font-weight: 535;
+  margin-right: 4px;
+  text-align: center;
 `
 
 const HoverText = styled(ThemedText.Body1)`
-  text-decoration: none;
   color: ${({ theme }) => theme.primary};
+  text-decoration: none;
   :hover {
     color: ${({ theme }) => theme.accent};
     text-decoration: none;
@@ -107,8 +108,8 @@ const ResponsiveRow = styled(RowBetween)`
 `
 
 const ActionButtonResponsiveRow = styled(ResponsiveRow)`
-  width: 50%;
   justify-content: flex-end;
+  width: 50%;
 
   @media only screen and (max-width: ${({ theme }) => `${WIDGET_BREAKPOINTS.SMALL}px`}) {
     width: 100%;
@@ -121,9 +122,9 @@ const ActionButtonResponsiveRow = styled(ResponsiveRow)`
 
 const ResponsiveButtonConfirmed = styled(ButtonConfirmed)`
   border-radius: 12px;
+  font-size: 16px;
   padding: 6px 8px;
   width: fit-content;
-  font-size: 16px;
 
   @media only screen and (max-width: ${({ theme }) => `${WIDGET_BREAKPOINTS.MEDIUM}px`}) {
     width: fit-content;
@@ -693,8 +694,8 @@ function PositionDetail({
                           onIncrease({
                             currencyIdA: currencyId(currency0),
                             currencyIdB: currencyId(currency1),
-                            feeAmount: feeAmount,
-                            tokenId: tokenId,
+                            feeAmount,
+                            tokenId,
                           })
                         }
                         padding="6px 8px"

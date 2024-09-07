@@ -6,18 +6,18 @@ import { ThemedText } from 'theme'
 import { WIDGET_BREAKPOINTS } from 'theme/breakpoints'
 
 const PositionPageButtonPrimary = styled(Button)`
-  width: 228px;
-  height: 40px;
-  font-size: 16px;
-  line-height: 20px;
   border-radius: 12px;
+  font-size: 16px;
+  height: 40px;
+  line-height: 20px;
   width: fit-content;
+  width: 228px;
 `
 
 const PageWrapper = styled.div`
-  padding: 68px 16px 16px 16px;
-
   max-width: 960px;
+
+  padding: 68px 16px 16px 16px;
 
   @media only screen and (max-width: ${({ theme }) => `${WIDGET_BREAKPOINTS.MEDIUM}px`}) {
     min-width: 100%;

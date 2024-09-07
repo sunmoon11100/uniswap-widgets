@@ -1,36 +1,36 @@
 import { BigNumber } from '@ethersproject/bignumber'
+import { Trans } from '@lingui/macro'
 import { Percent, Price, Token } from '@uniswap/sdk-core'
 import { Position } from '@uniswap/v3-sdk'
-import { useToken } from 'hooks/useCurrency'
-import useIsTickAtLimit from 'hooks/useIsTickAtLimit'
-import { usePool } from 'hooks/usePools'
-import { useMemo } from 'react'
-import { unwrappedToken } from 'utils/unwrappedToken'
-
-import { Trans } from '@lingui/macro'
 import RangeBadge from 'components/Badge/RangeBadge'
-import Button, { ButtonGray, ButtonPrimary } from 'components/Button'
+import Button from 'components/Button'
 import Column from 'components/Column'
 import HoverInlineText from 'components/HoverInlineText'
 import { useLogo } from 'components/Logo'
 import DoubleLogo from 'components/Logo/DoubleCurrencyLogo'
 import { Loading } from 'components/Swap/Toolbar/Caption'
+import { useToken } from 'hooks/useCurrency'
+import useIsTickAtLimit from 'hooks/useIsTickAtLimit'
+import { usePool } from 'hooks/usePools'
+import { useMemo } from 'react'
 import styled from 'styled-components'
-import { HideSmall, MEDIA_WIDTHS, SmallOnly, ThemedText, mediaWidth } from 'theme'
+import { HideSmall, MEDIA_WIDTHS, mediaWidth, SmallOnly, ThemedText } from 'theme'
 import { Bound, formatTickPrice } from 'utils/formatNumbers'
+import { unwrappedToken } from 'utils/unwrappedToken'
+
 import { DAI, USDC_MAINNET, USDT, WBTC, WRAPPED_NATIVE_CURRENCY } from '../../constants/tokens'
 
 const LinkRow = styled.div`
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  border-bottom: solid 1px ${({ theme }) => theme.outline};
   cursor: pointer;
+  display: flex;
   flex-direction: column;
   font-weight: 535;
+  justify-content: space-between;
   padding: 8px;
   text-decoration: none;
   user-select: none;
-  border-bottom: solid 1px ${({ theme }) => theme.outline};
 
   & > div:not(:first-child) {
     text-align: center;

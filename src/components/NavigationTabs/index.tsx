@@ -7,22 +7,22 @@ import { Box } from 'rebass'
 import { useAppDispatch } from 'state/hooks'
 import { resetMintState as resetMintV3State } from 'state/mint/v3/actions'
 import styled, { useTheme } from 'styled-components'
+import { mediaWidth, ThemedText } from 'theme'
 
-import { ThemedText, mediaWidth } from 'theme'
 import { RowBetween } from '../Row'
 
 const Tabs = styled.div`
-  display: flex;
-  flex-wrap: no-wrap;
   align-items: center;
   border-radius: 3rem;
+  display: flex;
+  flex-wrap: no-wrap;
   justify-content: space-evenly;
 `
 
 const StyledLink = styled.div<{ flex?: string }>`
-  flex: ${({ flex }) => flex ?? 'none'};
-  display: flex;
   align-items: center;
+  display: flex;
+  flex: ${({ flex }) => flex ?? 'none'};
 
   ${({ theme }) => mediaWidth.deprecated_upToMedium`
     flex: none;

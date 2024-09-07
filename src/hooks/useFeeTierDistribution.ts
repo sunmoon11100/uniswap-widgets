@@ -3,8 +3,6 @@ import { FeeAmount } from '@uniswap/v3-sdk'
 import { useMemo } from 'react'
 
 import { PoolState, usePool } from './usePools'
-import useBlockNumber from './useBlockNumber'
-import ms from 'ms.macro'
 
 // maximum number of blocks past which we consider the data stale
 const MAX_DATA_BLOCK_AGE = 20

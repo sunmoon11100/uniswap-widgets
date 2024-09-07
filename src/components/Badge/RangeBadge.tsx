@@ -5,14 +5,14 @@ import styled, { useTheme } from 'styled-components'
 import { TooltipText } from '../../components/Tooltip'
 
 const BadgeWrapper = styled.div`
-  font-size: 14px;
   display: flex;
+  font-size: 14px;
   justify-content: flex-end;
 `
 
 const BadgeText = styled.div`
-  font-weight: 535;
   font-size: 12px;
+  font-weight: 535;
   line-height: 14px;
   margin-right: 8px;
 `

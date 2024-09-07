@@ -3,11 +3,11 @@ import './external'
 
 import { mix, rgba, transparentize } from 'polished'
 import { createContext, PropsWithChildren, useContext, useMemo, useState } from 'react'
-import { DefaultTheme, ThemeProvider as StyledProvider, css } from 'styled-components/macro'
+import styled from 'styled-components'
+import { css, DefaultTheme, ThemeProvider as StyledProvider } from 'styled-components/macro'
 
 import { Layer } from './layer'
 import type { Colors, Theme, ThemeBorderRadius } from './theme'
-import styled from 'styled-components'
 
 export * from './animations'
 export * from './dynamic'

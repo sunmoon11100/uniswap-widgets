@@ -10,7 +10,7 @@ import { serializeGetQuoteArgs, serializeGetQuoteQueryArgs } from './args'
 import { GetQuoteArgs, QuoteData, QuoteState, TradeResult } from './types'
 import { transformQuoteToTradeResult } from './utils'
 
-const protocols: Protocol[] = [Protocol.V2, Protocol.V3, Protocol.MIXED]
+const protocols: Protocol[] = [Protocol.V3]
 
 // routing API quote query params: https://github.com/Uniswap/routing-api/blob/main/lib/handlers/quote/schema/quote-schema.ts
 const DEFAULT_QUERY_PARAMS = {

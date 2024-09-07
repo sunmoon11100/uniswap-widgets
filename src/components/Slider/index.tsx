@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 const StyledRangeInput = styled.input<{ size: number }>`
   -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-  width: 100%; /* Specific width is required for Firefox. */
-  background: transparent; /* Otherwise white in Chrome */
-  cursor: pointer;
+  background: transparent; /* Specific width is required for Firefox. */
+  cursor: pointer; /* Otherwise white in Chrome */
+  width: 100%;
 
   &:focus {
     outline: none;
@@ -17,13 +17,13 @@ const StyledRangeInput = styled.input<{ size: number }>`
 
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
-    height: ${({ size }) => size}px;
-    width: ${({ size }) => size}px;
     background-color: ${({ theme }) => theme.accent};
-    border-radius: 100%;
     border: none;
-    transform: translateY(-50%);
+    border-radius: 100%;
     color: ${({ theme }) => theme.container};
+    height: ${({ size }) => size}px;
+    transform: translateY(-50%);
+    width: ${({ size }) => size}px;
 
     &:hover,
     &:focus {
@@ -33,12 +33,12 @@ const StyledRangeInput = styled.input<{ size: number }>`
   }
 
   &::-moz-range-thumb {
+    background-color: #565a69;
+    border: none;
+    border-radius: 100%;
+    color: ${({ theme }) => theme.container};
     height: ${({ size }) => size}px;
     width: ${({ size }) => size}px;
-    background-color: #565a69;
-    border-radius: 100%;
-    border: none;
-    color: ${({ theme }) => theme.container};
 
     &:hover,
     &:focus {
@@ -48,11 +48,11 @@ const StyledRangeInput = styled.input<{ size: number }>`
   }
 
   &::-ms-thumb {
-    height: ${({ size }) => size}px;
-    width: ${({ size }) => size}px;
     background-color: #565a69;
     border-radius: 100%;
     color: ${({ theme }) => theme.container};
+    height: ${({ size }) => size}px;
+    width: ${({ size }) => size}px;
 
     &:hover,
     &:focus {
@@ -72,12 +72,12 @@ const StyledRangeInput = styled.input<{ size: number }>`
   }
 
   &::-ms-track {
-    width: 100%;
+    background: ${({ theme }) => theme.outline};
     border-color: transparent;
     color: transparent;
 
-    background: ${({ theme }) => theme.outline};
     height: 2px;
+    width: 100%;
   }
   &::-ms-fill-lower {
     background: ${({ theme }) => theme.outline};

@@ -139,8 +139,8 @@ export const USDC_BASE = new Token(
 )
 export const USDC_COSTON2 = new Token(
   SupportedChainId.COSTON2,
-  '0xe38b9b20b5ff326afa16284ca028cb5627b60722',
-  6,
+  '0x4Df23a8DBB77aCD6Bdb05dbd5D48b4781FbF952E',
+  18,
   'USDC',
   'USD Coin'
 )

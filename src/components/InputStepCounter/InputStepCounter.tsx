@@ -6,9 +6,9 @@ import { AutoColumn } from 'components/Column'
 import { ReactNode, useCallback, useEffect, useState } from 'react'
 import { Minus, Plus } from 'react-feather'
 import styled, { keyframes } from 'styled-components'
+import { mediaWidth, ThemedText } from 'theme'
 
 import { Input as NumericalInput } from '../NumericalInput'
-import { ThemedText, mediaWidth } from 'theme'
 
 const pulse = (color: string) => keyframes`
   0% {
@@ -34,15 +34,15 @@ const SmallButton = styled(ButtonGray)`
 `
 
 const FocusedOutlineCard = styled(OutlineCard)<{ active?: boolean; pulsing?: boolean }>`
-  border-color: transparent;
-  background-color: ${({ theme }) => theme.interactive};
-  padding: 12px;
   animation: ${({ pulsing, theme }) => pulsing && pulse(theme.accent)} 0.8s linear;
+  background-color: ${({ theme }) => theme.interactive};
+  border-color: transparent;
+  padding: 12px;
 `
 
 const StyledInput = styled(NumericalInput)<{ usePercent?: boolean }>`
-  color: ${({ theme }) => theme.primary};
   background-color: transparent;
+  color: ${({ theme }) => theme.primary};
   font-weight: 535;
   text-align: left;
   width: 100%;

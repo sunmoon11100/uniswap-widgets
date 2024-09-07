@@ -1,8 +1,8 @@
 import Button from 'components/Button'
 import Column from 'components/Column'
+import { InteractiveContainerRounded } from 'components/container/interactive/InteractiveContainer'
 import { DecimalInput } from 'components/Input'
 import Row from 'components/Row'
-import { InteractiveContainerRounded } from 'components/container/interactive/InteractiveContainer'
 import { ThemedText } from 'theme'
 
 function PriceInput({

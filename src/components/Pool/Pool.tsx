@@ -19,27 +19,27 @@ import { PositionDetails } from 'types/position'
 import { supportedChainId } from 'utils/supportedChainId'
 
 const MainContentWrapper = styled.main`
+  align-items: stretch;
   background-color: ${({ theme }) => theme.container};
   border: 1px solid ${({ theme }) => theme.container};
   border-radius: 16px;
   display: flex;
   flex-direction: column;
+  gap: 4px;
   overflow: hidden;
   padding: 0;
-  align-items: stretch;
-  gap: 4px;
 `
 
 const ErrorContainer = styled.div`
+  align-items: stretch;
   display: flex;
   flex-direction: column;
+  gap: 8px;
   justify-content: center;
-  align-items: stretch;
   margin: auto;
   max-width: 300px;
   min-height: 25vh;
   padding-bottom: 8px;
-  gap: 8px;
 `
 
 const IconStyle = css`
@@ -72,10 +72,10 @@ function WrongNetworkCard() {
 
 const AddLiquidityButton = styled(Button)`
   background-color: ${({ theme }) => theme.accent};
-  padding: 12px;
-  width: 100%;
   font-size: 14px;
   font-weight: 600;
+  padding: 12px;
+  width: 100%;
   &:hover {
     background-color: ${({ theme }) => theme.accentSoft};
   }

@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import { mediaWidth } from 'theme'
 
 export const Wrapper = styled.div`
-  position: relative;
   padding: 20px;
+  position: relative;
 `
 
 export const ClickableText = styled(Text)`
@@ -14,19 +14,19 @@ export const ClickableText = styled(Text)`
   color: ${({ theme }) => theme.primary};
 `
 export const MaxButton = styled.button<{ width: string }>`
-  padding: 0.5rem 1rem;
   background-color: ${({ theme }) => theme.module};
   border: 1px solid ${({ theme }) => theme.module};
   border-radius: 0.5rem;
-  font-size: 1rem;
+  color: ${({ theme }) => theme.primary};
+  cursor: pointer;
   ${({ theme }) => mediaWidth.deprecated_upToSmall`
     padding: 0.25rem 0.5rem;
   `};
+  font-size: 1rem;
   font-weight: 535;
-  cursor: pointer;
   margin: 0.25rem;
   overflow: hidden;
-  color: ${({ theme }) => theme.primary};
+  padding: 0.5rem 1rem;
   :hover {
     border: 1px solid ${({ theme }) => theme.primary};
   }
@@ -38,11 +38,11 @@ export const MaxButton = styled.button<{ width: string }>`
 
 export const Dots = styled.span`
   &::after {
-    display: inline-block;
     animation: ellipsis 1.25s infinite;
     content: '.';
-    width: 1em;
+    display: inline-block;
     text-align: left;
+    width: 1em;
   }
   @keyframes ellipsis {
     0% {
@@ -58,13 +58,13 @@ export const Dots = styled.span`
 `
 
 export const LoadingRows = styled.div`
-  padding-top: 36px;
-  min-width: 75%;
-  max-width: 960px;
   grid-column-gap: 0.5em;
   grid-row-gap: 0.8em;
   grid-template-columns: repeat(3, 1fr);
+  max-width: 960px;
+  min-width: 75%;
   padding: 8px;
+  padding-top: 36px;
 
   & > div:nth-child(4n + 1) {
     grid-column: 1 / 3;

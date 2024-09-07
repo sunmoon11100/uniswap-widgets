@@ -1,13 +1,13 @@
 import { Currency, CurrencyAmount, Percent, Price, Token } from '@uniswap/sdk-core'
 import { DEFAULT_LOCALE, SupportedLocale } from 'constants/locales'
+import usePrevious from 'hooks/usePrevious'
+import { useCallback, useMemo } from 'react'
 
 import {
   DEFAULT_LOCAL_CURRENCY,
   LOCAL_CURRENCY_SYMBOL_DISPLAY_TYPE,
   SupportedLocalCurrency,
 } from '../constants/localCurrencies'
-import usePrevious from 'hooks/usePrevious'
-import { useCallback, useMemo } from 'react'
 
 // Convert [CurrencyAmount] to number with necessary precision for price formatting.
 export function currencyAmountToPreciseFloat(currencyAmount: CurrencyAmount<Currency> | undefined) {

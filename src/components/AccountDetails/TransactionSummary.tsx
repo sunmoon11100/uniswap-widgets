@@ -1,6 +1,7 @@
 import { Trans } from '@lingui/macro'
 import { Fraction, TradeType } from '@uniswap/sdk-core'
 import { BigNumber } from 'ethers/lib/ethers'
+import useCurrency, { useToken } from 'hooks/useCurrency'
 import JSBI from 'jsbi'
 
 import { nativeOnChain } from '../../constants/tokens'
@@ -26,7 +27,6 @@ import {
   VoteTransactionInfo,
   WrapTransactionInfo,
 } from '../../state/transactions/types'
-import useCurrency, { useToken } from 'hooks/useCurrency'
 
 function formatAmount(amountRaw: string, decimals: number, sigFigs: number): string {
   return new Fraction(amountRaw, JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(decimals))).toSignificant(sigFigs)

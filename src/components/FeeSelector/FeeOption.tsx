@@ -1,17 +1,18 @@
 import { Trans } from '@lingui/macro'
 import { FeeAmount } from '@uniswap/v3-sdk'
+import { ButtonRadioChecked } from 'components/Button'
 import { AutoColumn } from 'components/Column'
 import { useFeeTierDistribution } from 'hooks/useFeeTierDistribution'
 import { PoolState } from 'hooks/usePools'
 import styled from 'styled-components'
-import { ThemedText, mediaWidth } from 'theme'
+import { mediaWidth, ThemedText } from 'theme'
+
 import { FeeTierPercentageBadge } from './FeeTierPercentageBadge'
 import { FEE_AMOUNT_DETAIL } from './shared'
-import { ButtonRadioChecked } from 'components/Button'
 
 const ResponsiveText = styled(ThemedText.Body1)`
-  line-height: 16px;
   font-size: 14px;
+  line-height: 16px;
 
   ${({ theme }) => mediaWidth.deprecated_upToSmall`
     font-size: 12px;

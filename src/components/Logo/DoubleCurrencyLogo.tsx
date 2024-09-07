@@ -1,18 +1,19 @@
+import { Currency } from '@uniswap/sdk-core'
 import blankTokenUrl from 'assets/svg/blank_token.svg'
 import styled from 'styled-components'
+
 import { useLogo } from './hooks'
-import { Currency } from '@uniswap/sdk-core'
 
 const DoubleLogoContainer = styled.div`
   display: flex;
   gap: 2px;
+  left: 0;
   position: relative;
   top: 0;
-  left: 0;
   img {
-    width: 16px;
     height: 32px;
     object-fit: cover;
+    width: 16px;
   }
   img:first-child {
     border-radius: 16px 0 0 16px;
@@ -25,9 +26,9 @@ const DoubleLogoContainer = styled.div`
 `
 
 const CircleLogoImage = styled.img`
-  width: 32px;
-  height: 32px;
   border-radius: 50%;
+  height: 32px;
+  width: 32px;
 `
 
 interface CurrencyLogoProps {

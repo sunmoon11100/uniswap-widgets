@@ -2,16 +2,16 @@ import { Box } from 'rebass/styled-components'
 import styled from 'styled-components'
 
 const Card = styled(Box)<{ width?: string; padding?: string; border?: string; $borderRadius?: string }>`
-  width: ${({ width }) => width ?? '100%'};
-  padding: ${({ padding }) => padding ?? '1rem'};
-  border-radius: ${({ $borderRadius }) => $borderRadius ?? '16px'};
   border: ${({ border }) => border};
+  border-radius: ${({ $borderRadius }) => $borderRadius ?? '16px'};
+  padding: ${({ padding }) => padding ?? '1rem'};
+  width: ${({ width }) => width ?? '100%'};
 `
 export default Card
 
 export const LightCard = styled(Card)`
-  border: 1px solid ${({ theme }) => theme.outline};
   background-color: ${({ theme }) => theme.container};
+  border: 1px solid ${({ theme }) => theme.outline};
 `
 
 export const GrayCard = styled(Card)`
@@ -28,8 +28,8 @@ export const DarkCard = styled(Card)`
 `
 
 export const OutlineCard = styled(Card)`
-  border: 1px solid ${({ theme }) => theme.outline};
   background-color: ${({ theme }) => theme.container};
+  border: 1px solid ${({ theme }) => theme.outline};
 `
 
 export const YellowCard = styled(Card)`
@@ -40,6 +40,6 @@ export const YellowCard = styled(Card)`
 
 export const BlueCard = styled(Card)`
   background-color: ${({ theme }) => theme.accentSoft};
-  color: ${({ theme }) => theme.accent};
   border-radius: 12px;
+  color: ${({ theme }) => theme.accent};
 `

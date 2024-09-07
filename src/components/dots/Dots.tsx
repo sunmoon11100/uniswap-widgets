@@ -2,11 +2,11 @@ import styled from 'styled-components'
 
 export const Dots = styled.span`
   &::after {
-    display: inline-block;
     animation: ellipsis 1.25s infinite;
     content: '.';
-    width: 1em;
+    display: inline-block;
     text-align: left;
+    width: 1em;
   }
   @keyframes ellipsis {
     0% {

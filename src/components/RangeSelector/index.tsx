@@ -2,7 +2,6 @@ import { Trans } from '@lingui/macro'
 import { Currency, Price, Token } from '@uniswap/sdk-core'
 import Column from 'components/Column'
 import StepCounter from 'components/InputStepCounter/InputStepCounter'
-import { AutoRow } from 'components/Row'
 import { Bound } from 'state/mint/v3/actions'
 
 // currencyA is the base token

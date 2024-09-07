@@ -1,35 +1,31 @@
 import { Trans } from '@lingui/macro'
 import { Currency } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
-import Card, { OutlineCard } from 'components/Card'
+import { ButtonEmpty } from 'components/Button'
+import Card from 'components/Card'
 import { AutoColumn } from 'components/Column'
-import { AutoRow, RowBetween } from 'components/Row'
+import Dialog from 'components/Dialog'
+import { RowBetween } from 'components/Row'
 import { useState } from 'react'
 import styled from 'styled-components'
-
-import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
-import { ButtonEmpty } from 'components/Button'
-import { ThemedText, mediaWidth } from 'theme'
-import Dialog, { Modal } from 'components/Dialog'
-import { CurrencyLogo } from 'components/Logo/DoubleCurrencyLogo'
-import ExternalLink from 'components/ExternalLink'
+import { mediaWidth, ThemedText } from 'theme'
 
 const DetailsFooter = styled.div<{ show: boolean }>`
-  padding-top: calc(16px + 2rem);
-  padding-bottom: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: -2rem;
-  width: 100%;
-  max-width: 400px;
+  background-color: ${({ theme }) => theme.container};
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   color: ${({ theme }) => theme.accent};
-  background-color: ${({ theme }) => theme.container};
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -2rem;
+  max-width: 400px;
+  padding-bottom: 20px;
+  padding-top: calc(16px + 2rem);
+  text-align: center;
 
   transform: ${({ show }) => (show ? 'translateY(0%)' : 'translateY(-100%)')};
   transition: transform 300ms ease-in-out;
-  text-align: center;
+  width: 100%;
 `
 // z-index: ${Z_INDEX.deprecated_zero};
 

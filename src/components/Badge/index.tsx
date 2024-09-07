@@ -77,9 +77,9 @@ const Badge = styled.div<PropsWithChildren<BadgeProps>>`
   border-radius: 0.5rem;
   color: ${({ theme, variant }) => pickFontColor(variant, theme)};
   display: inline-flex;
-  padding: 4px 6px;
-  justify-content: center;
   font-weight: 535;
+  justify-content: center;
+  padding: 4px 6px;
 `
 
 export default Badge
